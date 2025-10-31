@@ -34,21 +34,31 @@ namespace ProjectileReflector
             ) return;
 
             // do reflect
-            var oldContext = self.context;
-            self.damagedObjects.Clear();
-            delta = oldContext.fromCharacter.transform.position - self.transform.position;
-            delta.y = 0;
-            oldContext.direction = ___direction = delta.normalized;
-            ___velocity = ___direction * oldContext.speed;
-            oldContext.team = Teams.player;
-            oldContext.fromCharacter = player;
-            self.context = oldContext;
+            var aimBackProb = 0.3f;
+            DoReflect(player, self, ref ___velocity, ref ___direction, Random.value < aimBackProb);
 
             // play melee fx
             var evilReflection = Traverse.Create(player.attackAction);
             evilReflection.Field("lastAttackTime").SetValue(-114514);
             evilReflection.Field("running").SetValue(false);
             player.Attack();
+        }
+
+        private static void DoReflect(CharacterMainControl player, Projectile self,
+            ref Vector3 ___velocity, ref Vector3 ___direction,
+            bool aimBack = true)
+        {
+            var oldContext = self.context;
+            self.damagedObjects.Clear();
+            Vector3 delta;
+            if (aimBack) delta = oldContext.fromCharacter.transform.position - self.transform.position;
+            else delta = Vector3.Reflect(___velocity, self.transform.position - player.transform.position);
+            delta.y = 0;
+            oldContext.direction = ___direction = delta.normalized;
+            ___velocity = ___direction * oldContext.speed;
+            oldContext.team = Teams.player;
+            oldContext.fromCharacter = player;
+            self.context = oldContext;
         }
     }
 }
