@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using System.Reflection;
+using UnityEngine;
 
 namespace ProjectileReflector
 {
@@ -7,15 +8,17 @@ namespace ProjectileReflector
     {
         public const string HARMONY_ID = "YukkuriC.ProjectileReflector";
 
-        Harmony patcher;
+        Harmony? patcher;
         void OnEnable()
         {
             if (patcher == null) patcher = new Harmony(HARMONY_ID);
             patcher.PatchAll(Assembly.GetExecutingAssembly());
+            Debug.Log("[ProjectileReflector] Harmony patched");
         }
         void OnDisable()
         {
-            patcher.UnpatchSelf();
+            patcher?.UnpatchSelf();
+            Debug.Log("[ProjectileReflector] Harmony released");
         }
     }
 }
