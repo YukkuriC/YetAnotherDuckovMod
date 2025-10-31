@@ -1,0 +1,1 @@
+move /Y "bin\Release\netstandard2.1\ProjectileReflector.dll" "ReleaseExample\ProjectileReflector"

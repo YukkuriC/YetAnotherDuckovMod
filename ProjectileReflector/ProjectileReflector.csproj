@@ -13,10 +13,15 @@
     <Reference Include="$(DuckovPath)\Duckov_Data\Managed\ItemStatsSystem.dll">
       <Private>False</Private>
     </Reference>
+    <Reference Include="$(DuckovPath)\Duckov_Data\Managed\Unity*">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="0Harmony">
       <HintPath>..\Harmony\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="$(DuckovPath)\Duckov_Data\Managed\Unity*" />
   </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="call copier.bat" />
+  </Target>
 </Project>
