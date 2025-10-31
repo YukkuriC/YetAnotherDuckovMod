@@ -18,7 +18,7 @@
     </Reference>
     <Reference Include="0Harmony">
       <HintPath>..\Harmony\0Harmony.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

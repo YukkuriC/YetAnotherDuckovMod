@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using System.IO;
 using System.Reflection;
 using UnityEngine;
 
@@ -17,8 +18,13 @@ namespace ProjectileReflector
         }
         void OnDisable()
         {
-            patcher?.UnpatchSelf();
+            patcher?.UnpatchAll(HARMONY_ID);
             Debug.Log("[ProjectileReflector] Harmony released");
+        }
+        void Awake()
+        {
+            var harmonyPath = Path.Combine(Assembly.GetExecutingAssembly().Location, "..", "0Harmony.dll");
+            Assembly.LoadFrom(harmonyPath);
         }
     }
 }
