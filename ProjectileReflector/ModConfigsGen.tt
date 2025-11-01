@@ -1,0 +1,54 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#
+// type,name,default
+var raw = new string[] {
+    "float,REFLECT_RANGE_SQR,2 * 2",
+    "float,REFLECT_RANGE_SQR_PASSIVE,1.5f * 1.5f",
+
+    "float,TIME_PASSIVE_EXTEND,0.1f",
+    "float,TIME_ACTIVE_EXTEND,0.2f",
+    "float,TIME_SWING_ACTIVE,0.3f",
+    "float,TIME_AIM_ACTIVE,0.2f",
+
+    "float,CHANCE_BACK_ACTIVE,0.9f",
+    "float,CHANCE_BACK_PASSIVE,0.05f",
+    "float,PASSIVE_STAMINA_COST,0.5f",
+
+    "float,DAMAGE_MULT_ACTIVE,1",
+    "float,DAMAGE_MULT_PASSIVE,0.5f",
+    "float,DISTANCE_MULT_ACTIVE,5",
+    "float,DISTANCE_MULT_PASSIVE,1",
+
+    "bool,ACTIVE_EXPLOSION,false",
+    "float,ACTIVE_EXPLOSION_DAMAGE_FACTOR,1",
+    "float,ACTIVE_EXPLOSION_RANGE,1",
+
+    "float,SFX_VOLUME,0.5f",
+};
+var lines = (from r in raw select r.Split(',')).ToList();
+int N = lines.Count;
+#>
+using System;
+
+namespace ProjectileReflector
+{
+    public static class ModConfigs
+    {
+<#foreach(var line in lines) {#>
+        public static <#=line[0]#> <#=line[1]#> { get => ModConfigEntry.INSTANCE.<#=line[1]#>; }
+<#}#>
+    }
+
+    [Serializable]
+    public partial class ModConfigEntry
+    {
+        private static ModConfigEntry instance = new ModConfigEntry();
+<#foreach(var line in lines) {#>
+        public <#=line[0]#> <#=line[1]#> = <#=line[2]#>;
+<#}#>
+    }
+}

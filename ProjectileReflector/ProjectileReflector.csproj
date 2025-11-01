@@ -24,6 +24,22 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <None Update="ModConfigsGen.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModConfigsGen.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="ModConfigsGen.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ModConfigsGen.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="call copier.bat" />
   </Target>

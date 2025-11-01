@@ -104,7 +104,7 @@ namespace ProjectileReflector
                 oldContext.damage *= DAMAGE_MULT_ACTIVE;
                 if (ACTIVE_EXPLOSION && oldContext.explosionRange <= 0)
                 {
-                    oldContext.explosionRange = 1;
+                    oldContext.explosionRange = ACTIVE_EXPLOSION_RANGE;
                     oldContext.explosionDamage = oldContext.damage * ACTIVE_EXPLOSION_DAMAGE_FACTOR;
                 }
             }
