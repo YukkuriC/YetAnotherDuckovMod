@@ -13,7 +13,10 @@
     <Reference Include="$(DuckovPath)\Duckov_Data\Managed\ItemStatsSystem.dll">
       <Private>False</Private>
     </Reference>
-    <Reference Include="$(DuckovPath)\Duckov_Data\Managed\Unity*">
+    <Reference Include="$(DuckovPath)\Duckov_Data\Managed\UnityEngine*">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(DuckovPath)\Duckov_Data\Managed\FMOD*">
       <Private>False</Private>
     </Reference>
     <Reference Include="0Harmony">

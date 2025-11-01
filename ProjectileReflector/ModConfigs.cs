@@ -25,5 +25,7 @@ namespace ProjectileReflector
 
         public static bool ACTIVE_EXPLOSION = false;
         public static float ACTIVE_EXPLOSION_DAMAGE_FACTOR = 1;
+
+        public static float SFX_VOLUME = 0.5f;
     }
 }

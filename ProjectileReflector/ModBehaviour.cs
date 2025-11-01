@@ -26,6 +26,11 @@ namespace ProjectileReflector
         {
             var harmonyPath = Path.Combine(ROOT_PATH, "0Harmony.dll");
             Assembly.LoadFrom(harmonyPath);
+            ModAudio.InitAudio();
+        }
+        void LateUpdate()
+        {
+            ModAudio.ClearPlayedFlag();
         }
     }
 }

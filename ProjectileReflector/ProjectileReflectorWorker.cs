@@ -67,9 +67,9 @@ namespace ProjectileReflector
             fFlag.SetValue(false);
             if (curStatus != Status.ACTIVE) ExtendStatus(Status.PASSIVE, TIME_PASSIVE_EXTEND);
             player.Attack();
+            fCD.SetValue(-114514); // for easily swap to active
             if (curStatus == Status.ACTIVE)
             {
-                fCD.SetValue(-114514);
                 //fFlag.SetValue(false); no this cancels fx
                 ExtendStatus(Status.ACTIVE, TIME_ACTIVE_EXTEND);
             }
@@ -81,6 +81,9 @@ namespace ProjectileReflector
         {
             var aimBackProb = ReflectBackChance(curStatus);
             var aimBack = Random.value < aimBackProb;
+
+            if (curStatus == Status.ACTIVE) ModAudio.PlaySoundActive();
+            else ModAudio.PlaySoundPassive();
 
             var oldContext = self.context;
             self.damagedObjects.Clear();
