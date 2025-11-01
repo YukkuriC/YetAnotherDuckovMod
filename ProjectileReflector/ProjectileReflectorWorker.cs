@@ -22,6 +22,7 @@ namespace ProjectileReflector
             if (
                 self.context.team == Teams.player
                 || player == null
+                || player.Dashing // until a better plan
                 || !(player.CurrentHoldItemAgent is ItemAgent_MeleeWeapon)
             ) return false;
 

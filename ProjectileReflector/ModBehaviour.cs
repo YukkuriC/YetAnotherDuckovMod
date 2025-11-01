@@ -8,6 +8,7 @@ namespace ProjectileReflector
     public class ModBehaviour : Duckov.Modding.ModBehaviour
     {
         public const string HARMONY_ID = "YukkuriC.ProjectileReflector";
+        public static readonly string ROOT_PATH = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
         Harmony? patcher;
         void OnEnable()
@@ -23,7 +24,7 @@ namespace ProjectileReflector
         }
         void Awake()
         {
-            var harmonyPath = Path.Combine(Assembly.GetExecutingAssembly().Location, "..", "0Harmony.dll");
+            var harmonyPath = Path.Combine(ROOT_PATH, "0Harmony.dll");
             Assembly.LoadFrom(harmonyPath);
         }
     }
