@@ -101,7 +101,7 @@ namespace ProjectileReflector
             if (curStatus == Status.ACTIVE)
             {
                 oldContext.distance *= DISTANCE_MULT_ACTIVE;
-                oldContext.critRate = 1;
+                oldContext.critRate = ACTIVE_CRITICAL ? 1 : 0;
                 oldContext.damage *= DAMAGE_MULT_ACTIVE;
                 if (ACTIVE_EXPLOSION && oldContext.explosionRange <= 0)
                 {

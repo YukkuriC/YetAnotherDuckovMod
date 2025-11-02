@@ -12,7 +12,7 @@ var raw = new string[] {
     "float,TIME_PASSIVE_EXTEND,0.1f",
     "float,TIME_ACTIVE_EXTEND,0.2f",
     "float,TIME_SWING_ACTIVE,0.3f",
-    "float,TIME_AIM_ACTIVE,0.2f",
+    //"float,TIME_AIM_ACTIVE,0.2f",
 
     "float,CHANCE_BACK_ACTIVE,0.9f",
     "float,CHANCE_BACK_PASSIVE,0.05f",
@@ -22,7 +22,8 @@ var raw = new string[] {
     "float,DAMAGE_MULT_PASSIVE,0.5f",
     "float,DISTANCE_MULT_ACTIVE,5",
     "float,DISTANCE_MULT_PASSIVE,1",
-
+    
+    "bool,ACTIVE_CRITICAL,true",
     "bool,ACTIVE_EXPLOSION,false",
     "float,ACTIVE_EXPLOSION_DAMAGE_FACTOR,1",
     "float,ACTIVE_EXPLOSION_RANGE,1",
@@ -34,6 +35,13 @@ int N = lines.Count;
 #>
 using System;
 
+/*
+配置名|类型|默认值|描述
+--|--|--|--
+<#foreach(var line in lines) {#>
+<#=line[1]#>|<#=line[0]#>|<#=line[2]#>|
+<#}#>
+*/
 namespace ProjectileReflector
 {
     public static class ModConfigs
