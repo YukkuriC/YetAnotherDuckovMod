@@ -1,0 +1,35 @@
+[url=https://github.com/YukkuriC/YetAnotherDuckovMod/tree/main/ProjectileReflector] Github源代码 [/url]
+
+近战武器可以反弹面前 180° 扇形内的子弹。有两种反射方式：主动与被动。  
+主动反射在玩家近战攻击后短时间内触发，无需消耗体力即可反弹，（默认配置下）拥有更大的反射范围与反射子弹威力；  
+被动反射在玩家手持武器受击，且体力充足时触发，消耗体力弹开子弹，反射回开火敌人的概率较小。
+
+[h2]配置[/h2]
+
+配置文件位于[u]<存档目录>/YukkuriC.ProjectileReflector.json[/u]（Windows 系统下通常为[u]C:\Users\<用户名>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json[/u]），其中内容如下：
+
+[table]    
+    [tr]
+        [th]配置名[/th]
+        [th]类型[/th]
+        [th]默认值[/th]
+        [th]描述[/th]
+    [/tr]
+    [tr][td]REFLECT_RANGE[/td][td]float[/td][td]2[/td][td]主动反射触发范围[/td][/tr]
+    [tr][td]REFLECT_RANGE_PASSIVE[/td][td]float[/td][td]1.5f[/td][td]被动反射触发范围[/td][/tr]
+    [tr][td]TIME_PASSIVE_EXTEND[/td][td]float[/td][td]0.1f[/td][td]每次被动反射延续状态时长（秒）[/td][/tr]
+    [tr][td]TIME_ACTIVE_EXTEND[/td][td]float[/td][td]0.2f[/td][td]每次主动反射延续状态时长（秒）[/td][/tr]
+    [tr][td]TIME_SWING_ACTIVE[/td][td]float[/td][td]0.3f[/td][td]挥刀后主动反射状态持续时长（秒）[/td][/tr]
+    [tr][td]CHANCE_BACK_ACTIVE[/td][td]float[/td][td]0.9f[/td][td]主动反射回弹子弹概率[/td][/tr]
+    [tr][td]CHANCE_BACK_PASSIVE[/td][td]float[/td][td]0.05f[/td][td]被动反射回弹子弹概率[/td][/tr]
+    [tr][td]PASSIVE_STAMINA_COST[/td][td]float[/td][td]0.5f[/td][td]被动反射体力消耗率（基于子弹伤害）[/td][/tr]
+    [tr][td]DAMAGE_MULT_ACTIVE[/td][td]float[/td][td]1[/td][td]主动反射后子弹伤害乘数[/td][/tr]
+    [tr][td]DAMAGE_MULT_PASSIVE[/td][td]float[/td][td]0.5f[/td][td]被动反射后子弹伤害乘数[/td][/tr]
+    [tr][td]DISTANCE_MULT_ACTIVE[/td][td]float[/td][td]5[/td][td]主动反射后子弹射程乘数[/td][/tr]
+    [tr][td]DISTANCE_MULT_PASSIVE[/td][td]float[/td][td]1[/td][td]被动反射后子弹射程乘数[/td][/tr]
+    [tr][td]ACTIVE_CRITICAL[/td][td]bool[/td][td]true[/td][td]主动反射子弹是否暴击[/td][/tr]
+    [tr][td]ACTIVE_EXPLOSION[/td][td]bool[/td][td]false[/td][td]主动反射子弹是否爆炸[/td][/tr]
+    [tr][td]ACTIVE_EXPLOSION_DAMAGE_FACTOR[/td][td]float[/td][td]1[/td][td]主动反射爆炸额外伤害乘数（基于反射后子弹伤害）[/td][/tr]
+    [tr][td]ACTIVE_EXPLOSION_RANGE[/td][td]float[/td][td]1[/td][td]主动反射爆炸范围[/td][/tr]
+    [tr][td]SFX_VOLUME[/td][td]float[/td][td]0.5f[/td][td]反射音效强度[/td][/tr]
+[/table]
