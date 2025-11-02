@@ -18,11 +18,13 @@ namespace ProjectileReflector
             if (patcher == null) patcher = new Harmony(HARMONY_ID);
             patcher.PatchAll(Assembly.GetExecutingAssembly());
             Debug.Log("[ProjectileReflector] Harmony patched");
+            Compat.ModConfigMenu.Init();
         }
         void OnDisable()
         {
             patcher?.UnpatchAll(HARMONY_ID);
             Debug.Log("[ProjectileReflector] Harmony released");
+            Compat.ModConfigMenu.Dispose();
         }
         void Awake()
         {
@@ -95,8 +97,17 @@ namespace ProjectileReflector
         public static void SaveConfig()
         {
             skipNextChange = true;
-            var output = JsonUtility.ToJson(instance, true);
-            File.WriteAllText(CONFIG_FILE_PATH, output, System.Text.Encoding.UTF8);
+            try
+            {
+                var output = JsonUtility.ToJson(instance, true);
+                File.WriteAllText(CONFIG_FILE_PATH, output, System.Text.Encoding.UTF8);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("[ProjectileReflector] error when saving config:");
+                Debug.LogException(e);
+                skipNextChange = false;
+            }
         }
     }
 }

@@ -13,6 +13,9 @@
     <Reference Include="$(DuckovPath)\Duckov_Data\Managed\ItemStatsSystem.dll">
       <Private>False</Private>
     </Reference>
+    <Reference Include="$(DuckovPath)\Duckov_Data\Managed\SodaLocalization.dll">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="$(DuckovPath)\Duckov_Data\Managed\UnityEngine*">
       <Private>False</Private>
     </Reference>
