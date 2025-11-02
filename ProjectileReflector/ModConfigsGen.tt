@@ -1,36 +1,26 @@
 ﻿<#@ template language="C#" #>
 <#@ assembly name="System.Core" #>
+<#@ import namespace="System.IO" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#
-// type,name,default(,min,max)
-var raw = new string[] {
-    "float,REFLECT_RANGE,2,0,10",
-    "float,REFLECT_RANGE_PASSIVE,1.5f,0,10",
-
-    "float,TIME_PASSIVE_EXTEND,0.1f,0,1",
-    "float,TIME_ACTIVE_EXTEND,0.2f,0,1",
-    "float,TIME_SWING_ACTIVE,0.3f,0,3",
-    //"float,TIME_AIM_ACTIVE,0.2f",
-
-    "float,CHANCE_BACK_ACTIVE,0.9f,0,1",
-    "float,CHANCE_BACK_PASSIVE,0.05f,0,1",
-    "float,PASSIVE_STAMINA_COST,0.5f,0,10",
-
-    "float,DAMAGE_MULT_ACTIVE,1,0,10",
-    "float,DAMAGE_MULT_PASSIVE,0.5f,0,10",
-    "float,DISTANCE_MULT_ACTIVE,5,0,10",
-    "float,DISTANCE_MULT_PASSIVE,1,0,10",
-    
-    "bool,ACTIVE_CRITICAL,true",
-    "bool,ACTIVE_EXPLOSION,false",
-    "float,ACTIVE_EXPLOSION_DAMAGE_FACTOR,1,0,10",
-    "float,ACTIVE_EXPLOSION_RANGE,1,0,10",
-
-    "float,SFX_VOLUME,0.5f,0,1",
-};
-var lines = (from r in raw select r.Split(',')).ToList();
+// read csv
+// type,name,default,min,max,descrip_cn,descrip_en
+var configRaw = File.ReadAllText("ProjectileReflector/ALL_CONFIGS.csv", Encoding.UTF8);
+configRaw = configRaw.Replace("\r", "");
+var linesRaw = (from r in configRaw.Split('\n') select r.Split(',')).ToList();
+var header = linesRaw[0];
+linesRaw.Remove(header);
+var lines = new List<Dictionary<string,string>>();
+var ncol = header.Length;
+foreach(var line in linesRaw){
+    var unit = new Dictionary<string,string>();
+    for(int i=0;i<ncol;i++){
+        unit[header[i]]=line[i];
+    }
+    lines.Add(unit);
+}
 int N = lines.Count;
 
 var OUTPUT_DOC = false;
@@ -39,12 +29,44 @@ using System;
 using UnityEngine;
 
 <#if (OUTPUT_DOC) {#>
-/*
+/* CN
 配置名|类型|默认值|描述
 --|--|--|--
 <#foreach(var line in lines) {#>
-<#=line[1]#>|<#=line[0]#>|<#=line[2]#>|
+<#=line["name"]#>|<#=line["type"]#>|<#=line["default"]#>|<#=line["descrip_cn"]#>
 <#}#>
+
+[table]
+    [tr]
+        [th]配置名[/th]
+        [th]类型[/th]
+        [th]默认值[/th]
+        [th]描述[/th]
+    [/tr]
+<#foreach(var line in lines) {#>
+    [tr][td]<#=line["name"]#>[/td][td]<#=line["type"]#>[/td][td]<#=line["default"]#>[/td][td]<#=line["descrip_cn"]#>[/td][/tr]
+<#}#>
+[/table]
+*/
+
+/* EN
+Configuration Name|Type|Default Value|Description
+--|--|--|--
+<#foreach(var line in lines) {#>
+<#=line["name"]#>|<#=line["type"]#>|<#=line["default"]#>|<#=line["descrip_en"]#>
+<#}#>
+
+[table]
+    [tr]
+        [th]Configuration Name[/th]
+        [th]Type[/th]
+        [th]Default Value[/th]
+        [th]Description[/th]
+    [/tr]
+<#foreach(var line in lines) {#>
+    [tr][td]<#=line["name"]#>[/td][td]<#=line["type"]#>[/td][td]<#=line["default"]#>[/td][td]<#=line["descrip_en"]#>[/td][/tr]
+<#}#>
+[/table]
 */
 <#}#>
 namespace ProjectileReflector
@@ -52,7 +74,7 @@ namespace ProjectileReflector
     public static class ModConfigs
     {
 <#foreach(var line in lines) {#>
-        public static <#=line[0]#> <#=line[1]#> { get => ModConfigEntry.INSTANCE.<#=line[1]#>; }
+        public static <#=line["type"]#> <#=line["name"]#> { get => ModConfigEntry.INSTANCE.<#=line["name"]#>; }
 <#}#>
     }
 
@@ -61,7 +83,7 @@ namespace ProjectileReflector
     {
         private static ModConfigEntry instance = new ModConfigEntry();
 <#foreach(var line in lines) {#>
-        public <#=line[0]#> <#=line[1]#> = <#=line[2]#>;
+        public <#=line["type"]#> <#=line["name"]#> = <#=line["default"]#>;
 <#}#>
     }
     // mod config menu compat
@@ -73,21 +95,21 @@ namespace ProjectileReflector
             {
                 var config = ModConfigEntry.INSTANCE;
 <#foreach(var line in lines) {#>
-<#if (line[0]=="bool") {#>
+<#if (line["type"]=="bool") {#>
                 ModConfigAPI.SafeAddBoolDropdownList(
                     MOD_NAME,
-                    "<#=line[1]#>",
-                    "<#=line[1]#>",
-                    config.<#=line[1]#>
+                    "<#=line["name"]#>",
+                    isChinese ? "<#=line["descrip_cn"]#>" : "<#=line["descrip_en"]#>",
+                    config.<#=line["name"]#>
                 );
 <#} else {#>
                 ModConfigAPI.SafeAddInputWithSlider(
                     MOD_NAME,
-                    "<#=line[1]#>",
-                    "<#=line[1]#>",
-                    typeof(<#=line[0]#>),
-                    config.<#=line[1]#>,
-                    new Vector2(<#=line[3]#>, <#=line[4]#>)
+                    "<#=line["name"]#>",
+                    isChinese ? "<#=line["descrip_cn"]#>" : "<#=line["descrip_en"]#>",
+                    typeof(<#=line["type"]#>),
+                    config.<#=line["name"]#>,
+                    new Vector2(<#=line["min"]#>, <#=line["max"]#>)
                 );
 <#}#>
 <#}#>
@@ -96,7 +118,7 @@ namespace ProjectileReflector
             {
                 var config = ModConfigEntry.INSTANCE;
 <#foreach(var line in lines) {#>
-                config.<#=line[1]#> = ModConfigAPI.SafeLoad(MOD_NAME, "<#=line[1]#>", config.<#=line[1]#>);
+                config.<#=line["name"]#> = ModConfigAPI.SafeLoad(MOD_NAME, "<#=line["name"]#>", config.<#=line["name"]#>);
 <#}#>
             }
         }

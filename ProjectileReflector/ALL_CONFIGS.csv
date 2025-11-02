@@ -1,0 +1,18 @@
+type,name,default,min,max,descrip_cn,descrip_en
+float,REFLECT_RANGE,2,0,10,主动反射触发范围,Active reflection trigger range
+float,REFLECT_RANGE_PASSIVE,1.5f,0,10,被动反射触发范围,Passive reflection trigger range
+float,TIME_PASSIVE_EXTEND,0.1f,0,1,每次被动反射延续状态时长（秒）,State duration extension per passive reflection (seconds)
+float,TIME_ACTIVE_EXTEND,0.2f,0,1,每次主动反射延续状态时长（秒）,State duration extension per active reflection (seconds)
+float,TIME_SWING_ACTIVE,0.3f,0,3,挥刀后主动反射状态持续时长（秒）,Active reflection state duration after a melee swing (seconds)
+float,CHANCE_BACK_ACTIVE,0.9f,0,1,主动反射回弹子弹概率,Chance for active reflection to return bullet to shooter
+float,CHANCE_BACK_PASSIVE,0.05f,0,1,被动反射回弹子弹概率,Chance for passive reflection to return bullet to shooter
+float,PASSIVE_STAMINA_COST,0.5f,0,10,被动反射体力消耗率（基于子弹伤害）,Passive reflection stamina cost rate (based on bullet damage)
+float,DAMAGE_MULT_ACTIVE,1,0,10,主动反射后子弹伤害乘数,Reflected bullet damage multiplier after active reflection
+float,DAMAGE_MULT_PASSIVE,0.5f,0,10,被动反射后子弹伤害乘数,Reflected bullet damage multiplier after passive reflection
+float,DISTANCE_MULT_ACTIVE,5,0,10,主动反射后子弹射程乘数,Reflected bullet range multiplier after active reflection
+float,DISTANCE_MULT_PASSIVE,1,0,10,被动反射后子弹射程乘数,Reflected bullet range multiplier after passive reflection
+bool,ACTIVE_CRITICAL,true,foo,bar,主动反射子弹是否暴击,Whether actively reflected bullets are critical hits
+bool,ACTIVE_EXPLOSION,false,foo,bar,主动反射子弹是否爆炸,Whether actively reflected bullets explode
+float,ACTIVE_EXPLOSION_DAMAGE_FACTOR,1,0,10,主动反射爆炸额外伤害乘数（基于反射后子弹伤害）,Active reflection explosion extra damage multiplier (based on reflected bullet damage)
+float,ACTIVE_EXPLOSION_RANGE,1,0,10,主动反射爆炸范围,Active reflection explosion range
+float,SFX_VOLUME,0.5f,0,1,反射音效强度,Reflection sound effect volume
