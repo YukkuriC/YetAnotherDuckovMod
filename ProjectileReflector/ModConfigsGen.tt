@@ -6,8 +6,8 @@
 <#
 // type,name,default
 var raw = new string[] {
-    "float,REFLECT_RANGE_SQR,2 * 2",
-    "float,REFLECT_RANGE_SQR_PASSIVE,1.5f * 1.5f",
+    "float,REFLECT_RANGE,2",
+    "float,REFLECT_RANGE_PASSIVE,1.5f",
 
     "float,TIME_PASSIVE_EXTEND,0.1f",
     "float,TIME_ACTIVE_EXTEND,0.2f",

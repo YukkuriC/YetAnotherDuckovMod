@@ -22,6 +22,7 @@ namespace ProjectileReflector
             if (
                 self.context.team == Teams.player
                 || player == null
+                || player.Running // until a better plan
                 || player.Dashing // until a better plan
                 || !(player.CurrentHoldItemAgent is ItemAgent_MeleeWeapon)
             ) return false;
@@ -38,8 +39,8 @@ namespace ProjectileReflector
         {
             var delta = self.transform.position - player.transform.position;
             delta.y = 0;
-            var rangeSqr = curStatus == Status.ACTIVE ? REFLECT_RANGE_SQR : REFLECT_RANGE_SQR_PASSIVE;
-            return delta.sqrMagnitude < rangeSqr
+            var range = curStatus == Status.ACTIVE ? REFLECT_RANGE : REFLECT_RANGE_PASSIVE;
+            return delta.sqrMagnitude < range * range
             && Vector3.Angle(delta, player.CurrentAimDirection) <= 90;
         }
         #endregion

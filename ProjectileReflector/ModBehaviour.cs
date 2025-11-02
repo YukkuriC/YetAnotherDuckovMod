@@ -66,7 +66,7 @@ namespace ProjectileReflector
         }
         public static void SaveConfig()
         {
-            var output = JsonUtility.ToJson(instance);
+            var output = JsonUtility.ToJson(instance, true);
             File.WriteAllText(CONFIG_FILE_PATH, output, System.Text.Encoding.UTF8);
         }
     }
