@@ -9,10 +9,13 @@ Passive reflection triggers when the player is hit while holding the weapon and 
 
 ## Configuration
 
-The configuration file is located at `<SaveDirectory>/YukkuriC.ProjectileReflector.json` (typically `C:\Users\<Username>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json` for Windows OS). Its contents are as follows:
+The configuration file is located at `<SaveDirectory>/YukkuriC.ProjectileReflector.json` (typically `C:\Users\<Username>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json` for Windows OS); if installed with [ModConfig](https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339) then the config can also be edited in game.  
+All config entries are listed as follows:
 
 | Configuration Name             | Type  | Default Value | Description                                                                            |
 | ------------------------------ | ----- | ------------- | -------------------------------------------------------------------------------------- |
+| ENABLE_ACTIVE_REFLECT          | bool  | true          | Enables active reflection                                                              |
+| ENABLE_PASSIVE_REFLECT         | bool  | true          | Enables passive reflection                                                             |
 | REFLECT_RANGE                  | float | 2             | Active reflection trigger range                                                        |
 | REFLECT_RANGE_PASSIVE          | float | 1.5f          | Passive reflection trigger range                                                       |
 | TIME_PASSIVE_EXTEND            | float | 0.1f          | State duration extension per passive reflection (seconds)                              |
@@ -21,6 +24,7 @@ The configuration file is located at `<SaveDirectory>/YukkuriC.ProjectileReflect
 | CHANCE_BACK_ACTIVE             | float | 0.9f          | Chance for active reflection to return bullet to shooter                               |
 | CHANCE_BACK_PASSIVE            | float | 0.05f         | Chance for passive reflection to return bullet to shooter                              |
 | PASSIVE_STAMINA_COST           | float | 0.5f          | Passive reflection stamina cost rate (based on bullet damage)                          |
+| ACTIVE_STAMINA_GAIN            | float | 5             | Stamina amount gain after each single active bullet reflection                         |
 | DAMAGE_MULT_ACTIVE             | float | 1             | Reflected bullet damage multiplier after active reflection                             |
 | DAMAGE_MULT_PASSIVE            | float | 0.5f          | Reflected bullet damage multiplier after passive reflection                            |
 | DISTANCE_MULT_ACTIVE           | float | 5             | Reflected bullet range multiplier after active reflection                              |

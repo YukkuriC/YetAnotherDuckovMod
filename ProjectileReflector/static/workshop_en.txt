@@ -6,7 +6,8 @@ Passive reflection triggers when the player is hit while holding the weapon and 
 
 [h2]Configuration[/h2]
 
-The configuration file is located at [u]<SaveDirectory>/YukkuriC.ProjectileReflector.json[/u] (typically [u]C:\Users\<Username>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json[/u] for Windows OS). Its contents are as follows:
+The configuration file is located at [u]<SaveDirectory>/YukkuriC.ProjectileReflector.json[/u] (typically [u]C:\Users\<Username>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json[/u] for Windows OS); if installed with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339]ModConfig[/url] then the config can also be edited in game.  
+All config entries are listed as follows:
 
 [table]
     [tr]
@@ -15,6 +16,8 @@ The configuration file is located at [u]<SaveDirectory>/YukkuriC.ProjectileRefle
         [th]Default Value[/th]
         [th]Description[/th]
     [/tr]
+    [tr][td]ENABLE_ACTIVE_REFLECT[/td][td]bool[/td][td]true[/td][td]Enables active reflection[/td][/tr]
+    [tr][td]ENABLE_PASSIVE_REFLECT[/td][td]bool[/td][td]true[/td][td]Enables passive reflection[/td][/tr]
     [tr][td]REFLECT_RANGE[/td][td]float[/td][td]2[/td][td]Active reflection trigger range[/td][/tr]
     [tr][td]REFLECT_RANGE_PASSIVE[/td][td]float[/td][td]1.5f[/td][td]Passive reflection trigger range[/td][/tr]
     [tr][td]TIME_PASSIVE_EXTEND[/td][td]float[/td][td]0.1f[/td][td]State duration extension per passive reflection (seconds)[/td][/tr]
@@ -23,6 +26,7 @@ The configuration file is located at [u]<SaveDirectory>/YukkuriC.ProjectileRefle
     [tr][td]CHANCE_BACK_ACTIVE[/td][td]float[/td][td]0.9f[/td][td]Chance for active reflection to return bullet to shooter[/td][/tr]
     [tr][td]CHANCE_BACK_PASSIVE[/td][td]float[/td][td]0.05f[/td][td]Chance for passive reflection to return bullet to shooter[/td][/tr]
     [tr][td]PASSIVE_STAMINA_COST[/td][td]float[/td][td]0.5f[/td][td]Passive reflection stamina cost rate (based on bullet damage)[/td][/tr]
+    [tr][td]ACTIVE_STAMINA_GAIN[/td][td]float[/td][td]5[/td][td]Stamina amount gain after each single active bullet reflection[/td][/tr]
     [tr][td]DAMAGE_MULT_ACTIVE[/td][td]float[/td][td]1[/td][td]Reflected bullet damage multiplier after active reflection[/td][/tr]
     [tr][td]DAMAGE_MULT_PASSIVE[/td][td]float[/td][td]0.5f[/td][td]Reflected bullet damage multiplier after passive reflection[/td][/tr]
     [tr][td]DISTANCE_MULT_ACTIVE[/td][td]float[/td][td]5[/td][td]Reflected bullet range multiplier after active reflection[/td][/tr]

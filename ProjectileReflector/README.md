@@ -1,7 +1,7 @@
 # Projectile Reflector 刀反子弹
 
 [中文] [[English](./README_en.md)]  
-[Steam创意工坊](https://steamcommunity.com/sharedfiles/filedetails/?id=3597305916)
+[Steam 创意工坊](https://steamcommunity.com/sharedfiles/filedetails/?id=3597305916)
 
 近战武器可以反弹面前 180° 扇形内的子弹。有两种反射方式：主动与被动。  
 主动反射在玩家近战攻击后短时间内触发，无需消耗体力即可反弹，（默认配置下）拥有更大的反射范围与反射子弹威力；  
@@ -9,10 +9,13 @@
 
 ## 配置
 
-配置文件位于`<存档目录>/YukkuriC.ProjectileReflector.json`（Windows 系统下通常为`C:\Users\<用户名>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json`），其中内容如下：
+配置文件位于`<存档目录>/YukkuriC.ProjectileReflector.json`（Windows 系统下通常为`C:\Users\<用户名>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json`）；若安装了 [ModConfig](https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339) 也可直接在游戏内更改。  
+所有配置项内容如下：
 
 | 配置名                         | 类型  | 默认值 | 描述                                           |
 | ------------------------------ | ----- | ------ | ---------------------------------------------- |
+| ENABLE_ACTIVE_REFLECT          | bool  | true   | 启用主动反射                                   |
+| ENABLE_PASSIVE_REFLECT         | bool  | true   | 启用被动反射                                   |
 | REFLECT_RANGE                  | float | 2      | 主动反射触发范围                               |
 | REFLECT_RANGE_PASSIVE          | float | 1.5f   | 被动反射触发范围                               |
 | TIME_PASSIVE_EXTEND            | float | 0.1f   | 每次被动反射延续状态时长（秒）                 |
@@ -21,6 +24,7 @@
 | CHANCE_BACK_ACTIVE             | float | 0.9f   | 主动反射回弹子弹概率                           |
 | CHANCE_BACK_PASSIVE            | float | 0.05f  | 被动反射回弹子弹概率                           |
 | PASSIVE_STAMINA_COST           | float | 0.5f   | 被动反射体力消耗率（基于子弹伤害）             |
+| ACTIVE_STAMINA_GAIN            | float | 5      | 主动反射单颗子弹恢复体力量                     |
 | DAMAGE_MULT_ACTIVE             | float | 1      | 主动反射后子弹伤害乘数                         |
 | DAMAGE_MULT_PASSIVE            | float | 0.5f   | 被动反射后子弹伤害乘数                         |
 | DISTANCE_MULT_ACTIVE           | float | 5      | 主动反射后子弹射程乘数                         |

@@ -41,7 +41,7 @@ namespace ProjectileReflector
         [HarmonyPostfix, HarmonyPatch(typeof(CharacterMainControl), nameof(CharacterMainControl.Attack))]
         static void PostAttack(CharacterMainControl __instance, bool __result)
         {
-            if (!__result || !__instance.IsMainCharacter || PlayerStatus == Status.PASSIVE) return;
+            if (!ENABLE_ACTIVE_REFLECT || !__result || !__instance.IsMainCharacter || PlayerStatus == Status.PASSIVE) return;
             //Debug.Log("swing extend");
             ExtendStatus(Status.ACTIVE, TIME_SWING_ACTIVE);
         }

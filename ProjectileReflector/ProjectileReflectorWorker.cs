@@ -28,9 +28,14 @@ namespace ProjectileReflector
             ) return false;
 
             // type 1: active strike
-            if (PlayerStatus == Status.ACTIVE) return true;
+            if (PlayerStatus == Status.ACTIVE)
+            {
+                staminaCost = -ACTIVE_STAMINA_GAIN;
+                return true;
+            }
 
             // type 2: has extra stamina
+            if (!ENABLE_PASSIVE_REFLECT) return false;
             staminaCost = self.context.damage * PASSIVE_STAMINA_COST;
             return player.CurrentStamina >= staminaCost;
         }
@@ -58,7 +63,13 @@ namespace ProjectileReflector
 
             // do reflect
             DoReflect(player, self, ref ___velocity, ref ___direction, curStatus);
-            player.UseStamina(staminaCost);
+            if (staminaCost > 0) player.UseStamina(staminaCost);
+            else if (staminaCost < 0)
+            {
+                // hack increase stamina
+                var staminaField = Traverse.Create(player).Field<float>("currentStamina");
+                staminaField.Value = Mathf.Min(player.MaxStamina, staminaField.Value - staminaCost);
+            }
 
             // play melee fx
             var evilReflection = Traverse.Create(player.attackAction);

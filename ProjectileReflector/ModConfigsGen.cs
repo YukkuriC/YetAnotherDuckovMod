@@ -5,6 +5,8 @@ namespace ProjectileReflector
 {
     public static class ModConfigs
     {
+        public static bool ENABLE_ACTIVE_REFLECT { get => ModConfigEntry.INSTANCE.ENABLE_ACTIVE_REFLECT; }
+        public static bool ENABLE_PASSIVE_REFLECT { get => ModConfigEntry.INSTANCE.ENABLE_PASSIVE_REFLECT; }
         public static float REFLECT_RANGE { get => ModConfigEntry.INSTANCE.REFLECT_RANGE; }
         public static float REFLECT_RANGE_PASSIVE { get => ModConfigEntry.INSTANCE.REFLECT_RANGE_PASSIVE; }
         public static float TIME_PASSIVE_EXTEND { get => ModConfigEntry.INSTANCE.TIME_PASSIVE_EXTEND; }
@@ -13,6 +15,7 @@ namespace ProjectileReflector
         public static float CHANCE_BACK_ACTIVE { get => ModConfigEntry.INSTANCE.CHANCE_BACK_ACTIVE; }
         public static float CHANCE_BACK_PASSIVE { get => ModConfigEntry.INSTANCE.CHANCE_BACK_PASSIVE; }
         public static float PASSIVE_STAMINA_COST { get => ModConfigEntry.INSTANCE.PASSIVE_STAMINA_COST; }
+        public static float ACTIVE_STAMINA_GAIN { get => ModConfigEntry.INSTANCE.ACTIVE_STAMINA_GAIN; }
         public static float DAMAGE_MULT_ACTIVE { get => ModConfigEntry.INSTANCE.DAMAGE_MULT_ACTIVE; }
         public static float DAMAGE_MULT_PASSIVE { get => ModConfigEntry.INSTANCE.DAMAGE_MULT_PASSIVE; }
         public static float DISTANCE_MULT_ACTIVE { get => ModConfigEntry.INSTANCE.DISTANCE_MULT_ACTIVE; }
@@ -28,6 +31,8 @@ namespace ProjectileReflector
     public partial class ModConfigEntry
     {
         private static ModConfigEntry instance = new ModConfigEntry();
+        public bool ENABLE_ACTIVE_REFLECT = true;
+        public bool ENABLE_PASSIVE_REFLECT = true;
         public float REFLECT_RANGE = 2;
         public float REFLECT_RANGE_PASSIVE = 1.5f;
         public float TIME_PASSIVE_EXTEND = 0.1f;
@@ -36,6 +41,7 @@ namespace ProjectileReflector
         public float CHANCE_BACK_ACTIVE = 0.9f;
         public float CHANCE_BACK_PASSIVE = 0.05f;
         public float PASSIVE_STAMINA_COST = 0.5f;
+        public float ACTIVE_STAMINA_GAIN = 5;
         public float DAMAGE_MULT_ACTIVE = 1;
         public float DAMAGE_MULT_PASSIVE = 0.5f;
         public float DISTANCE_MULT_ACTIVE = 5;
@@ -54,6 +60,18 @@ namespace ProjectileReflector
             static void SetupModConfig(bool isChinese)
             {
                 var config = ModConfigEntry.INSTANCE;
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
+                    "ENABLE_ACTIVE_REFLECT",
+                    isChinese ? "启用主动反射" : "Enables active reflection",
+                    config.ENABLE_ACTIVE_REFLECT
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
+                    "ENABLE_PASSIVE_REFLECT",
+                    isChinese ? "启用被动反射" : "Enables passive reflection",
+                    config.ENABLE_PASSIVE_REFLECT
+                );
                 ModConfigAPI.SafeAddInputWithSlider(
                     MOD_NAME,
                     "REFLECT_RANGE",
@@ -117,6 +135,14 @@ namespace ProjectileReflector
                     typeof(float),
                     config.PASSIVE_STAMINA_COST,
                     new Vector2(0, 10)
+                );
+                ModConfigAPI.SafeAddInputWithSlider(
+                    MOD_NAME,
+                    "ACTIVE_STAMINA_GAIN",
+                    isChinese ? "主动反射单颗子弹恢复体力量" : "Stamina amount gain after each single active bullet reflection",
+                    typeof(float),
+                    config.ACTIVE_STAMINA_GAIN,
+                    new Vector2(0, 100)
                 );
                 ModConfigAPI.SafeAddInputWithSlider(
                     MOD_NAME,
@@ -190,6 +216,8 @@ namespace ProjectileReflector
             static void LoadConfigFromModConfig()
             {
                 var config = ModConfigEntry.INSTANCE;
+                config.ENABLE_ACTIVE_REFLECT = ModConfigAPI.SafeLoad(MOD_NAME, "ENABLE_ACTIVE_REFLECT", config.ENABLE_ACTIVE_REFLECT);
+                config.ENABLE_PASSIVE_REFLECT = ModConfigAPI.SafeLoad(MOD_NAME, "ENABLE_PASSIVE_REFLECT", config.ENABLE_PASSIVE_REFLECT);
                 config.REFLECT_RANGE = ModConfigAPI.SafeLoad(MOD_NAME, "REFLECT_RANGE", config.REFLECT_RANGE);
                 config.REFLECT_RANGE_PASSIVE = ModConfigAPI.SafeLoad(MOD_NAME, "REFLECT_RANGE_PASSIVE", config.REFLECT_RANGE_PASSIVE);
                 config.TIME_PASSIVE_EXTEND = ModConfigAPI.SafeLoad(MOD_NAME, "TIME_PASSIVE_EXTEND", config.TIME_PASSIVE_EXTEND);
@@ -198,6 +226,7 @@ namespace ProjectileReflector
                 config.CHANCE_BACK_ACTIVE = ModConfigAPI.SafeLoad(MOD_NAME, "CHANCE_BACK_ACTIVE", config.CHANCE_BACK_ACTIVE);
                 config.CHANCE_BACK_PASSIVE = ModConfigAPI.SafeLoad(MOD_NAME, "CHANCE_BACK_PASSIVE", config.CHANCE_BACK_PASSIVE);
                 config.PASSIVE_STAMINA_COST = ModConfigAPI.SafeLoad(MOD_NAME, "PASSIVE_STAMINA_COST", config.PASSIVE_STAMINA_COST);
+                config.ACTIVE_STAMINA_GAIN = ModConfigAPI.SafeLoad(MOD_NAME, "ACTIVE_STAMINA_GAIN", config.ACTIVE_STAMINA_GAIN);
                 config.DAMAGE_MULT_ACTIVE = ModConfigAPI.SafeLoad(MOD_NAME, "DAMAGE_MULT_ACTIVE", config.DAMAGE_MULT_ACTIVE);
                 config.DAMAGE_MULT_PASSIVE = ModConfigAPI.SafeLoad(MOD_NAME, "DAMAGE_MULT_PASSIVE", config.DAMAGE_MULT_PASSIVE);
                 config.DISTANCE_MULT_ACTIVE = ModConfigAPI.SafeLoad(MOD_NAME, "DISTANCE_MULT_ACTIVE", config.DISTANCE_MULT_ACTIVE);
