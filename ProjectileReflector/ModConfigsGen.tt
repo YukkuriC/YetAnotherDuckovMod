@@ -27,6 +27,7 @@ var OUTPUT_DOC = false;
 #>
 using System;
 using UnityEngine;
+using YukkuriC;
 
 <#if (OUTPUT_DOC) {#>
 /* CN

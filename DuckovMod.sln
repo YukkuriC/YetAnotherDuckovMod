@@ -5,16 +5,17 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectileReflector", "ProjectileReflector\ProjectileReflector.csproj", "{1BB106E5-EC38-49CE-8CCB-9B72909B3755}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonLib", "CommonLib\CommonLib.csproj", "{59345793-4D38-44EC-B0D4-76F685C65286}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1BB106E5-EC38-49CE-8CCB-9B72909B3755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1BB106E5-EC38-49CE-8CCB-9B72909B3755}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BB106E5-EC38-49CE-8CCB-9B72909B3755}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BB106E5-EC38-49CE-8CCB-9B72909B3755}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59345793-4D38-44EC-B0D4-76F685C65286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59345793-4D38-44EC-B0D4-76F685C65286}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

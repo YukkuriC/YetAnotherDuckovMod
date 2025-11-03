@@ -28,8 +28,7 @@ namespace ProjectileReflector
         }
         void Awake()
         {
-            var harmonyPath = Path.Combine(ROOT_PATH, "0Harmony.dll");
-            Assembly.LoadFrom(harmonyPath);
+            // seems it auto loads DLLs next to it
             ModAudio.InitAudio();
             ModConfigEntry.Init();
         }

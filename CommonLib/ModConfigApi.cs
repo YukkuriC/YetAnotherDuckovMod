@@ -4,7 +4,7 @@ using System.Reflection;
 using UnityEngine;
 
 //替换为你的mod命名空间, 防止多个同名ModConfigAPI冲突
-namespace ProjectileReflector.Compat
+namespace YukkuriC
 {
     /// <summary>
     /// ModConfig 安全接口封装类 - 提供不抛异常的静态接口
