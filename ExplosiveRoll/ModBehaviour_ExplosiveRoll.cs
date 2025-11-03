@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using Saves;
 using System;
+using System.Collections;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
@@ -38,7 +39,32 @@ namespace ExplosiveRoll
                 fromWeaponItemID = -1,
                 armorPiercing = 6,
             };
-            LevelManager.Instance.ExplosionManager.CreateExplosion(self.transform.position, explosionRange, damageInfo, ExplosionFxTypes.normal, 1f, true);
+            LevelManager.Instance.ExplosionManager.CreateExplosion(self.transform.position, explosionRange, damageInfo, ExplosionFxTypes.flash, 1f, true);
+
+            self.StartCoroutine(DelayCall(0.4f, () =>
+            {
+                if (self == null) return;
+                var expandRadius = 8;
+                var expandAngle = 60;
+                var delta = self.CurrentMoveDirection * expandRadius;
+                for (var i = 0; i < 360; i += expandAngle)
+                {
+                    var r = i * Mathf.PI / 180;
+                    var newCenter = self.transform.position +
+                        new Vector3(
+                            delta.x * Mathf.Cos(r) - delta.z * Mathf.Sin(r),
+                            delta.y,
+                            delta.z * Mathf.Cos(r) + delta.x * Mathf.Sin(r)
+                        );
+                    LevelManager.Instance.ExplosionManager.CreateExplosion(newCenter, explosionRange, damageInfo, ExplosionFxTypes.normal, 1f, true);
+                }
+            }));
+        }
+
+        static IEnumerator DelayCall(float delay, Action next)
+        {
+            yield return new WaitForSeconds(delay);
+            next();
         }
     }
 }

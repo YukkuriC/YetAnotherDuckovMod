@@ -21,4 +21,7 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="call copier.bat" />
+  </Target>
 </Project>
