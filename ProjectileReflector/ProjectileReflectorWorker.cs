@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using Duckov.Utilities;
+using HarmonyLib;
 using UnityEngine;
 
 namespace ProjectileReflector
@@ -107,6 +108,9 @@ namespace ProjectileReflector
             ___velocity = ___direction * oldContext.speed;
             oldContext.team = Teams.player;
             oldContext.fromCharacter = player;
+
+            // hit fx
+            Object.Instantiate(GameplayDataSettings.Prefabs.BulletHitObsticleFx, self.transform.position, Quaternion.LookRotation(delta, Vector3.up));
 
             // extra dmg
             if (curStatus == Status.ACTIVE)
