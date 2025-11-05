@@ -16,6 +16,9 @@
     <Reference Include="$(DuckovPath)\Duckov_Data\Managed\UnityEngine*">
       <Private>False</Private>
     </Reference>
+    <Reference Include="$(DuckovPath)\Duckov_Data\Managed\Unitask*">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="0Harmony">
       <HintPath>..\Harmony\0Harmony.dll</HintPath>
       <Private>True</Private>
