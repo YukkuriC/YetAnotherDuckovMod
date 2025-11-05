@@ -18,7 +18,7 @@ namespace ExplosiveRoll
         void OnEnable()
         {
             if (patcher == null) patcher = new Harmony(HARMONY_ID);
-            patcher.PatchAll(Assembly.GetExecutingAssembly());
+            patcher.PatchAll();
             Debug.Log("[ExplosiveRoll] Harmony patched");
         }
         void OnDisable()

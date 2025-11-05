@@ -2,17 +2,23 @@
 using UnityEngine;
 using YukkuriC;
 
+
 namespace ProjectileReflector
 {
     public static class ModConfigs
     {
+        public static bool ModVersion_1_0 { get => ModConfigEntry.INSTANCE.ModVersion_1_0; }
         public static bool ENABLE_ACTIVE_REFLECT { get => ModConfigEntry.INSTANCE.ENABLE_ACTIVE_REFLECT; }
         public static bool ENABLE_PASSIVE_REFLECT { get => ModConfigEntry.INSTANCE.ENABLE_PASSIVE_REFLECT; }
+        public static bool PASSIVE_REFLECT_BY_ADS { get => ModConfigEntry.INSTANCE.PASSIVE_REFLECT_BY_ADS; }
+        public static bool PASSIVE_REFLECT_WHEN_RUNNING { get => ModConfigEntry.INSTANCE.PASSIVE_REFLECT_WHEN_RUNNING; }
+        public static bool PASSIVE_REFLECT_WHEN_DASHING { get => ModConfigEntry.INSTANCE.PASSIVE_REFLECT_WHEN_DASHING; }
         public static float REFLECT_RANGE { get => ModConfigEntry.INSTANCE.REFLECT_RANGE; }
         public static float REFLECT_RANGE_PASSIVE { get => ModConfigEntry.INSTANCE.REFLECT_RANGE_PASSIVE; }
         public static float TIME_PASSIVE_EXTEND { get => ModConfigEntry.INSTANCE.TIME_PASSIVE_EXTEND; }
         public static float TIME_ACTIVE_EXTEND { get => ModConfigEntry.INSTANCE.TIME_ACTIVE_EXTEND; }
         public static float TIME_SWING_ACTIVE { get => ModConfigEntry.INSTANCE.TIME_SWING_ACTIVE; }
+        public static float TIME_ADS_ACTIVE { get => ModConfigEntry.INSTANCE.TIME_ADS_ACTIVE; }
         public static float CHANCE_BACK_ACTIVE { get => ModConfigEntry.INSTANCE.CHANCE_BACK_ACTIVE; }
         public static float CHANCE_BACK_PASSIVE { get => ModConfigEntry.INSTANCE.CHANCE_BACK_PASSIVE; }
         public static float PASSIVE_STAMINA_COST { get => ModConfigEntry.INSTANCE.PASSIVE_STAMINA_COST; }
@@ -32,13 +38,18 @@ namespace ProjectileReflector
     public partial class ModConfigEntry
     {
         private static ModConfigEntry instance = new ModConfigEntry();
+        public bool ModVersion_1_0 = true;
         public bool ENABLE_ACTIVE_REFLECT = true;
         public bool ENABLE_PASSIVE_REFLECT = true;
+        public bool PASSIVE_REFLECT_BY_ADS = false;
+        public bool PASSIVE_REFLECT_WHEN_RUNNING = false;
+        public bool PASSIVE_REFLECT_WHEN_DASHING = false;
         public float REFLECT_RANGE = 2;
         public float REFLECT_RANGE_PASSIVE = 1.5f;
         public float TIME_PASSIVE_EXTEND = 0.1f;
         public float TIME_ACTIVE_EXTEND = 0.2f;
         public float TIME_SWING_ACTIVE = 0.3f;
+        public float TIME_ADS_ACTIVE = 0.3f;
         public float CHANCE_BACK_ACTIVE = 0.9f;
         public float CHANCE_BACK_PASSIVE = 0.05f;
         public float PASSIVE_STAMINA_COST = 0.5f;
@@ -63,6 +74,12 @@ namespace ProjectileReflector
                 var config = ModConfigEntry.INSTANCE;
                 ModConfigAPI.SafeAddBoolDropdownList(
                     MOD_NAME,
+                    "ModVersion_1_0",
+                    isChinese ? "（仅展示）Mod版本：1.0" : "(Display only) Mod version: 1.0",
+                    config.ModVersion_1_0
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
                     "ENABLE_ACTIVE_REFLECT",
                     isChinese ? "启用主动反射" : "Enables active reflection",
                     config.ENABLE_ACTIVE_REFLECT
@@ -72,6 +89,24 @@ namespace ProjectileReflector
                     "ENABLE_PASSIVE_REFLECT",
                     isChinese ? "启用被动反射" : "Enables passive reflection",
                     config.ENABLE_PASSIVE_REFLECT
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
+                    "PASSIVE_REFLECT_BY_ADS",
+                    isChinese ? "仅在机瞄状态下启用被动反射" : "Enables passive reflection only during ADS mode",
+                    config.PASSIVE_REFLECT_BY_ADS
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
+                    "PASSIVE_REFLECT_WHEN_RUNNING",
+                    isChinese ? "是否在跑动中被动反射" : "Whether passive reflection enables when running",
+                    config.PASSIVE_REFLECT_WHEN_RUNNING
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
+                    "PASSIVE_REFLECT_WHEN_DASHING",
+                    isChinese ? "是否在翻滚中被动反射" : "Whether passive reflection enables when dashing",
+                    config.PASSIVE_REFLECT_WHEN_DASHING
                 );
                 ModConfigAPI.SafeAddInputWithSlider(
                     MOD_NAME,
@@ -111,6 +146,14 @@ namespace ProjectileReflector
                     isChinese ? "挥刀后主动反射状态持续时长（秒）" : "Active reflection state duration after a melee swing (seconds)",
                     typeof(float),
                     config.TIME_SWING_ACTIVE,
+                    new Vector2(0, 3)
+                );
+                ModConfigAPI.SafeAddInputWithSlider(
+                    MOD_NAME,
+                    "TIME_ADS_ACTIVE",
+                    isChinese ? "机瞄后主动反射状态持续时长（秒）（需开启“仅机瞄被动反射”）" : "Active reflection state duration after entering ADS mode (seconds) (works only with \"Enables passive during ADS\")",
+                    typeof(float),
+                    config.TIME_ADS_ACTIVE,
                     new Vector2(0, 3)
                 );
                 ModConfigAPI.SafeAddInputWithSlider(
@@ -217,13 +260,18 @@ namespace ProjectileReflector
             static void LoadConfigFromModConfig()
             {
                 var config = ModConfigEntry.INSTANCE;
+                config.ModVersion_1_0 = ModConfigAPI.SafeLoad(MOD_NAME, "ModVersion_1_0", config.ModVersion_1_0);
                 config.ENABLE_ACTIVE_REFLECT = ModConfigAPI.SafeLoad(MOD_NAME, "ENABLE_ACTIVE_REFLECT", config.ENABLE_ACTIVE_REFLECT);
                 config.ENABLE_PASSIVE_REFLECT = ModConfigAPI.SafeLoad(MOD_NAME, "ENABLE_PASSIVE_REFLECT", config.ENABLE_PASSIVE_REFLECT);
+                config.PASSIVE_REFLECT_BY_ADS = ModConfigAPI.SafeLoad(MOD_NAME, "PASSIVE_REFLECT_BY_ADS", config.PASSIVE_REFLECT_BY_ADS);
+                config.PASSIVE_REFLECT_WHEN_RUNNING = ModConfigAPI.SafeLoad(MOD_NAME, "PASSIVE_REFLECT_WHEN_RUNNING", config.PASSIVE_REFLECT_WHEN_RUNNING);
+                config.PASSIVE_REFLECT_WHEN_DASHING = ModConfigAPI.SafeLoad(MOD_NAME, "PASSIVE_REFLECT_WHEN_DASHING", config.PASSIVE_REFLECT_WHEN_DASHING);
                 config.REFLECT_RANGE = ModConfigAPI.SafeLoad(MOD_NAME, "REFLECT_RANGE", config.REFLECT_RANGE);
                 config.REFLECT_RANGE_PASSIVE = ModConfigAPI.SafeLoad(MOD_NAME, "REFLECT_RANGE_PASSIVE", config.REFLECT_RANGE_PASSIVE);
                 config.TIME_PASSIVE_EXTEND = ModConfigAPI.SafeLoad(MOD_NAME, "TIME_PASSIVE_EXTEND", config.TIME_PASSIVE_EXTEND);
                 config.TIME_ACTIVE_EXTEND = ModConfigAPI.SafeLoad(MOD_NAME, "TIME_ACTIVE_EXTEND", config.TIME_ACTIVE_EXTEND);
                 config.TIME_SWING_ACTIVE = ModConfigAPI.SafeLoad(MOD_NAME, "TIME_SWING_ACTIVE", config.TIME_SWING_ACTIVE);
+                config.TIME_ADS_ACTIVE = ModConfigAPI.SafeLoad(MOD_NAME, "TIME_ADS_ACTIVE", config.TIME_ADS_ACTIVE);
                 config.CHANCE_BACK_ACTIVE = ModConfigAPI.SafeLoad(MOD_NAME, "CHANCE_BACK_ACTIVE", config.CHANCE_BACK_ACTIVE);
                 config.CHANCE_BACK_PASSIVE = ModConfigAPI.SafeLoad(MOD_NAME, "CHANCE_BACK_PASSIVE", config.CHANCE_BACK_PASSIVE);
                 config.PASSIVE_STAMINA_COST = ModConfigAPI.SafeLoad(MOD_NAME, "PASSIVE_STAMINA_COST", config.PASSIVE_STAMINA_COST);

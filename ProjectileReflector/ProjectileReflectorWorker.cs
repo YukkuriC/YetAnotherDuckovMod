@@ -23,8 +23,9 @@ namespace ProjectileReflector
             if (
                 self.context.team == Teams.player
                 || player == null
-                || player.Running // until a better plan
-                || player.Dashing // until a better plan
+                || (PASSIVE_REFLECT_BY_ADS && !player.IsInAdsInput)
+                || (!PASSIVE_REFLECT_WHEN_RUNNING && player.Running)
+                || (!PASSIVE_REFLECT_WHEN_DASHING && player.Dashing)
                 || !(player.CurrentHoldItemAgent is ItemAgent_MeleeWeapon)
             ) return false;
 

@@ -16,7 +16,7 @@ namespace ProjectileReflector
         void OnEnable()
         {
             if (patcher == null) patcher = new Harmony(HARMONY_ID);
-            patcher.PatchAll(Assembly.GetExecutingAssembly());
+            patcher.PatchAll();
             Debug.Log("[ProjectileReflector] Harmony patched");
             Compat.ModConfigMenu.Init();
         }

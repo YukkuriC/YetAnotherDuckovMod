@@ -36,7 +36,6 @@ namespace ProjectileReflector
         }
         #endregion
 
-
         #region hooks
         [HarmonyPostfix, HarmonyPatch(typeof(CharacterMainControl), nameof(CharacterMainControl.Attack))]
         static void PostAttack(CharacterMainControl __instance, bool __result)
@@ -46,10 +45,13 @@ namespace ProjectileReflector
             ExtendStatus(Status.ACTIVE, TIME_SWING_ACTIVE);
         }
 
-        //[HarmonyPostfix, HarmonyPatch(typeof(InputManager), nameof(InputManager.SetAimType))]
-        //static void PostAim(AimTypes aimType)
-        //{ failed
-        //}
+        static bool isAdsLastFrame = false;
+        [HarmonyPostfix, HarmonyPatch(typeof(InputManager), nameof(InputManager.SetAdsInput))]
+        static void UpdatePlayerADSInput(bool ads)
+        {
+            if (!PASSIVE_REFLECT_BY_ADS || !LevelManager.Instance.MainCharacter.IsInAdsInput) return;
+            ExtendStatus(Status.ACTIVE, TIME_ADS_ACTIVE);
+        }
         #endregion
     }
 }
