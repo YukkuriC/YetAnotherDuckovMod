@@ -39,7 +39,7 @@ namespace ExplosiveRoll
                 fromWeaponItemID = -1,
                 armorPiercing = 6,
             };
-            LevelManager.Instance.ExplosionManager.CreateExplosion(self.transform.position, explosionRange, damageInfo, ExplosionFxTypes.flash, 1f, true);
+            LevelManager.Instance.ExplosionManager.CreateExplosion(self.transform.position, explosionRange, damageInfo, ExplosionFxTypes.flash);
 
             self.StartCoroutine(DelayCall(0.4f, () =>
             {
@@ -56,7 +56,7 @@ namespace ExplosiveRoll
                             delta.y,
                             delta.z * Mathf.Cos(r) + delta.x * Mathf.Sin(r)
                         );
-                    LevelManager.Instance.ExplosionManager.CreateExplosion(newCenter, explosionRange, damageInfo, ExplosionFxTypes.normal, 1f, true);
+                    LevelManager.Instance.ExplosionManager.CreateExplosion(newCenter, explosionRange, damageInfo);
                 }
             }));
         }
