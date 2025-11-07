@@ -1,4 +1,5 @@
-﻿using Duckov.Utilities;
+﻿using YukkuriC;
+using Duckov.Utilities;
 using HarmonyLib;
 using UnityEngine;
 
@@ -74,19 +75,12 @@ namespace ProjectileReflector
             }
 
             // play melee fx
-            var evilReflection = Traverse.Create(player.attackAction);
-            var fCD = evilReflection.Field("lastAttackTime");
-            var fFlag = evilReflection.Field("running");
-            fCD.SetValue(-114514);
-            fFlag.SetValue(false);
-            if (curStatus != Status.ACTIVE) ExtendStatus(Status.PASSIVE, TIME_PASSIVE_EXTEND);
-            player.Attack();
-            fCD.SetValue(-114514); // for easily swap to active
-            if (curStatus == Status.ACTIVE)
-            {
-                //fFlag.SetValue(false); no this cancels fx
-                ExtendStatus(Status.ACTIVE, TIME_ACTIVE_EXTEND);
-            }
+            var isActive = curStatus == Status.ACTIVE;
+            if (!isActive) ExtendStatus(Status.PASSIVE, TIME_PASSIVE_EXTEND);
+            var fxSize = curStatus == Status.ACTIVE ? REFLECT_RANGE : REFLECT_RANGE_PASSIVE;
+            FxLib.CreateSlash(player.GetMeleeWeapon(), player, fxSize);
+            if (curStatus == Status.ACTIVE) ExtendStatus(Status.ACTIVE, TIME_ACTIVE_EXTEND);
+            else ExtendStatus(Status.PASSIVE, TIME_PASSIVE_EXTEND);
         }
 
         private static void DoReflect(CharacterMainControl player, Projectile self,

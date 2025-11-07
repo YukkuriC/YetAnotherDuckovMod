@@ -5,8 +5,15 @@
     <!-- This should be the folder that contains Duckov.exe -->
     <!-- 下面这行里填写你的鸭科夫安装路径，这样编译器就能找到相关的dll文件 -->
     <DuckovPath>C:\SteamLibrary\steamapps\common\Escape from Duckov</DuckovPath>
+    <RootNamespace>YukkuriC</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="$(DuckovPath)\Duckov_Data\Managed\TeamSoda.*">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(DuckovPath)\Duckov_Data\Managed\ItemStatsSystem.dll">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="$(DuckovPath)\Duckov_Data\Managed\UnityEngine*">
       <Private>False</Private>
     </Reference>
