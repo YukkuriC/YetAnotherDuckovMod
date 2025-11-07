@@ -1,5 +1,5 @@
 ﻿<#@ include file="ModConfigsGen.ttinclude" #><#@ output extension=".md" #>
-# Projectile Reflector 刀反子弹
+# Projectile Reflector 刀反子弹 v<#= MOD_VERSION #>
 
 [中文] [[English](./README_en.md)]  
 [Steam 创意工坊](https://steamcommunity.com/sharedfiles/filedetails/?id=3597305916)

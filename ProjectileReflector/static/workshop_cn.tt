@@ -1,4 +1,6 @@
 ﻿<#@ include file="../ModConfigsGen.ttinclude" #><#@ output extension=".txt" #>
+[h1]Projectile Reflector 刀反子弹 v<#= MOD_VERSION #>[/h1]
+
 [url=https://github.com/YukkuriC/YetAnotherDuckovMod/tree/main/ProjectileReflector] Github源代码 [/url]
 
 近战武器可以反弹面前 180° 扇形内的子弹。有两种反射方式：主动与被动。  

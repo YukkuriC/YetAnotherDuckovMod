@@ -1,4 +1,6 @@
-﻿[url=https://github.com/YukkuriC/YetAnotherDuckovMod/tree/main/ProjectileReflector] Github源代码 [/url]
+﻿[h1]Projectile Reflector 刀反子弹 v1.1[/h1]
+
+[url=https://github.com/YukkuriC/YetAnotherDuckovMod/tree/main/ProjectileReflector] Github源代码 [/url]
 
 近战武器可以反弹面前 180° 扇形内的子弹。有两种反射方式：主动与被动。  
 主动反射在玩家近战攻击后短时间内触发，无需消耗体力即可反弹，（默认配置下）拥有更大的反射范围与反射子弹威力；  

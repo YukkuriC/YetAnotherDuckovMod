@@ -1,4 +1,6 @@
 ﻿<#@ include file="../ModConfigsGen.ttinclude" #><#@ output extension=".txt" #>
+[h1]Projectile Reflector 刀反子弹 v<#= MOD_VERSION #>[/h1]
+
 [url=https://github.com/YukkuriC/YetAnotherDuckovMod/tree/main/ProjectileReflector] Github Source Code [/url]
 
 Melee weapons can reflect bullets within a 180° sector in front. There are two reflection modes: Active and Passive.  

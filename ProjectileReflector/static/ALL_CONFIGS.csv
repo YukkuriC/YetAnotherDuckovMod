@@ -1,5 +1,5 @@
 type,name,default,min,max,descrip_cn,descrip_en
-bool,ModVersion_1_1,true,foo,bar,（仅展示）Mod版本：1.1,(Display only) Mod version: 1.1
+bool,ModVersion_{1},true,foo,bar,（仅展示）Mod版本：{0},(Display only) Mod version: {0}
 bool,ENABLE_ACTIVE_REFLECT,true,foo,bar,启用主动反射,Enables active reflection
 bool,ENABLE_PASSIVE_REFLECT,true,foo,bar,启用被动反射,Enables passive reflection
 bool,PASSIVE_REFLECT_BY_ADS,false,foo,bar,仅在机瞄状态下启用被动反射,Enables passive reflection only during ADS mode

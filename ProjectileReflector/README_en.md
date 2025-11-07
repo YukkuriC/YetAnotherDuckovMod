@@ -1,4 +1,4 @@
-﻿# Projectile Reflector 刀反子弹
+﻿# Projectile Reflector 刀反子弹 v1.1
 
 [[中文](./README.md)] [English]  
 [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3597305916)
