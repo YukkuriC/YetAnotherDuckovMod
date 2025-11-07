@@ -1,0 +1,26 @@
+﻿<#@ include file="ModConfigsGen.ttinclude" #><#@ output extension=".md" #>
+# Projectile Reflector 刀反子弹
+
+[[中文](./README.md)] [English]  
+[Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3597305916)
+
+Melee weapons can reflect bullets within a 180° sector in front. There are two reflection modes: Active and Passive.  
+Active reflection triggers shortly after the player performs a melee attack, reflecting bullets without consuming stamina, (by default) featuring a larger reflection area and increased reflected bullet power;  
+Passive reflection triggers when the player is hit while holding the weapon and has sufficient stamina, consuming stamina to deflect bullets, with a lower probability of reflecting bullets back towards the attacker.
+
+## Configuration
+
+The configuration file is located at `<SaveDirectory>/YukkuriC.ProjectileReflector.json` (typically `C:\Users\<Username>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json` for Windows OS); if installed with [ModConfig](https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339) then the config can also be edited in game.  
+All config entries are listed as follows:
+
+<!-- table begin -->
+Configuration Name|Type|Default Value|Description
+--|--|--|--
+<#
+    foreach (var line in lines)
+    {
+#>
+<#= line["name"] #>|<#= line["type"] #>|<#= line["default"] #>|<#= line["descrip_en"] #>
+<#
+    }
+#>

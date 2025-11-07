@@ -33,6 +33,37 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModConfigsGen.cs</LastGenOutput>
     </None>
+    <None Update="ModConfigsGen.ttinclude">
+      <Generator></Generator>
+    </None>
+    <None Update="README_en.md">
+      <DependentUpon>README_en.tt</DependentUpon>
+    </None>
+    <None Update="README_en.tt">
+      <LastGenOutput>README_en.md</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="README.md">
+      <DependentUpon>README.tt</DependentUpon>
+    </None>
+    <None Update="README.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>README.md</LastGenOutput>
+    </None>
+    <None Update="static\workshop_cn.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>workshop_cn.txt</LastGenOutput>
+    </None>
+    <None Update="static\workshop_en.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>workshop_en.txt</LastGenOutput>
+    </None>
+    <None Update="static\workshop_en.txt">
+      <DependentUpon>workshop_en.tt</DependentUpon>
+    </None>
+    <None Update="static\workshop_cn.txt">
+      <DependentUpon>workshop_cn.tt</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />

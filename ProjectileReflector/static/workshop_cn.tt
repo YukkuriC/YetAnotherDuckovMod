@@ -1,0 +1,28 @@
+﻿<#@ include file="../ModConfigsGen.ttinclude" #><#@ output extension=".txt" #>
+[url=https://github.com/YukkuriC/YetAnotherDuckovMod/tree/main/ProjectileReflector] Github源代码 [/url]
+
+近战武器可以反弹面前 180° 扇形内的子弹。有两种反射方式：主动与被动。  
+主动反射在玩家近战攻击后短时间内触发，无需消耗体力即可反弹，（默认配置下）拥有更大的反射范围与反射子弹威力；  
+被动反射在玩家手持武器受击，且体力充足时触发，消耗体力弹开子弹，反射回开火敌人的概率较小。
+
+[h2]配置[/h2]
+
+配置文件位于[u]<存档目录>/YukkuriC.ProjectileReflector.json[/u]（Windows 系统下通常为[u]C:\Users\<用户名>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json[/u]）；若安装了 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339]ModConfig[/url] 也可直接在游戏内更改。
+所有配置项内容如下：
+
+[table]
+    [tr]
+        [th]配置名[/th]
+        [th]类型[/th]
+        [th]默认值[/th]
+        [th]描述[/th]
+    [/tr]
+<#
+    foreach (var line in lines)
+    {
+#>
+[tr][td]<#= line["name"] #>[/td][td]<#= line["type"] #>[/td][td]<#= line["default"] #>[/td][td]<#= line["descrip_cn"] #>[/td][/tr]
+<#
+    }
+#>
+[/table]
