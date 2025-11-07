@@ -22,6 +22,9 @@
     <Reference Include="$(DuckovPath)\Duckov_Data\Managed\FMOD*">
       <Private>False</Private>
     </Reference>
+    <Reference Include="$(DuckovPath)\Duckov_Data\Managed\UniTask*">
+      <Private>False</Private>
+    </Reference>
     <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
     <Reference Include="0Harmony">
       <HintPath>..\Harmony\0Harmony.dll</HintPath>

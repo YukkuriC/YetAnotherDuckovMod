@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using UnityEngine;
+using YukkuriC.Skills;
 
 namespace ProjectileReflector
 {
@@ -9,6 +10,7 @@ namespace ProjectileReflector
     public static class ReflectController
     {
         #region body
+
         public enum Status
         {
             IDLE,
@@ -34,24 +36,41 @@ namespace ProjectileReflector
             curStatus = newStat;
             //Debug.Log($"extend status {newStat} to {statusUntil}, now is {PlayerStatus}");
         }
+
         #endregion
 
         #region hooks
+
         [HarmonyPostfix, HarmonyPatch(typeof(CharacterMainControl), nameof(CharacterMainControl.Attack))]
         static void PostAttack(CharacterMainControl __instance, bool __result)
         {
-            if (!ENABLE_ACTIVE_REFLECT || !__result || !__instance.IsMainCharacter || PlayerStatus == Status.PASSIVE) return;
+            var self = __instance;
+            if (!ENABLE_ACTIVE_REFLECT || !__result || !self.IsMainCharacter ||
+                PlayerStatus == Status.PASSIVE) return;
             //Debug.Log("swing extend");
             ExtendStatus(Status.ACTIVE, TIME_SWING_ACTIVE);
+
+            // fly blade
+            if (ENABLES_FLYING_BLADE && hasRunInput && !self.Running)
+            {
+                FlyBlade.CreateFlyBlade(self);
+            }
         }
 
-        static bool isAdsLastFrame = false;
         [HarmonyPostfix, HarmonyPatch(typeof(InputManager), nameof(InputManager.SetAdsInput))]
         static void UpdatePlayerADSInput(bool ads)
         {
             if (!PASSIVE_REFLECT_BY_ADS || !LevelManager.Instance.MainCharacter.IsInAdsInput) return;
             ExtendStatus(Status.ACTIVE, TIME_ADS_ACTIVE);
         }
+
+        static bool hasRunInput = false;
+        [HarmonyPostfix, HarmonyPatch(typeof(InputManager), nameof(InputManager.SetRunInput))]
+        static void UpdatePlayerRunInput(bool run)
+        {
+            hasRunInput = run;
+        }
+
         #endregion
     }
 }

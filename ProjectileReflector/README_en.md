@@ -40,4 +40,5 @@ ACTIVE_CRITICAL|bool|true|Whether actively reflected bullets are critical hits
 ACTIVE_EXPLOSION|bool|false|Whether actively reflected bullets explode
 ACTIVE_EXPLOSION_DAMAGE_FACTOR|float|1|Active reflection explosion extra damage multiplier (based on reflected bullet damage)
 ACTIVE_EXPLOSION_RANGE|float|1|Active reflection explosion range
+ENABLES_FLYING_BLADE|bool|false|Enables flying blade (?)
 SFX_VOLUME|float|0.5f|Reflection sound effect volume

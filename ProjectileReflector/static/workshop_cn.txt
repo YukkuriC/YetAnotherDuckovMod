@@ -43,5 +43,6 @@
 [tr][td]ACTIVE_EXPLOSION[/td][td]bool[/td][td]false[/td][td]主动反射子弹是否爆炸[/td][/tr]
 [tr][td]ACTIVE_EXPLOSION_DAMAGE_FACTOR[/td][td]float[/td][td]1[/td][td]主动反射爆炸额外伤害乘数（基于反射后子弹伤害）[/td][/tr]
 [tr][td]ACTIVE_EXPLOSION_RANGE[/td][td]float[/td][td]1[/td][td]主动反射爆炸范围[/td][/tr]
+[tr][td]ENABLES_FLYING_BLADE[/td][td]bool[/td][td]false[/td][td]启用飞刃（？）[/td][/tr]
 [tr][td]SFX_VOLUME[/td][td]float[/td][td]0.5f[/td][td]反射音效强度[/td][/tr]
 [/table]

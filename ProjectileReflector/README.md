@@ -40,4 +40,5 @@ ACTIVE_CRITICAL|bool|true|主动反射子弹是否暴击
 ACTIVE_EXPLOSION|bool|false|主动反射子弹是否爆炸
 ACTIVE_EXPLOSION_DAMAGE_FACTOR|float|1|主动反射爆炸额外伤害乘数（基于反射后子弹伤害）
 ACTIVE_EXPLOSION_RANGE|float|1|主动反射爆炸范围
+ENABLES_FLYING_BLADE|bool|false|启用飞刃（？）
 SFX_VOLUME|float|0.5f|反射音效强度

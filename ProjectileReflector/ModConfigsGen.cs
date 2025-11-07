@@ -32,6 +32,7 @@ namespace ProjectileReflector
         public static bool ACTIVE_EXPLOSION { get => ModConfigEntry.INSTANCE.ACTIVE_EXPLOSION; }
         public static float ACTIVE_EXPLOSION_DAMAGE_FACTOR { get => ModConfigEntry.INSTANCE.ACTIVE_EXPLOSION_DAMAGE_FACTOR; }
         public static float ACTIVE_EXPLOSION_RANGE { get => ModConfigEntry.INSTANCE.ACTIVE_EXPLOSION_RANGE; }
+        public static bool ENABLES_FLYING_BLADE { get => ModConfigEntry.INSTANCE.ENABLES_FLYING_BLADE; }
         public static float SFX_VOLUME { get => ModConfigEntry.INSTANCE.SFX_VOLUME; }
     }
 
@@ -64,6 +65,7 @@ namespace ProjectileReflector
         public bool ACTIVE_EXPLOSION = false;
         public float ACTIVE_EXPLOSION_DAMAGE_FACTOR = 1;
         public float ACTIVE_EXPLOSION_RANGE = 1;
+        public bool ENABLES_FLYING_BLADE = false;
         public float SFX_VOLUME = 0.5f;
     }
     // mod config menu compat
@@ -256,6 +258,12 @@ namespace ProjectileReflector
                     config.ACTIVE_EXPLOSION_RANGE,
                     new Vector2(0, 10)
                 );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
+                    "ENABLES_FLYING_BLADE",
+                    isChinese ? "启用飞刃（？）" : "Enables flying blade (?)",
+                    config.ENABLES_FLYING_BLADE
+                );
                 ModConfigAPI.SafeAddInputWithSlider(
                     MOD_NAME,
                     "SFX_VOLUME",
@@ -293,6 +301,7 @@ namespace ProjectileReflector
                 config.ACTIVE_EXPLOSION = ModConfigAPI.SafeLoad(MOD_NAME, "ACTIVE_EXPLOSION", config.ACTIVE_EXPLOSION);
                 config.ACTIVE_EXPLOSION_DAMAGE_FACTOR = ModConfigAPI.SafeLoad(MOD_NAME, "ACTIVE_EXPLOSION_DAMAGE_FACTOR", config.ACTIVE_EXPLOSION_DAMAGE_FACTOR);
                 config.ACTIVE_EXPLOSION_RANGE = ModConfigAPI.SafeLoad(MOD_NAME, "ACTIVE_EXPLOSION_RANGE", config.ACTIVE_EXPLOSION_RANGE);
+                config.ENABLES_FLYING_BLADE = ModConfigAPI.SafeLoad(MOD_NAME, "ENABLES_FLYING_BLADE", config.ENABLES_FLYING_BLADE);
                 config.SFX_VOLUME = ModConfigAPI.SafeLoad(MOD_NAME, "SFX_VOLUME", config.SFX_VOLUME);
             }
         }
