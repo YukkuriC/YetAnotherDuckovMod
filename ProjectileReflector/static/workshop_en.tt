@@ -14,10 +14,10 @@ All config entries are listed as follows:
 
 [table]
     [tr]
-        [th]配置名[/th]
-        [th]类型[/th]
-        [th]默认值[/th]
-        [th]描述[/th]
+        [th]Configuration Name[/th]
+        [th]Type[/th]
+        [th]Default Value[/th]
+        [th]Description[/th]
     [/tr]
 <#
     foreach (var line in lines)
