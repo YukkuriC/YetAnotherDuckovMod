@@ -49,7 +49,10 @@ namespace ProjectileReflector
             delta.y = 0;
             var range = curStatus == Status.ACTIVE ? REFLECT_RANGE : REFLECT_RANGE_PASSIVE;
             return delta.sqrMagnitude < range * range
-            && Vector3.Angle(delta, player.CurrentAimDirection) <= 90;
+                && (
+                    IGNORES_ANGLE
+                    || Vector3.Angle(delta, player.CurrentAimDirection) <= 90
+                );
         }
         #endregion
 

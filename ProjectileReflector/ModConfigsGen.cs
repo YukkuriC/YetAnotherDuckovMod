@@ -7,7 +7,7 @@ namespace ProjectileReflector
 {
     public static class ModConfigs
     {
-        public static bool ModVersion_1_0 { get => ModConfigEntry.INSTANCE.ModVersion_1_0; }
+        public static bool ModVersion_1_1 { get => ModConfigEntry.INSTANCE.ModVersion_1_1; }
         public static bool ENABLE_ACTIVE_REFLECT { get => ModConfigEntry.INSTANCE.ENABLE_ACTIVE_REFLECT; }
         public static bool ENABLE_PASSIVE_REFLECT { get => ModConfigEntry.INSTANCE.ENABLE_PASSIVE_REFLECT; }
         public static bool PASSIVE_REFLECT_BY_ADS { get => ModConfigEntry.INSTANCE.PASSIVE_REFLECT_BY_ADS; }
@@ -27,6 +27,7 @@ namespace ProjectileReflector
         public static float DAMAGE_MULT_PASSIVE { get => ModConfigEntry.INSTANCE.DAMAGE_MULT_PASSIVE; }
         public static float DISTANCE_MULT_ACTIVE { get => ModConfigEntry.INSTANCE.DISTANCE_MULT_ACTIVE; }
         public static float DISTANCE_MULT_PASSIVE { get => ModConfigEntry.INSTANCE.DISTANCE_MULT_PASSIVE; }
+        public static bool IGNORES_ANGLE { get => ModConfigEntry.INSTANCE.IGNORES_ANGLE; }
         public static bool ACTIVE_CRITICAL { get => ModConfigEntry.INSTANCE.ACTIVE_CRITICAL; }
         public static bool ACTIVE_EXPLOSION { get => ModConfigEntry.INSTANCE.ACTIVE_EXPLOSION; }
         public static float ACTIVE_EXPLOSION_DAMAGE_FACTOR { get => ModConfigEntry.INSTANCE.ACTIVE_EXPLOSION_DAMAGE_FACTOR; }
@@ -38,7 +39,7 @@ namespace ProjectileReflector
     public partial class ModConfigEntry
     {
         private static ModConfigEntry instance = new ModConfigEntry();
-        public bool ModVersion_1_0 = true;
+        public bool ModVersion_1_1 = true;
         public bool ENABLE_ACTIVE_REFLECT = true;
         public bool ENABLE_PASSIVE_REFLECT = true;
         public bool PASSIVE_REFLECT_BY_ADS = false;
@@ -58,6 +59,7 @@ namespace ProjectileReflector
         public float DAMAGE_MULT_PASSIVE = 0.5f;
         public float DISTANCE_MULT_ACTIVE = 5;
         public float DISTANCE_MULT_PASSIVE = 1;
+        public bool IGNORES_ANGLE = false;
         public bool ACTIVE_CRITICAL = true;
         public bool ACTIVE_EXPLOSION = false;
         public float ACTIVE_EXPLOSION_DAMAGE_FACTOR = 1;
@@ -74,9 +76,9 @@ namespace ProjectileReflector
                 var config = ModConfigEntry.INSTANCE;
                 ModConfigAPI.SafeAddBoolDropdownList(
                     MOD_NAME,
-                    "ModVersion_1_0",
-                    isChinese ? "（仅展示）Mod版本：1.0" : "(Display only) Mod version: 1.0",
-                    config.ModVersion_1_0
+                    "ModVersion_1_1",
+                    isChinese ? "（仅展示）Mod版本：1.1" : "(Display only) Mod version: 1.1",
+                    config.ModVersion_1_1
                 );
                 ModConfigAPI.SafeAddBoolDropdownList(
                     MOD_NAME,
@@ -222,6 +224,12 @@ namespace ProjectileReflector
                 );
                 ModConfigAPI.SafeAddBoolDropdownList(
                     MOD_NAME,
+                    "IGNORES_ANGLE",
+                    isChinese ? "后方子弹也可反射；或许可解决部分高速子弹穿透防御问题" : "Also reflects bullets from behind; might solve the issue that some high-speed bullets go through the barrier",
+                    config.IGNORES_ANGLE
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
                     "ACTIVE_CRITICAL",
                     isChinese ? "主动反射子弹是否暴击" : "Whether actively reflected bullets are critical hits",
                     config.ACTIVE_CRITICAL
@@ -260,7 +268,7 @@ namespace ProjectileReflector
             static void LoadConfigFromModConfig()
             {
                 var config = ModConfigEntry.INSTANCE;
-                config.ModVersion_1_0 = ModConfigAPI.SafeLoad(MOD_NAME, "ModVersion_1_0", config.ModVersion_1_0);
+                config.ModVersion_1_1 = ModConfigAPI.SafeLoad(MOD_NAME, "ModVersion_1_1", config.ModVersion_1_1);
                 config.ENABLE_ACTIVE_REFLECT = ModConfigAPI.SafeLoad(MOD_NAME, "ENABLE_ACTIVE_REFLECT", config.ENABLE_ACTIVE_REFLECT);
                 config.ENABLE_PASSIVE_REFLECT = ModConfigAPI.SafeLoad(MOD_NAME, "ENABLE_PASSIVE_REFLECT", config.ENABLE_PASSIVE_REFLECT);
                 config.PASSIVE_REFLECT_BY_ADS = ModConfigAPI.SafeLoad(MOD_NAME, "PASSIVE_REFLECT_BY_ADS", config.PASSIVE_REFLECT_BY_ADS);
@@ -280,6 +288,7 @@ namespace ProjectileReflector
                 config.DAMAGE_MULT_PASSIVE = ModConfigAPI.SafeLoad(MOD_NAME, "DAMAGE_MULT_PASSIVE", config.DAMAGE_MULT_PASSIVE);
                 config.DISTANCE_MULT_ACTIVE = ModConfigAPI.SafeLoad(MOD_NAME, "DISTANCE_MULT_ACTIVE", config.DISTANCE_MULT_ACTIVE);
                 config.DISTANCE_MULT_PASSIVE = ModConfigAPI.SafeLoad(MOD_NAME, "DISTANCE_MULT_PASSIVE", config.DISTANCE_MULT_PASSIVE);
+                config.IGNORES_ANGLE = ModConfigAPI.SafeLoad(MOD_NAME, "IGNORES_ANGLE", config.IGNORES_ANGLE);
                 config.ACTIVE_CRITICAL = ModConfigAPI.SafeLoad(MOD_NAME, "ACTIVE_CRITICAL", config.ACTIVE_CRITICAL);
                 config.ACTIVE_EXPLOSION = ModConfigAPI.SafeLoad(MOD_NAME, "ACTIVE_EXPLOSION", config.ACTIVE_EXPLOSION);
                 config.ACTIVE_EXPLOSION_DAMAGE_FACTOR = ModConfigAPI.SafeLoad(MOD_NAME, "ACTIVE_EXPLOSION_DAMAGE_FACTOR", config.ACTIVE_EXPLOSION_DAMAGE_FACTOR);

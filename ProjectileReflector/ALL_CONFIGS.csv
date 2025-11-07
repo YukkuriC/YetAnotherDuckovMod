@@ -1,5 +1,5 @@
 type,name,default,min,max,descrip_cn,descrip_en
-bool,ModVersion_1_0,true,foo,bar,（仅展示）Mod版本：1.0,(Display only) Mod version: 1.0
+bool,ModVersion_1_1,true,foo,bar,（仅展示）Mod版本：1.1,(Display only) Mod version: 1.1
 bool,ENABLE_ACTIVE_REFLECT,true,foo,bar,启用主动反射,Enables active reflection
 bool,ENABLE_PASSIVE_REFLECT,true,foo,bar,启用被动反射,Enables passive reflection
 bool,PASSIVE_REFLECT_BY_ADS,false,foo,bar,仅在机瞄状态下启用被动反射,Enables passive reflection only during ADS mode
@@ -19,6 +19,7 @@ float,DAMAGE_MULT_ACTIVE,1,0,10,主动反射后子弹伤害乘数,Reflected bull
 float,DAMAGE_MULT_PASSIVE,0.5f,0,10,被动反射后子弹伤害乘数,Reflected bullet damage multiplier after passive reflection
 float,DISTANCE_MULT_ACTIVE,5,0,10,主动反射后子弹射程乘数,Reflected bullet range multiplier after active reflection
 float,DISTANCE_MULT_PASSIVE,1,0,10,被动反射后子弹射程乘数,Reflected bullet range multiplier after passive reflection
+bool,IGNORES_ANGLE,false,foo,bar,后方子弹也可反射；或许可解决部分高速子弹穿透防御问题,Also reflects bullets from behind; might solve the issue that some high-speed bullets go through the barrier
 bool,ACTIVE_CRITICAL,true,foo,bar,主动反射子弹是否暴击,Whether actively reflected bullets are critical hits
 bool,ACTIVE_EXPLOSION,false,foo,bar,主动反射子弹是否爆炸,Whether actively reflected bullets explode
 float,ACTIVE_EXPLOSION_DAMAGE_FACTOR,1,0,10,主动反射爆炸额外伤害乘数（基于反射后子弹伤害）,Active reflection explosion extra damage multiplier (based on reflected bullet damage)

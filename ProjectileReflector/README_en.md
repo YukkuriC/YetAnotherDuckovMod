@@ -15,7 +15,7 @@ All config entries are listed as follows:
 <!-- table begin -->
 Configuration Name|Type|Default Value|Description
 --|--|--|--
-ModVersion_1_0|bool|true|(Display only) Mod version: 1.0
+ModVersion_1_1|bool|true|(Display only) Mod version: 1.1
 ENABLE_ACTIVE_REFLECT|bool|true|Enables active reflection
 ENABLE_PASSIVE_REFLECT|bool|true|Enables passive reflection
 PASSIVE_REFLECT_BY_ADS|bool|false|Enables passive reflection only during ADS mode
@@ -35,6 +35,7 @@ DAMAGE_MULT_ACTIVE|float|1|Reflected bullet damage multiplier after active refle
 DAMAGE_MULT_PASSIVE|float|0.5f|Reflected bullet damage multiplier after passive reflection
 DISTANCE_MULT_ACTIVE|float|5|Reflected bullet range multiplier after active reflection
 DISTANCE_MULT_PASSIVE|float|1|Reflected bullet range multiplier after passive reflection
+IGNORES_ANGLE|bool|false|Also reflects bullets from behind; might solve the issue that some high-speed bullets go through the barrier
 ACTIVE_CRITICAL|bool|true|Whether actively reflected bullets are critical hits
 ACTIVE_EXPLOSION|bool|false|Whether actively reflected bullets explode
 ACTIVE_EXPLOSION_DAMAGE_FACTOR|float|1|Active reflection explosion extra damage multiplier (based on reflected bullet damage)

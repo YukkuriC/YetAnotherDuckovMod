@@ -15,7 +15,7 @@
 <!-- table begin -->
 配置名|类型|默认值|描述
 --|--|--|--
-ModVersion_1_0|bool|true|（仅展示）Mod版本：1.0
+ModVersion_1_1|bool|true|（仅展示）Mod版本：1.1
 ENABLE_ACTIVE_REFLECT|bool|true|启用主动反射
 ENABLE_PASSIVE_REFLECT|bool|true|启用被动反射
 PASSIVE_REFLECT_BY_ADS|bool|false|仅在机瞄状态下启用被动反射
@@ -35,6 +35,7 @@ DAMAGE_MULT_ACTIVE|float|1|主动反射后子弹伤害乘数
 DAMAGE_MULT_PASSIVE|float|0.5f|被动反射后子弹伤害乘数
 DISTANCE_MULT_ACTIVE|float|5|主动反射后子弹射程乘数
 DISTANCE_MULT_PASSIVE|float|1|被动反射后子弹射程乘数
+IGNORES_ANGLE|bool|false|后方子弹也可反射；或许可解决部分高速子弹穿透防御问题
 ACTIVE_CRITICAL|bool|true|主动反射子弹是否暴击
 ACTIVE_EXPLOSION|bool|false|主动反射子弹是否爆炸
 ACTIVE_EXPLOSION_DAMAGE_FACTOR|float|1|主动反射爆炸额外伤害乘数（基于反射后子弹伤害）
