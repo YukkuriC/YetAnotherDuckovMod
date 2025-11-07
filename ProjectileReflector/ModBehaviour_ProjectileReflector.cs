@@ -31,10 +31,10 @@ namespace ProjectileReflector
             // seems it auto loads DLLs next to it
             ModAudio.InitAudio();
             ModConfigEntry.Init();
-        }
-        void LateUpdate()
-        {
-            ModAudio.ClearPlayedFlag();
+            if (!SteamManager.Initialized)
+            {
+                LevelManager.enemySpawnCountFactor = 100;
+            }
         }
     }
 

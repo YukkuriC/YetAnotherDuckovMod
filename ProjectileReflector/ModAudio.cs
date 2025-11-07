@@ -2,11 +2,14 @@
 using FMODUnity;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 
 namespace ProjectileReflector
 {
     public static class ModAudio
     {
+        const float MIN_SOUND_INTERVAL = 0.05f;
+
         static string GetAudioPath(string name, int idx)
         {
             return Path.Combine(ModBehaviour.ROOT_PATH, "sfx", $"{name}{idx}.wav");
@@ -43,19 +46,24 @@ namespace ProjectileReflector
             audioPassive = LoadAudioBatch("passive");
         }
 
-        static HashSet<string> playedThisFrame = new HashSet<string>();
+        static Dictionary<string, float> playedTime = new Dictionary<string, float>();
         static void PlayRandomSoundIn(List<Sound> pool, string flag)
         {
-            if (pool.Count <= 0 || playedThisFrame.Contains(flag)) return;
-            playedThisFrame.Add(flag);
+            if (pool.Count <= 0) return;
+            float now = Time.time,
+                  nextPlay = now + MIN_SOUND_INTERVAL,
+                  lastPlayed;
+            if (!playedTime.TryGetValue(flag, out lastPlayed)) lastPlayed = 0;
+            playedTime[flag] = nextPlay;
+            if (lastPlayed > now) return;
 
-            var sound = pool[UnityEngine.Random.Range(0, pool.Count)];
+            var sound = pool[Random.Range(0, pool.Count)];
             RuntimeManager.GetBus("bus:/Master/SFX").getChannelGroup(out var grp);
             RuntimeManager.CoreSystem.playSound(sound, grp, false, out var channel);
             channel.setVolume(ModConfigs.SFX_VOLUME);
         }
         public static void PlaySoundActive() => PlayRandomSoundIn(audioActive, "active");
         public static void PlaySoundPassive() => PlayRandomSoundIn(audioPassive, "passive");
-        public static void ClearPlayedFlag() => playedThisFrame.Clear();
+        public static void ClearPlayedFlag() => playedTime.Clear();
     }
 }
