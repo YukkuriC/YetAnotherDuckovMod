@@ -51,9 +51,10 @@ namespace ProjectileReflector
             ExtendStatus(Status.ACTIVE, TIME_SWING_ACTIVE);
 
             // fly blade
-            if (ENABLES_FLYING_BLADE && hasRunInput && !self.Running)
+            if (ENABLES_FLYING_BLADE && hasRunInput && !self.movementControl.Moving)
             {
                 FlyBlade.CreateFlyBlade(self);
+                self.UseStamina(self.MaxStamina / 3);
             }
         }
 

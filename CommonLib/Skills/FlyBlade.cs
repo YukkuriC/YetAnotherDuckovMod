@@ -10,8 +10,8 @@ namespace YukkuriC.Skills
     public class FlyBlade
     {
         private const int FLY_COUNT = 10;
-        private const float FLY_STEP = 1.5f;
-        private const float BLADE_SIZE = 2.5f;
+        private const float FLY_STEP = 2f;
+        private const float BLADE_SIZE = 3f;
         private const float BLADE_STRENGTH = 0.5f;
         private const float STEP_INTERVAL = 0.1f;
 

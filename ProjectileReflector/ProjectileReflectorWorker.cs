@@ -108,7 +108,9 @@ namespace ProjectileReflector
             oldContext.fromCharacter = player;
 
             // hit fx
-            Object.Instantiate(GameplayDataSettings.Prefabs.BulletHitObsticleFx, self.transform.position, Quaternion.LookRotation(delta, Vector3.up));
+            var prefab = player.GetMeleeWeapon()?.hitFx ?? GameplayDataSettings.Prefabs.BulletHitObsticleFx;
+            var hitFx = Object.Instantiate(prefab, self.transform.position, Quaternion.LookRotation(Random.onUnitSphere, Vector3.up));
+            hitFx.transform.localScale = Vector3.one * (0.5f + Random.value * 0.3f);
 
             // extra dmg
             if (curStatus == Status.ACTIVE)
