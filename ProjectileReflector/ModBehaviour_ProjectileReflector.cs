@@ -19,12 +19,14 @@ namespace ProjectileReflector
             patcher.PatchAll();
             Debug.Log("[ProjectileReflector] Harmony patched");
             Compat.ModConfigMenu.Init();
+            Compat.ModSettingMenu.Init(info);
         }
         void OnDisable()
         {
             patcher?.UnpatchAll(HARMONY_ID);
             Debug.Log("[ProjectileReflector] Harmony released");
             Compat.ModConfigMenu.Dispose();
+            Compat.ModSettingMenu.Dispose();
         }
         void Awake()
         {
