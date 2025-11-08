@@ -20,9 +20,9 @@
     var MOD_VERSION = File.ReadAllText(GetPath("static/VERSION.txt"), Encoding.UTF8);
 
     // read csv
-    // type,name,default,min,max,descrip_cn,descrip_en
+    // group,type,name,default,min,max,descrip_cn,descrip_en
     var configRaw = File.ReadAllText(GetPath("static/ALL_CONFIGS.csv"), Encoding.UTF8);
-    configRaw = configRaw.Replace("\r", "");
+    configRaw = configRaw.Replace("\r", "").TrimEnd();
     configRaw = string.Format(configRaw, MOD_VERSION, MOD_VERSION.Replace(".", "_"));
     var linesRaw = (from r in configRaw.Split('\n') select r.Split(',')).ToList();
     var header = linesRaw[0];
@@ -37,5 +37,17 @@
             unit[header[i]] = line[i];
         }
         lines.Add(unit);
+    }
+
+    // group configs
+    var linesByGroup = new Dictionary<string, List<Dictionary<string, string>>>();
+    foreach (var line in lines)
+    {
+        List<Dictionary<string, string>> pool;
+        if (!linesByGroup.TryGetValue(line["group"], out pool))
+        {
+            pool = linesByGroup[line["group"]] = new List<Dictionary<string, string>>();
+        }
+        pool.Add(line);
     }
 #>

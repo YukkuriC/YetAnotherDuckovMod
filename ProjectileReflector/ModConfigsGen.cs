@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using YukkuriC;
 
@@ -256,6 +257,11 @@ namespace ProjectileReflector
                     new Vector2(0, 1),
                     WrapOnChange<float>(v => config.SFX_VOLUME = v)
                 );
+                ModSettingAPI.AddGroup("Version 1.2", "Version 1.2", new List<string>() { "ModVersion_1_2" });
+                ModSettingAPI.AddGroup("Functions", "Functions", new List<string>() { "ENABLE_ACTIVE_REFLECT", "ENABLE_PASSIVE_REFLECT", "PASSIVE_REFLECT_BY_ADS", "PASSIVE_REFLECT_WHEN_RUNNING", "PASSIVE_REFLECT_WHEN_DASHING" });
+                ModSettingAPI.AddGroup("Parameters", "Parameters", new List<string>() { "REFLECT_RANGE", "REFLECT_RANGE_PASSIVE", "TIME_PASSIVE_EXTEND", "TIME_ACTIVE_EXTEND", "TIME_SWING_ACTIVE", "TIME_ADS_ACTIVE", "CHANCE_BACK_ACTIVE", "CHANCE_BACK_PASSIVE", "PASSIVE_STAMINA_COST", "ACTIVE_STAMINA_GAIN", "DAMAGE_MULT_ACTIVE", "DAMAGE_MULT_PASSIVE", "DISTANCE_MULT_ACTIVE", "DISTANCE_MULT_PASSIVE" });
+                ModSettingAPI.AddGroup("Misc", "Misc", new List<string>() { "IGNORES_ANGLE", "ACTIVE_CRITICAL", "ACTIVE_EXPLOSION", "ACTIVE_EXPLOSION_DAMAGE_FACTOR", "ACTIVE_EXPLOSION_RANGE", "ENABLES_FLYING_BLADE" });
+                ModSettingAPI.AddGroup("Sound", "Sound", new List<string>() { "SFX_VOLUME" });
             }
         }
         public static partial class ModConfigMenu
@@ -263,136 +269,60 @@ namespace ProjectileReflector
             static void SetupModConfig(bool isChinese)
             {
                 var config = ModConfigEntry.INSTANCE;
-                ModConfigAPI.SafeAddBoolDropdownList(
+                ModConfigAPI.SafeAddInputWithSlider(
                     MOD_NAME,
-                    "ModVersion_1_2",
-                    isChinese ? "（仅展示）Mod版本：1.2" : "(Display only) Mod version: 1.2",
-                    config.ModVersion_1_2
+                    "SFX_VOLUME",
+                    isChinese ? "反射音效强度" : "Reflection sound effect volume",
+                    typeof(float),
+                    config.SFX_VOLUME,
+                    new Vector2(0, 1)
                 );
                 ModConfigAPI.SafeAddBoolDropdownList(
                     MOD_NAME,
-                    "ENABLE_ACTIVE_REFLECT",
-                    isChinese ? "启用主动反射" : "Enables active reflection",
-                    config.ENABLE_ACTIVE_REFLECT
-                );
-                ModConfigAPI.SafeAddBoolDropdownList(
-                    MOD_NAME,
-                    "ENABLE_PASSIVE_REFLECT",
-                    isChinese ? "启用被动反射" : "Enables passive reflection",
-                    config.ENABLE_PASSIVE_REFLECT
-                );
-                ModConfigAPI.SafeAddBoolDropdownList(
-                    MOD_NAME,
-                    "PASSIVE_REFLECT_BY_ADS",
-                    isChinese ? "仅在机瞄状态下启用被动反射" : "Enables passive reflection only during ADS mode",
-                    config.PASSIVE_REFLECT_BY_ADS
-                );
-                ModConfigAPI.SafeAddBoolDropdownList(
-                    MOD_NAME,
-                    "PASSIVE_REFLECT_WHEN_RUNNING",
-                    isChinese ? "是否在跑动中被动反射" : "Whether passive reflection enables when running",
-                    config.PASSIVE_REFLECT_WHEN_RUNNING
-                );
-                ModConfigAPI.SafeAddBoolDropdownList(
-                    MOD_NAME,
-                    "PASSIVE_REFLECT_WHEN_DASHING",
-                    isChinese ? "是否在翻滚中被动反射" : "Whether passive reflection enables when dashing",
-                    config.PASSIVE_REFLECT_WHEN_DASHING
+                    "ENABLES_FLYING_BLADE",
+                    isChinese ? "启用飞刃（？）" : "Enables flying blade (?)",
+                    config.ENABLES_FLYING_BLADE
                 );
                 ModConfigAPI.SafeAddInputWithSlider(
                     MOD_NAME,
-                    "REFLECT_RANGE",
-                    isChinese ? "主动反射触发范围" : "Active reflection trigger range",
+                    "ACTIVE_EXPLOSION_RANGE",
+                    isChinese ? "主动反射爆炸范围" : "Active reflection explosion range",
                     typeof(float),
-                    config.REFLECT_RANGE,
+                    config.ACTIVE_EXPLOSION_RANGE,
                     new Vector2(0, 10)
                 );
                 ModConfigAPI.SafeAddInputWithSlider(
                     MOD_NAME,
-                    "REFLECT_RANGE_PASSIVE",
-                    isChinese ? "被动反射触发范围" : "Passive reflection trigger range",
+                    "ACTIVE_EXPLOSION_DAMAGE_FACTOR",
+                    isChinese ? "主动反射爆炸额外伤害乘数（基于反射后子弹伤害）" : "Active reflection explosion extra damage multiplier (based on reflected bullet damage)",
                     typeof(float),
-                    config.REFLECT_RANGE_PASSIVE,
+                    config.ACTIVE_EXPLOSION_DAMAGE_FACTOR,
                     new Vector2(0, 10)
                 );
-                ModConfigAPI.SafeAddInputWithSlider(
+                ModConfigAPI.SafeAddBoolDropdownList(
                     MOD_NAME,
-                    "TIME_PASSIVE_EXTEND",
-                    isChinese ? "每次被动反射延续状态时长（秒）" : "State duration extension per passive reflection (seconds)",
-                    typeof(float),
-                    config.TIME_PASSIVE_EXTEND,
-                    new Vector2(0, 1)
+                    "ACTIVE_EXPLOSION",
+                    isChinese ? "主动反射子弹是否爆炸" : "Whether actively reflected bullets explode",
+                    config.ACTIVE_EXPLOSION
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
+                    "ACTIVE_CRITICAL",
+                    isChinese ? "主动反射子弹是否暴击" : "Whether actively reflected bullets are critical hits",
+                    config.ACTIVE_CRITICAL
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
+                    "IGNORES_ANGLE",
+                    isChinese ? "后方子弹也可反射；或许可解决部分高速子弹穿透防御问题" : "Also reflects bullets from behind; might solve the issue that some high-speed bullets go through the barrier",
+                    config.IGNORES_ANGLE
                 );
                 ModConfigAPI.SafeAddInputWithSlider(
                     MOD_NAME,
-                    "TIME_ACTIVE_EXTEND",
-                    isChinese ? "每次主动反射延续状态时长（秒）" : "State duration extension per active reflection (seconds)",
+                    "DISTANCE_MULT_PASSIVE",
+                    isChinese ? "被动反射后子弹射程乘数" : "Reflected bullet range multiplier after passive reflection",
                     typeof(float),
-                    config.TIME_ACTIVE_EXTEND,
-                    new Vector2(0, 1)
-                );
-                ModConfigAPI.SafeAddInputWithSlider(
-                    MOD_NAME,
-                    "TIME_SWING_ACTIVE",
-                    isChinese ? "挥刀后主动反射状态持续时长（秒）" : "Active reflection state duration after a melee swing (seconds)",
-                    typeof(float),
-                    config.TIME_SWING_ACTIVE,
-                    new Vector2(0, 3)
-                );
-                ModConfigAPI.SafeAddInputWithSlider(
-                    MOD_NAME,
-                    "TIME_ADS_ACTIVE",
-                    isChinese ? "机瞄后主动反射状态持续时长（秒）（需开启“仅机瞄被动反射”）" : "Active reflection state duration after entering ADS mode (seconds) (works only with \"Enables passive during ADS\")",
-                    typeof(float),
-                    config.TIME_ADS_ACTIVE,
-                    new Vector2(0, 3)
-                );
-                ModConfigAPI.SafeAddInputWithSlider(
-                    MOD_NAME,
-                    "CHANCE_BACK_ACTIVE",
-                    isChinese ? "主动反射回弹子弹概率" : "Chance for active reflection to return bullet to shooter",
-                    typeof(float),
-                    config.CHANCE_BACK_ACTIVE,
-                    new Vector2(0, 1)
-                );
-                ModConfigAPI.SafeAddInputWithSlider(
-                    MOD_NAME,
-                    "CHANCE_BACK_PASSIVE",
-                    isChinese ? "被动反射回弹子弹概率" : "Chance for passive reflection to return bullet to shooter",
-                    typeof(float),
-                    config.CHANCE_BACK_PASSIVE,
-                    new Vector2(0, 1)
-                );
-                ModConfigAPI.SafeAddInputWithSlider(
-                    MOD_NAME,
-                    "PASSIVE_STAMINA_COST",
-                    isChinese ? "被动反射体力消耗率（基于子弹伤害）" : "Passive reflection stamina cost rate (based on bullet damage)",
-                    typeof(float),
-                    config.PASSIVE_STAMINA_COST,
-                    new Vector2(0, 10)
-                );
-                ModConfigAPI.SafeAddInputWithSlider(
-                    MOD_NAME,
-                    "ACTIVE_STAMINA_GAIN",
-                    isChinese ? "主动反射单颗子弹恢复体力量" : "Stamina amount gain after each single active bullet reflection",
-                    typeof(float),
-                    config.ACTIVE_STAMINA_GAIN,
-                    new Vector2(0, 100)
-                );
-                ModConfigAPI.SafeAddInputWithSlider(
-                    MOD_NAME,
-                    "DAMAGE_MULT_ACTIVE",
-                    isChinese ? "主动反射后子弹伤害乘数" : "Reflected bullet damage multiplier after active reflection",
-                    typeof(float),
-                    config.DAMAGE_MULT_ACTIVE,
-                    new Vector2(0, 10)
-                );
-                ModConfigAPI.SafeAddInputWithSlider(
-                    MOD_NAME,
-                    "DAMAGE_MULT_PASSIVE",
-                    isChinese ? "被动反射后子弹伤害乘数" : "Reflected bullet damage multiplier after passive reflection",
-                    typeof(float),
-                    config.DAMAGE_MULT_PASSIVE,
+                    config.DISTANCE_MULT_PASSIVE,
                     new Vector2(0, 10)
                 );
                 ModConfigAPI.SafeAddInputWithSlider(
@@ -405,59 +335,135 @@ namespace ProjectileReflector
                 );
                 ModConfigAPI.SafeAddInputWithSlider(
                     MOD_NAME,
-                    "DISTANCE_MULT_PASSIVE",
-                    isChinese ? "被动反射后子弹射程乘数" : "Reflected bullet range multiplier after passive reflection",
+                    "DAMAGE_MULT_PASSIVE",
+                    isChinese ? "被动反射后子弹伤害乘数" : "Reflected bullet damage multiplier after passive reflection",
                     typeof(float),
-                    config.DISTANCE_MULT_PASSIVE,
-                    new Vector2(0, 10)
-                );
-                ModConfigAPI.SafeAddBoolDropdownList(
-                    MOD_NAME,
-                    "IGNORES_ANGLE",
-                    isChinese ? "后方子弹也可反射；或许可解决部分高速子弹穿透防御问题" : "Also reflects bullets from behind; might solve the issue that some high-speed bullets go through the barrier",
-                    config.IGNORES_ANGLE
-                );
-                ModConfigAPI.SafeAddBoolDropdownList(
-                    MOD_NAME,
-                    "ACTIVE_CRITICAL",
-                    isChinese ? "主动反射子弹是否暴击" : "Whether actively reflected bullets are critical hits",
-                    config.ACTIVE_CRITICAL
-                );
-                ModConfigAPI.SafeAddBoolDropdownList(
-                    MOD_NAME,
-                    "ACTIVE_EXPLOSION",
-                    isChinese ? "主动反射子弹是否爆炸" : "Whether actively reflected bullets explode",
-                    config.ACTIVE_EXPLOSION
-                );
-                ModConfigAPI.SafeAddInputWithSlider(
-                    MOD_NAME,
-                    "ACTIVE_EXPLOSION_DAMAGE_FACTOR",
-                    isChinese ? "主动反射爆炸额外伤害乘数（基于反射后子弹伤害）" : "Active reflection explosion extra damage multiplier (based on reflected bullet damage)",
-                    typeof(float),
-                    config.ACTIVE_EXPLOSION_DAMAGE_FACTOR,
+                    config.DAMAGE_MULT_PASSIVE,
                     new Vector2(0, 10)
                 );
                 ModConfigAPI.SafeAddInputWithSlider(
                     MOD_NAME,
-                    "ACTIVE_EXPLOSION_RANGE",
-                    isChinese ? "主动反射爆炸范围" : "Active reflection explosion range",
+                    "DAMAGE_MULT_ACTIVE",
+                    isChinese ? "主动反射后子弹伤害乘数" : "Reflected bullet damage multiplier after active reflection",
                     typeof(float),
-                    config.ACTIVE_EXPLOSION_RANGE,
+                    config.DAMAGE_MULT_ACTIVE,
                     new Vector2(0, 10)
-                );
-                ModConfigAPI.SafeAddBoolDropdownList(
-                    MOD_NAME,
-                    "ENABLES_FLYING_BLADE",
-                    isChinese ? "启用飞刃（？）" : "Enables flying blade (?)",
-                    config.ENABLES_FLYING_BLADE
                 );
                 ModConfigAPI.SafeAddInputWithSlider(
                     MOD_NAME,
-                    "SFX_VOLUME",
-                    isChinese ? "反射音效强度" : "Reflection sound effect volume",
+                    "ACTIVE_STAMINA_GAIN",
+                    isChinese ? "主动反射单颗子弹恢复体力量" : "Stamina amount gain after each single active bullet reflection",
                     typeof(float),
-                    config.SFX_VOLUME,
+                    config.ACTIVE_STAMINA_GAIN,
+                    new Vector2(0, 100)
+                );
+                ModConfigAPI.SafeAddInputWithSlider(
+                    MOD_NAME,
+                    "PASSIVE_STAMINA_COST",
+                    isChinese ? "被动反射体力消耗率（基于子弹伤害）" : "Passive reflection stamina cost rate (based on bullet damage)",
+                    typeof(float),
+                    config.PASSIVE_STAMINA_COST,
+                    new Vector2(0, 10)
+                );
+                ModConfigAPI.SafeAddInputWithSlider(
+                    MOD_NAME,
+                    "CHANCE_BACK_PASSIVE",
+                    isChinese ? "被动反射回弹子弹概率" : "Chance for passive reflection to return bullet to shooter",
+                    typeof(float),
+                    config.CHANCE_BACK_PASSIVE,
                     new Vector2(0, 1)
+                );
+                ModConfigAPI.SafeAddInputWithSlider(
+                    MOD_NAME,
+                    "CHANCE_BACK_ACTIVE",
+                    isChinese ? "主动反射回弹子弹概率" : "Chance for active reflection to return bullet to shooter",
+                    typeof(float),
+                    config.CHANCE_BACK_ACTIVE,
+                    new Vector2(0, 1)
+                );
+                ModConfigAPI.SafeAddInputWithSlider(
+                    MOD_NAME,
+                    "TIME_ADS_ACTIVE",
+                    isChinese ? "机瞄后主动反射状态持续时长（秒）（需开启“仅机瞄被动反射”）" : "Active reflection state duration after entering ADS mode (seconds) (works only with \"Enables passive during ADS\")",
+                    typeof(float),
+                    config.TIME_ADS_ACTIVE,
+                    new Vector2(0, 3)
+                );
+                ModConfigAPI.SafeAddInputWithSlider(
+                    MOD_NAME,
+                    "TIME_SWING_ACTIVE",
+                    isChinese ? "挥刀后主动反射状态持续时长（秒）" : "Active reflection state duration after a melee swing (seconds)",
+                    typeof(float),
+                    config.TIME_SWING_ACTIVE,
+                    new Vector2(0, 3)
+                );
+                ModConfigAPI.SafeAddInputWithSlider(
+                    MOD_NAME,
+                    "TIME_ACTIVE_EXTEND",
+                    isChinese ? "每次主动反射延续状态时长（秒）" : "State duration extension per active reflection (seconds)",
+                    typeof(float),
+                    config.TIME_ACTIVE_EXTEND,
+                    new Vector2(0, 1)
+                );
+                ModConfigAPI.SafeAddInputWithSlider(
+                    MOD_NAME,
+                    "TIME_PASSIVE_EXTEND",
+                    isChinese ? "每次被动反射延续状态时长（秒）" : "State duration extension per passive reflection (seconds)",
+                    typeof(float),
+                    config.TIME_PASSIVE_EXTEND,
+                    new Vector2(0, 1)
+                );
+                ModConfigAPI.SafeAddInputWithSlider(
+                    MOD_NAME,
+                    "REFLECT_RANGE_PASSIVE",
+                    isChinese ? "被动反射触发范围" : "Passive reflection trigger range",
+                    typeof(float),
+                    config.REFLECT_RANGE_PASSIVE,
+                    new Vector2(0, 10)
+                );
+                ModConfigAPI.SafeAddInputWithSlider(
+                    MOD_NAME,
+                    "REFLECT_RANGE",
+                    isChinese ? "主动反射触发范围" : "Active reflection trigger range",
+                    typeof(float),
+                    config.REFLECT_RANGE,
+                    new Vector2(0, 10)
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
+                    "PASSIVE_REFLECT_WHEN_DASHING",
+                    isChinese ? "是否在翻滚中被动反射" : "Whether passive reflection enables when dashing",
+                    config.PASSIVE_REFLECT_WHEN_DASHING
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
+                    "PASSIVE_REFLECT_WHEN_RUNNING",
+                    isChinese ? "是否在跑动中被动反射" : "Whether passive reflection enables when running",
+                    config.PASSIVE_REFLECT_WHEN_RUNNING
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
+                    "PASSIVE_REFLECT_BY_ADS",
+                    isChinese ? "仅在机瞄状态下启用被动反射" : "Enables passive reflection only during ADS mode",
+                    config.PASSIVE_REFLECT_BY_ADS
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
+                    "ENABLE_PASSIVE_REFLECT",
+                    isChinese ? "启用被动反射" : "Enables passive reflection",
+                    config.ENABLE_PASSIVE_REFLECT
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
+                    "ENABLE_ACTIVE_REFLECT",
+                    isChinese ? "启用主动反射" : "Enables active reflection",
+                    config.ENABLE_ACTIVE_REFLECT
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
+                    "ModVersion_1_2",
+                    isChinese ? "（仅展示）Mod版本：1.2" : "(Display only) Mod version: 1.2",
+                    config.ModVersion_1_2
                 );
             }
             static void LoadConfigFromModConfig()

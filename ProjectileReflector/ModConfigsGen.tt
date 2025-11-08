@@ -1,5 +1,6 @@
 ﻿<#@ include file="ModConfigsGen.ttinclude" #><#@ output extension=".cs" #>
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using YukkuriC;
 
@@ -68,6 +69,16 @@ namespace ProjectileReflector
         }
     }
 #>
+<#
+    foreach (var kv in linesByGroup)
+    {
+        var group = kv.Key;
+        var allNames = (from l in kv.Value select $"\"{l["name"]}\"");
+#>
+                ModSettingAPI.AddGroup("<#= group #>", "<#= group #>", new List<string>() { <#= string.Join(", ", allNames) #> });
+<#
+    }
+#>
             }
         }
         public static partial class ModConfigMenu
@@ -76,7 +87,7 @@ namespace ProjectileReflector
             {
                 var config = ModConfigEntry.INSTANCE;
 <#
-    foreach (var line in lines)
+    foreach (var line in Enumerable.Reverse(lines))
     {
 #>
 <#
