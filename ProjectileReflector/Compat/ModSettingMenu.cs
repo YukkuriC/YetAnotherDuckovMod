@@ -26,7 +26,7 @@ namespace ProjectileReflector.Compat
         static void OnModActivated(ModInfo modInfo, Duckov.Modding.ModBehaviour behaviour)
         {
             if (modInfo.name != ModSettingAPI.MOD_NAME || !ModSettingAPI.Init(myInfo)) return;
-            if (ModSettingAPI.Init(myInfo)) AddUI();
+            AddUI();
         }
         static void OnModWillBeDeactivated(ModInfo modInfo, Duckov.Modding.ModBehaviour behaviour)
         {
