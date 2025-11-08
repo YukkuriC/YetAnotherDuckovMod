@@ -24,9 +24,6 @@ namespace ProjectileReflector
             if (
                 self.context.team == Teams.player
                 || player == null
-                || (PASSIVE_REFLECT_BY_ADS && !player.IsInAdsInput)
-                || (!PASSIVE_REFLECT_WHEN_RUNNING && player.Running)
-                || (!PASSIVE_REFLECT_WHEN_DASHING && player.Dashing)
                 || !(player.CurrentHoldItemAgent is ItemAgent_MeleeWeapon)
             ) return false;
 
@@ -39,6 +36,11 @@ namespace ProjectileReflector
 
             // type 2: has extra stamina
             if (!ENABLE_PASSIVE_REFLECT) return false;
+            if ( // filter various types
+                (PASSIVE_REFLECT_BY_ADS && !player.IsInAdsInput)
+                || (!PASSIVE_REFLECT_WHEN_RUNNING && player.Running)
+                || (!PASSIVE_REFLECT_WHEN_DASHING && player.Dashing)
+            ) return false;
             staminaCost = self.context.damage * PASSIVE_STAMINA_COST;
             return player.CurrentStamina >= staminaCost;
         }
