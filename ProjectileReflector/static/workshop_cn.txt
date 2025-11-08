@@ -1,4 +1,4 @@
-﻿[h1]Projectile Reflector 刀反子弹 v1.1[/h1]
+﻿[h1]Projectile Reflector 刀反子弹 v1.2[/h1]
 
 [url=https://github.com/YukkuriC/YetAnotherDuckovMod/tree/main/ProjectileReflector] Github源代码 [/url]
 
@@ -8,7 +8,7 @@
 
 [h2]配置[/h2]
 
-配置文件位于[u]<存档目录>/YukkuriC.ProjectileReflector.json[/u]（Windows 系统下通常为[u]C:\Users\<用户名>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json[/u]）；若安装了 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339]ModConfig[/url] 也可直接在游戏内更改。
+配置文件位于[u]<存档目录>/YukkuriC.ProjectileReflector.json[/u]（Windows 系统下通常为[u]C:\Users\<用户名>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json[/u]）；若安装了 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339]ModConfig[/url] 或 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3595729494]ModSetting[/url] 也可直接在游戏内更改。
 所有配置项内容如下：
 
 [table]
@@ -18,7 +18,7 @@
         [th]默认值[/th]
         [th]描述[/th]
     [/tr]
-[tr][td]ModVersion_1_1[/td][td]bool[/td][td]true[/td][td]（仅展示）Mod版本：1.1[/td][/tr]
+[tr][td]ModVersion_1_2[/td][td]bool[/td][td]true[/td][td]（仅展示）Mod版本：1.2[/td][/tr]
 [tr][td]ENABLE_ACTIVE_REFLECT[/td][td]bool[/td][td]true[/td][td]启用主动反射[/td][/tr]
 [tr][td]ENABLE_PASSIVE_REFLECT[/td][td]bool[/td][td]true[/td][td]启用被动反射[/td][/tr]
 [tr][td]PASSIVE_REFLECT_BY_ADS[/td][td]bool[/td][td]false[/td][td]仅在机瞄状态下启用被动反射[/td][/tr]

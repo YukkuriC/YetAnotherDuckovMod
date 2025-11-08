@@ -1,4 +1,4 @@
-﻿# Projectile Reflector 刀反子弹 v1.1
+﻿# Projectile Reflector 刀反子弹 v1.2
 
 [[中文](./README.md)] [English]  
 [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3597305916)
@@ -9,13 +9,13 @@ Passive reflection triggers when the player is hit while holding the weapon and 
 
 ## Configuration
 
-The configuration file is located at `<SaveDirectory>/YukkuriC.ProjectileReflector.json` (typically `C:\Users\<Username>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json` for Windows OS); if installed with [ModConfig](https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339) then the config can also be edited in game.  
+The configuration file is located at `<SaveDirectory>/YukkuriC.ProjectileReflector.json` (typically `C:\Users\<Username>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json` for Windows OS); if installed with [ModConfig](https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339) or [ModSetting](https://steamcommunity.com/sharedfiles/filedetails/?id=3595729494) then the config can also be edited in game.  
 All config entries are listed as follows:
 
 <!-- table begin -->
 Configuration Name|Type|Default Value|Description
 --|--|--|--
-ModVersion_1_1|bool|true|(Display only) Mod version: 1.1
+ModVersion_1_2|bool|true|(Display only) Mod version: 1.2
 ENABLE_ACTIVE_REFLECT|bool|true|Enables active reflection
 ENABLE_PASSIVE_REFLECT|bool|true|Enables passive reflection
 PASSIVE_REFLECT_BY_ADS|bool|false|Enables passive reflection only during ADS mode

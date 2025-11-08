@@ -10,7 +10,7 @@
 
 ## 配置
 
-配置文件位于`<存档目录>/YukkuriC.ProjectileReflector.json`（Windows 系统下通常为`C:\Users\<用户名>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json`）；若安装了 [ModConfig](https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339) 也可直接在游戏内更改。  
+配置文件位于`<存档目录>/YukkuriC.ProjectileReflector.json`（Windows 系统下通常为`C:\Users\<用户名>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json`）；若安装了 [ModConfig](https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339) 或 [ModSetting](https://steamcommunity.com/sharedfiles/filedetails/?id=3595729494) 也可直接在游戏内更改。  
 所有配置项内容如下：
 
 <!-- table begin -->
