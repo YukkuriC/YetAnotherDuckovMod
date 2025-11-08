@@ -67,8 +67,11 @@ namespace YukkuriC
                     .ToArray();
                 if (methodInfos.Length == 0)
                 {
+                    // 警告:ModSetting的版本:0.2 (API的版本:0.3),新功能将无法使用
+                    // AddKeybindingWithDefault方法找不到
+                    // ……什么毛病
                     Debug.LogError($"{methodName}方法找不到");
-                    return false;
+                    // return false;
                 }
             }
 
