@@ -35,37 +35,51 @@
     <None Update="ModConfigsGen.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModConfigsGen.cs</LastGenOutput>
+      <DependentUpon>ModConfigsGen.ttinclude</DependentUpon>
     </None>
     <None Update="ModConfigsGen.ttinclude">
-      <Generator></Generator>
+      <DependentUpon>static/ALL_CONFIGS.csv</DependentUpon>
+      <DependentUpon>static/VERSION.txt</DependentUpon>
     </None>
     <None Update="README_en.md">
       <DependentUpon>README_en.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </None>
     <None Update="README_en.tt">
       <LastGenOutput>README_en.md</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModConfigsGen.ttinclude</DependentUpon>
     </None>
     <None Update="README.md">
       <DependentUpon>README.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </None>
     <None Update="README.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>README.md</LastGenOutput>
+      <DependentUpon>ModConfigsGen.ttinclude</DependentUpon>
     </None>
     <None Update="static\workshop_cn.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>workshop_cn.txt</LastGenOutput>
+      <DependentUpon>ModConfigsGen.ttinclude</DependentUpon>
     </None>
     <None Update="static\workshop_en.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>workshop_en.txt</LastGenOutput>
+      <DependentUpon>ModConfigsGen.ttinclude</DependentUpon>
     </None>
     <None Update="static\workshop_en.txt">
       <DependentUpon>workshop_en.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </None>
     <None Update="static\workshop_cn.txt">
       <DependentUpon>workshop_cn.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </None>
   </ItemGroup>
   <ItemGroup>
