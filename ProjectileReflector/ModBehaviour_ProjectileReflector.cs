@@ -19,6 +19,9 @@ namespace ProjectileReflector
             patcher.PatchAll();
             Debug.Log("[ProjectileReflector] Harmony patched");
             Compat.ModConfigMenu.Init();
+        }
+        protected override void OnAfterSetup()
+        {
             Compat.ModSettingMenu.Init(info);
         }
         void OnDisable()
