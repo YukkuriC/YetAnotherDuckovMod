@@ -31,9 +31,45 @@ namespace ProjectileReflector
     }
 #>
     }
+
     // mod config menu compat
     namespace Compat
     {
+        public static partial class ModSettingMenu
+        {
+            static void AddUI(bool isChinese)
+            {
+                var config = ModConfigEntry.INSTANCE;
+<#
+    foreach (var line in lines)
+    {
+        if (line["type"] == "bool")
+        {
+#>
+                ModSettingAPI.AddToggle(
+                    "<#= line["name"] #>",
+                    isChinese ? "<#= line["descrip_cn"] #>" : "<#= Escape(line["descrip_en"]) #>",
+                    config.<#= line["name"] #>,
+                    WrapOnChange<<#= line["type"] #>>(v => config.<#= line["name"] #> = v)
+                );
+<#
+        }
+        else
+        {
+#>
+                ModSettingAPI.AddSlider(
+                    "<#= line["name"] #>",
+                    isChinese ? "<#= line["descrip_cn"] #>" : "<#= Escape(line["descrip_en"]) #>",
+                    config.<#= line["name"] #>,
+                    new Vector2(<#= line["min"] #>, <#= line["max"] #>),
+                    WrapOnChange<<#= line["type"] #>>(v => config.<#= line["name"] #> = v)
+                );
+<#
+        }
+    }
+#>
+            }
+        }
         public static partial class ModConfigMenu
         {
             static void SetupModConfig(bool isChinese)
@@ -50,7 +86,7 @@ namespace ProjectileReflector
                 ModConfigAPI.SafeAddBoolDropdownList(
                     MOD_NAME,
                     "<#= line["name"] #>",
-                    isChinese ? "<#= line["descrip_cn"] #>" : "<#= line["descrip_en"] #>",
+                    isChinese ? "<#= line["descrip_cn"] #>" : "<#= Escape(line["descrip_en"]) #>",
                     config.<#= line["name"] #>
                 );
 <#
@@ -61,15 +97,13 @@ namespace ProjectileReflector
                 ModConfigAPI.SafeAddInputWithSlider(
                     MOD_NAME,
                     "<#= line["name"] #>",
-                    isChinese ? "<#= line["descrip_cn"] #>" : "<#= line["descrip_en"].Replace("\"", "\\\"") #>",
+                    isChinese ? "<#= line["descrip_cn"] #>" : "<#= Escape(line["descrip_en"]) #>",
                     typeof(<#= line["type"] #>),
                     config.<#= line["name"] #>,
                     new Vector2(<#= line["min"] #>, <#= line["max"] #>)
                 );
 <#
         }
-#>
-<#
     }
 #>
             }

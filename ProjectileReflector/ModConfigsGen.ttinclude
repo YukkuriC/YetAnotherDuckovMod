@@ -12,6 +12,11 @@
         return Path.Combine(BASE_DIR, file);
     }
 
+    string Escape(string raw)
+    {
+        return raw.Replace("\"", "\\\"");
+    }
+
     var MOD_VERSION = File.ReadAllText(GetPath("static/VERSION.txt"), Encoding.UTF8);
 
     // read csv

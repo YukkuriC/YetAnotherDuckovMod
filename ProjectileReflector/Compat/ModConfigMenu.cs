@@ -42,13 +42,7 @@ namespace ProjectileReflector.Compat
             ModConfigAPI.SafeAddOnOptionsChangedDelegate(OnModConfigOptionsChanged);
 
             // 根据当前语言设置描述文字
-            SystemLanguage[] chineseLanguages = {
-                SystemLanguage.Chinese,
-                SystemLanguage.ChineseSimplified,
-                SystemLanguage.ChineseTraditional
-            };
-            bool isChinese = chineseLanguages.Contains(LocalizationManager.CurrentLanguage);
-            SetupModConfig(isChinese);
+            SetupModConfig(CommonLib.IsChinese());
         }
 
         static void OnModConfigOptionsChanged(string key)

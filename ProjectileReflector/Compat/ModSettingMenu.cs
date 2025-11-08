@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Duckov.Modding;
 using SodaCraft.Localizations;
 using UnityEngine;
@@ -6,7 +7,7 @@ using YukkuriC;
 
 namespace ProjectileReflector.Compat
 {
-    public static class ModSettingMenu
+    public static partial class ModSettingMenu
     {
         private static ModInfo myInfo;
         public static void Init(ModInfo info)
@@ -33,9 +34,17 @@ namespace ProjectileReflector.Compat
             // TODO remove custom watcher
         }
 
-        // TODO codegen
         static void AddUI()
         {
+            AddUI(CommonLib.IsChinese());
+        }
+        static Action<T> WrapOnChange<T>(Action<T> original)
+        {
+            return v =>
+            {
+                original(v);
+                ModConfigEntry.SaveConfig();
+            };
         }
     }
 }
