@@ -12,15 +12,21 @@
 配置文件位于`<存档目录>/YukkuriC.ProjectileReflector.json`（Windows 系统下通常为`C:\Users\<用户名>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json`）；若安装了 [ModConfig](https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339) 或 [ModSetting](https://steamcommunity.com/sharedfiles/filedetails/?id=3595729494) 也可直接在游戏内更改。  
 所有配置项内容如下：
 
-<!-- table begin -->
+### 分组：Version 1.2
 配置名|类型|默认值|描述
 --|--|--|--
 ModVersion_1_2|bool|true|（仅展示）Mod版本：1.2
+### 分组：Functions
+配置名|类型|默认值|描述
+--|--|--|--
 ENABLE_ACTIVE_REFLECT|bool|true|启用主动反射
 ENABLE_PASSIVE_REFLECT|bool|true|启用被动反射
 PASSIVE_REFLECT_BY_ADS|bool|false|仅在机瞄状态下启用被动反射
 PASSIVE_REFLECT_WHEN_RUNNING|bool|false|是否在跑动中被动反射
 PASSIVE_REFLECT_WHEN_DASHING|bool|false|是否在翻滚中被动反射
+### 分组：Parameters
+配置名|类型|默认值|描述
+--|--|--|--
 REFLECT_RANGE|float|2|主动反射触发范围
 REFLECT_RANGE_PASSIVE|float|1.5f|被动反射触发范围
 TIME_PASSIVE_EXTEND|float|0.1f|每次被动反射延续状态时长（秒）
@@ -35,10 +41,16 @@ DAMAGE_MULT_ACTIVE|float|1|主动反射后子弹伤害乘数
 DAMAGE_MULT_PASSIVE|float|0.5f|被动反射后子弹伤害乘数
 DISTANCE_MULT_ACTIVE|float|5|主动反射后子弹射程乘数
 DISTANCE_MULT_PASSIVE|float|1|被动反射后子弹射程乘数
+### 分组：Misc
+配置名|类型|默认值|描述
+--|--|--|--
 IGNORES_ANGLE|bool|false|后方子弹也可反射；或许可解决部分高速子弹穿透防御问题
 ACTIVE_CRITICAL|bool|true|主动反射子弹是否暴击
 ACTIVE_EXPLOSION|bool|false|主动反射子弹是否爆炸
 ACTIVE_EXPLOSION_DAMAGE_FACTOR|float|1|主动反射爆炸额外伤害乘数（基于反射后子弹伤害）
 ACTIVE_EXPLOSION_RANGE|float|1|主动反射爆炸范围
 ENABLES_FLYING_BLADE|bool|false|启用飞刃（？）
+### 分组：Sound
+配置名|类型|默认值|描述
+--|--|--|--
 SFX_VOLUME|float|0.5f|反射音效强度

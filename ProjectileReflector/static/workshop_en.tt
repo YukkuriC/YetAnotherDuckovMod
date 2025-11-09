@@ -12,6 +12,11 @@ Passive reflection triggers when the player is hit while holding the weapon and 
 The configuration file is located at [u]<SaveDirectory>/YukkuriC.ProjectileReflector.json[/u] (typically [u]C:\Users\<Username>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json[/u] for Windows OS); if installed with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339]ModConfig[/url] or [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3595729494]ModSetting[/url] then the config can also be edited in game.  
 All config entries are listed as follows:
 
+<#
+    foreach (var kv in linesByGroup)
+    {
+#>
+[h3]Group: <#= kv.Key #>[/h3]
 [table]
     [tr]
         [th]Configuration Name[/th]
@@ -20,11 +25,14 @@ All config entries are listed as follows:
         [th]Description[/th]
     [/tr]
 <#
-    foreach (var line in lines)
-    {
+        foreach (var line in kv.Value)
+        {
 #>
 [tr][td]<#= line["name"] #>[/td][td]<#= line["type"] #>[/td][td]<#= line["default"] #>[/td][td]<#= line["descrip_en"] #>[/td][/tr]
 <#
-    }
+        }
 #>
 [/table]
+<#
+    }
+#>

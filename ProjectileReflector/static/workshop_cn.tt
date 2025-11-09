@@ -12,6 +12,11 @@
 配置文件位于[u]<存档目录>/YukkuriC.ProjectileReflector.json[/u]（Windows 系统下通常为[u]C:\Users\<用户名>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json[/u]）；若安装了 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339]ModConfig[/url] 或 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3595729494]ModSetting[/url] 也可直接在游戏内更改。
 所有配置项内容如下：
 
+<#
+    foreach (var kv in linesByGroup)
+    {
+#>
+[h3]分组：<#= kv.Key #>[/h3]
 [table]
     [tr]
         [th]配置名[/th]
@@ -20,11 +25,14 @@
         [th]描述[/th]
     [/tr]
 <#
-    foreach (var line in lines)
-    {
+        foreach (var line in kv.Value)
+        {
 #>
 [tr][td]<#= line["name"] #>[/td][td]<#= line["type"] #>[/td][td]<#= line["default"] #>[/td][td]<#= line["descrip_cn"] #>[/td][/tr]
 <#
-    }
+        }
 #>
 [/table]
+<#
+    }
+#>

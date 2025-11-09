@@ -12,33 +12,45 @@ Passive reflection triggers when the player is hit while holding the weapon and 
 The configuration file is located at `<SaveDirectory>/YukkuriC.ProjectileReflector.json` (typically `C:\Users\<Username>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json` for Windows OS); if installed with [ModConfig](https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339) or [ModSetting](https://steamcommunity.com/sharedfiles/filedetails/?id=3595729494) then the config can also be edited in game.  
 All config entries are listed as follows:
 
-<!-- table begin -->
+### Group：Version 1.2
 Configuration Name|Type|Default Value|Description
 --|--|--|--
-ModVersion_1_2|bool|true|(Display only) Mod version: 1.2
-ENABLE_ACTIVE_REFLECT|bool|true|Enables active reflection
-ENABLE_PASSIVE_REFLECT|bool|true|Enables passive reflection
-PASSIVE_REFLECT_BY_ADS|bool|false|Enables passive reflection only during ADS mode
-PASSIVE_REFLECT_WHEN_RUNNING|bool|false|Whether passive reflection enables when running
-PASSIVE_REFLECT_WHEN_DASHING|bool|false|Whether passive reflection enables when dashing
-REFLECT_RANGE|float|2|Active reflection trigger range
-REFLECT_RANGE_PASSIVE|float|1.5f|Passive reflection trigger range
-TIME_PASSIVE_EXTEND|float|0.1f|State duration extension per passive reflection (seconds)
-TIME_ACTIVE_EXTEND|float|0.2f|State duration extension per active reflection (seconds)
-TIME_SWING_ACTIVE|float|0.3f|Active reflection state duration after a melee swing (seconds)
-TIME_ADS_ACTIVE|float|0.3f|Active reflection state duration after entering ADS mode (seconds) (works only with "Enables passive during ADS")
-CHANCE_BACK_ACTIVE|float|0.9f|Chance for active reflection to return bullet to shooter
-CHANCE_BACK_PASSIVE|float|0.05f|Chance for passive reflection to return bullet to shooter
-PASSIVE_STAMINA_COST|float|0.5f|Passive reflection stamina cost rate (based on bullet damage)
-ACTIVE_STAMINA_GAIN|float|5|Stamina amount gain after each single active bullet reflection
-DAMAGE_MULT_ACTIVE|float|1|Reflected bullet damage multiplier after active reflection
-DAMAGE_MULT_PASSIVE|float|0.5f|Reflected bullet damage multiplier after passive reflection
-DISTANCE_MULT_ACTIVE|float|5|Reflected bullet range multiplier after active reflection
-DISTANCE_MULT_PASSIVE|float|1|Reflected bullet range multiplier after passive reflection
-IGNORES_ANGLE|bool|false|Also reflects bullets from behind; might solve the issue that some high-speed bullets go through the barrier
-ACTIVE_CRITICAL|bool|true|Whether actively reflected bullets are critical hits
-ACTIVE_EXPLOSION|bool|false|Whether actively reflected bullets explode
-ACTIVE_EXPLOSION_DAMAGE_FACTOR|float|1|Active reflection explosion extra damage multiplier (based on reflected bullet damage)
-ACTIVE_EXPLOSION_RANGE|float|1|Active reflection explosion range
-ENABLES_FLYING_BLADE|bool|false|Enables flying blade (?)
-SFX_VOLUME|float|0.5f|Reflection sound effect volume
+ModVersion_1_2|bool|true|（仅展示）Mod版本：1.2
+### Group：Functions
+Configuration Name|Type|Default Value|Description
+--|--|--|--
+ENABLE_ACTIVE_REFLECT|bool|true|启用主动反射
+ENABLE_PASSIVE_REFLECT|bool|true|启用被动反射
+PASSIVE_REFLECT_BY_ADS|bool|false|仅在机瞄状态下启用被动反射
+PASSIVE_REFLECT_WHEN_RUNNING|bool|false|是否在跑动中被动反射
+PASSIVE_REFLECT_WHEN_DASHING|bool|false|是否在翻滚中被动反射
+### Group：Parameters
+Configuration Name|Type|Default Value|Description
+--|--|--|--
+REFLECT_RANGE|float|2|主动反射触发范围
+REFLECT_RANGE_PASSIVE|float|1.5f|被动反射触发范围
+TIME_PASSIVE_EXTEND|float|0.1f|每次被动反射延续状态时长（秒）
+TIME_ACTIVE_EXTEND|float|0.2f|每次主动反射延续状态时长（秒）
+TIME_SWING_ACTIVE|float|0.3f|挥刀后主动反射状态持续时长（秒）
+TIME_ADS_ACTIVE|float|0.3f|机瞄后主动反射状态持续时长（秒）（需开启“仅机瞄被动反射”）
+CHANCE_BACK_ACTIVE|float|0.9f|主动反射回弹子弹概率
+CHANCE_BACK_PASSIVE|float|0.05f|被动反射回弹子弹概率
+PASSIVE_STAMINA_COST|float|0.5f|被动反射体力消耗率（基于子弹伤害）
+ACTIVE_STAMINA_GAIN|float|5|主动反射单颗子弹恢复体力量
+DAMAGE_MULT_ACTIVE|float|1|主动反射后子弹伤害乘数
+DAMAGE_MULT_PASSIVE|float|0.5f|被动反射后子弹伤害乘数
+DISTANCE_MULT_ACTIVE|float|5|主动反射后子弹射程乘数
+DISTANCE_MULT_PASSIVE|float|1|被动反射后子弹射程乘数
+### Group：Misc
+Configuration Name|Type|Default Value|Description
+--|--|--|--
+IGNORES_ANGLE|bool|false|后方子弹也可反射；或许可解决部分高速子弹穿透防御问题
+ACTIVE_CRITICAL|bool|true|主动反射子弹是否暴击
+ACTIVE_EXPLOSION|bool|false|主动反射子弹是否爆炸
+ACTIVE_EXPLOSION_DAMAGE_FACTOR|float|1|主动反射爆炸额外伤害乘数（基于反射后子弹伤害）
+ACTIVE_EXPLOSION_RANGE|float|1|主动反射爆炸范围
+ENABLES_FLYING_BLADE|bool|false|启用飞刃（？）
+### Group：Sound
+Configuration Name|Type|Default Value|Description
+--|--|--|--
+SFX_VOLUME|float|0.5f|反射音效强度
