@@ -17,7 +17,7 @@
         return raw.Replace("\"", "\\\"");
     }
 
-    var MOD_VERSION = File.ReadAllText(GetPath("static/VERSION.txt"), Encoding.UTF8);
+    var MOD_VERSION = File.ReadAllText(GetPath("static/VERSION.txt"), Encoding.UTF8).Trim();
 
     // read csv
     // group,type,name,default,min,max,descrip_cn,descrip_en
