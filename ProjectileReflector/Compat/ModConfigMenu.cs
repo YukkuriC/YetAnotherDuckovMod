@@ -55,6 +55,9 @@ namespace ProjectileReflector.Compat
 
             // 保存到本地配置文件
             ModConfigEntry.SaveConfig();
+
+            // refresh menu
+            ModSettingMenu.Reset();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace ProjectileReflector
 {
     public static class ModConfigs
     {
-        public static bool ModVersion_1_2 { get => ModConfigEntry.INSTANCE.ModVersion_1_2; }
+        public static bool ModVersion_1_3 { get => ModConfigEntry.INSTANCE.ModVersion_1_3; }
         public static bool ENABLE_ACTIVE_REFLECT { get => ModConfigEntry.INSTANCE.ENABLE_ACTIVE_REFLECT; }
         public static bool ENABLE_PASSIVE_REFLECT { get => ModConfigEntry.INSTANCE.ENABLE_PASSIVE_REFLECT; }
         public static bool PASSIVE_REFLECT_BY_ADS { get => ModConfigEntry.INSTANCE.PASSIVE_REFLECT_BY_ADS; }
@@ -41,7 +41,7 @@ namespace ProjectileReflector
     public partial class ModConfigEntry
     {
         private static ModConfigEntry instance = new ModConfigEntry();
-        public bool ModVersion_1_2 = true;
+        public bool ModVersion_1_3 = true;
         public bool ENABLE_ACTIVE_REFLECT = true;
         public bool ENABLE_PASSIVE_REFLECT = true;
         public bool PASSIVE_REFLECT_BY_ADS = false;
@@ -75,14 +75,46 @@ namespace ProjectileReflector
     {
         public static partial class ModSettingMenu
         {
+            public static void Reset()
+            {
+                if (!ModSettingAPI.IsInit) return;
+                var config = ModConfigEntry.INSTANCE;
+                ModSettingAPI.SetValue("ModVersion_1_3", config.ModVersion_1_3);
+                ModSettingAPI.SetValue("ENABLE_ACTIVE_REFLECT", config.ENABLE_ACTIVE_REFLECT);
+                ModSettingAPI.SetValue("ENABLE_PASSIVE_REFLECT", config.ENABLE_PASSIVE_REFLECT);
+                ModSettingAPI.SetValue("PASSIVE_REFLECT_BY_ADS", config.PASSIVE_REFLECT_BY_ADS);
+                ModSettingAPI.SetValue("PASSIVE_REFLECT_WHEN_RUNNING", config.PASSIVE_REFLECT_WHEN_RUNNING);
+                ModSettingAPI.SetValue("PASSIVE_REFLECT_WHEN_DASHING", config.PASSIVE_REFLECT_WHEN_DASHING);
+                ModSettingAPI.SetValue("REFLECT_RANGE", config.REFLECT_RANGE);
+                ModSettingAPI.SetValue("REFLECT_RANGE_PASSIVE", config.REFLECT_RANGE_PASSIVE);
+                ModSettingAPI.SetValue("TIME_PASSIVE_EXTEND", config.TIME_PASSIVE_EXTEND);
+                ModSettingAPI.SetValue("TIME_ACTIVE_EXTEND", config.TIME_ACTIVE_EXTEND);
+                ModSettingAPI.SetValue("TIME_SWING_ACTIVE", config.TIME_SWING_ACTIVE);
+                ModSettingAPI.SetValue("TIME_ADS_ACTIVE", config.TIME_ADS_ACTIVE);
+                ModSettingAPI.SetValue("CHANCE_BACK_ACTIVE", config.CHANCE_BACK_ACTIVE);
+                ModSettingAPI.SetValue("CHANCE_BACK_PASSIVE", config.CHANCE_BACK_PASSIVE);
+                ModSettingAPI.SetValue("PASSIVE_STAMINA_COST", config.PASSIVE_STAMINA_COST);
+                ModSettingAPI.SetValue("ACTIVE_STAMINA_GAIN", config.ACTIVE_STAMINA_GAIN);
+                ModSettingAPI.SetValue("DAMAGE_MULT_ACTIVE", config.DAMAGE_MULT_ACTIVE);
+                ModSettingAPI.SetValue("DAMAGE_MULT_PASSIVE", config.DAMAGE_MULT_PASSIVE);
+                ModSettingAPI.SetValue("DISTANCE_MULT_ACTIVE", config.DISTANCE_MULT_ACTIVE);
+                ModSettingAPI.SetValue("DISTANCE_MULT_PASSIVE", config.DISTANCE_MULT_PASSIVE);
+                ModSettingAPI.SetValue("IGNORES_ANGLE", config.IGNORES_ANGLE);
+                ModSettingAPI.SetValue("ACTIVE_CRITICAL", config.ACTIVE_CRITICAL);
+                ModSettingAPI.SetValue("ACTIVE_EXPLOSION", config.ACTIVE_EXPLOSION);
+                ModSettingAPI.SetValue("ACTIVE_EXPLOSION_DAMAGE_FACTOR", config.ACTIVE_EXPLOSION_DAMAGE_FACTOR);
+                ModSettingAPI.SetValue("ACTIVE_EXPLOSION_RANGE", config.ACTIVE_EXPLOSION_RANGE);
+                ModSettingAPI.SetValue("ENABLES_FLYING_BLADE", config.ENABLES_FLYING_BLADE);
+                ModSettingAPI.SetValue("SFX_VOLUME", config.SFX_VOLUME);
+            }
             static void AddUI(bool isChinese)
             {
                 var config = ModConfigEntry.INSTANCE;
                 ModSettingAPI.AddToggle(
-                    "ModVersion_1_2",
-                    isChinese ? "（仅展示）Mod版本：1.2" : "(Display only) Mod version: 1.2",
-                    config.ModVersion_1_2,
-                    WrapOnChange<bool>(v => config.ModVersion_1_2 = v)
+                    "ModVersion_1_3",
+                    isChinese ? "（仅展示）Mod版本：1.3" : "(Display only) Mod version: 1.3",
+                    config.ModVersion_1_3,
+                    WrapOnChange<bool>(v => config.ModVersion_1_3 = v)
                 );
                 ModSettingAPI.AddToggle(
                     "ENABLE_ACTIVE_REFLECT",
@@ -257,7 +289,7 @@ namespace ProjectileReflector
                     new Vector2(0, 1),
                     WrapOnChange<float>(v => config.SFX_VOLUME = v)
                 );
-                ModSettingAPI.AddGroup("Version 1.2", "Version 1.2", new List<string>() { "ModVersion_1_2" });
+                ModSettingAPI.AddGroup("Version 1.3", "Version 1.3", new List<string>() { "ModVersion_1_3" });
                 ModSettingAPI.AddGroup("Functions", "Functions", new List<string>() { "ENABLE_ACTIVE_REFLECT", "ENABLE_PASSIVE_REFLECT", "PASSIVE_REFLECT_BY_ADS", "PASSIVE_REFLECT_WHEN_RUNNING", "PASSIVE_REFLECT_WHEN_DASHING" });
                 ModSettingAPI.AddGroup("Parameters", "Parameters", new List<string>() { "REFLECT_RANGE", "REFLECT_RANGE_PASSIVE", "TIME_PASSIVE_EXTEND", "TIME_ACTIVE_EXTEND", "TIME_SWING_ACTIVE", "TIME_ADS_ACTIVE", "CHANCE_BACK_ACTIVE", "CHANCE_BACK_PASSIVE", "PASSIVE_STAMINA_COST", "ACTIVE_STAMINA_GAIN", "DAMAGE_MULT_ACTIVE", "DAMAGE_MULT_PASSIVE", "DISTANCE_MULT_ACTIVE", "DISTANCE_MULT_PASSIVE" });
                 ModSettingAPI.AddGroup("Misc", "Misc", new List<string>() { "IGNORES_ANGLE", "ACTIVE_CRITICAL", "ACTIVE_EXPLOSION", "ACTIVE_EXPLOSION_DAMAGE_FACTOR", "ACTIVE_EXPLOSION_RANGE", "ENABLES_FLYING_BLADE" });
@@ -461,15 +493,15 @@ namespace ProjectileReflector
                 );
                 ModConfigAPI.SafeAddBoolDropdownList(
                     MOD_NAME,
-                    "ModVersion_1_2",
-                    isChinese ? "（仅展示）Mod版本：1.2" : "(Display only) Mod version: 1.2",
-                    config.ModVersion_1_2
+                    "ModVersion_1_3",
+                    isChinese ? "（仅展示）Mod版本：1.3" : "(Display only) Mod version: 1.3",
+                    config.ModVersion_1_3
                 );
             }
             static void LoadConfigFromModConfig()
             {
                 var config = ModConfigEntry.INSTANCE;
-                config.ModVersion_1_2 = ModConfigAPI.SafeLoad(MOD_NAME, "ModVersion_1_2", config.ModVersion_1_2);
+                config.ModVersion_1_3 = ModConfigAPI.SafeLoad(MOD_NAME, "ModVersion_1_3", config.ModVersion_1_3);
                 config.ENABLE_ACTIVE_REFLECT = ModConfigAPI.SafeLoad(MOD_NAME, "ENABLE_ACTIVE_REFLECT", config.ENABLE_ACTIVE_REFLECT);
                 config.ENABLE_PASSIVE_REFLECT = ModConfigAPI.SafeLoad(MOD_NAME, "ENABLE_PASSIVE_REFLECT", config.ENABLE_PASSIVE_REFLECT);
                 config.PASSIVE_REFLECT_BY_ADS = ModConfigAPI.SafeLoad(MOD_NAME, "PASSIVE_REFLECT_BY_ADS", config.PASSIVE_REFLECT_BY_ADS);

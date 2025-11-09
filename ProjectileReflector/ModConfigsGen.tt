@@ -38,6 +38,19 @@ namespace ProjectileReflector
     {
         public static partial class ModSettingMenu
         {
+            public static void Reset()
+            {
+                if (!ModSettingAPI.IsInit) return;
+                var config = ModConfigEntry.INSTANCE;
+<#
+    foreach (var line in lines)
+    {
+#>
+                ModSettingAPI.SetValue("<#= line["name"] #>", config.<#= line["name"] #>);
+<#
+    }
+#>
+            }
             static void AddUI(bool isChinese)
             {
                 var config = ModConfigEntry.INSTANCE;

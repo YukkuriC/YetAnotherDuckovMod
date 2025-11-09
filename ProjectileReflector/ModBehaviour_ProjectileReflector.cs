@@ -3,6 +3,7 @@ using Saves;
 using System;
 using System.IO;
 using System.Reflection;
+using ProjectileReflector.Compat;
 using UnityEngine;
 
 namespace ProjectileReflector
@@ -90,6 +91,9 @@ namespace ProjectileReflector
                     Debug.LogError("[ProjectileReflector] error when loading config:");
                     Debug.LogException(e);
                 }
+
+                // refresh menu
+                ModSettingMenu.Reset();
             }
             else
             {
