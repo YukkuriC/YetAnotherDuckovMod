@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonLib", "CommonLib\Comm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExplosiveRoll", "ExplosiveRoll\ExplosiveRoll.csproj", "{4AED1842-CE55-42C5-ABC5-745CCDBFEABE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NestedBag", "NestedBag\NestedBag.csproj", "{39FDF8AB-40FF-475F-B63E-E7A381E8605B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Release|Any CPU = Release|Any CPU
@@ -20,6 +22,8 @@ Global
 		{59345793-4D38-44EC-B0D4-76F685C65286}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4AED1842-CE55-42C5-ABC5-745CCDBFEABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AED1842-CE55-42C5-ABC5-745CCDBFEABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39FDF8AB-40FF-475F-B63E-E7A381E8605B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39FDF8AB-40FF-475F-B63E-E7A381E8605B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
