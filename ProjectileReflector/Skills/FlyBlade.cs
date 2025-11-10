@@ -58,10 +58,10 @@ namespace ProjectileReflector.Skills
                     bleedChance = melee.BleedChance,
                 };
                 damageInfo.damagePoint.y = melee.transform.position.y;
-                var healthBefore = health.CurrentHealth;
+                var healthBefore = health?.CurrentHealth ?? 0;
                 component.Hurt(damageInfo);
                 component.AddBuff(GameplayDataSettings.Buffs.Pain, player);
-                var healthAfter = health.CurrentHealth;
+                var healthAfter = health?.CurrentHealth ?? 0;
                 if (melee.hitFx != null)
                     Object.Instantiate(melee.hitFx, damageInfo.damagePoint,
                         Quaternion.LookRotation(damageInfo.damageNormal, Vector3.up));
