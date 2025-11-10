@@ -25,4 +25,6 @@ Misc,bool,ACTIVE_EXPLOSION,false,foo,bar,主动反射子弹是否爆炸,Whether 
 Misc,float,ACTIVE_EXPLOSION_DAMAGE_FACTOR,1,0,10,主动反射爆炸额外伤害乘数（基于反射后子弹伤害）,Active reflection explosion extra damage multiplier (based on reflected bullet damage)
 Misc,float,ACTIVE_EXPLOSION_RANGE,1,0,10,主动反射爆炸范围,Active reflection explosion range
 Misc,bool,ENABLES_FLYING_BLADE,false,foo,bar,启用飞刃（？）,Enables flying blade (?)
+Misc,float,FLYING_BLADE_STRENGTH,0.5f,0,5,飞刃伤害乘数,Flying blade damage multiplier
+Misc,float,FLYING_BLADE_VAMPIRISM,0.5f,0,2,飞刃造成伤害吸血比例,Damage HP absorbing ratio for flying blades
 Sound,float,SFX_VOLUME,0.5f,0,1,反射音效强度,Reflection sound effect volume

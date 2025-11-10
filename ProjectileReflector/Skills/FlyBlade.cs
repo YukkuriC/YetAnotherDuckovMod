@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Duckov.Utilities;
 using UnityEngine;
+using YukkuriC;
 using Object = UnityEngine.Object;
 
-namespace YukkuriC.Skills
+namespace ProjectileReflector.Skills
 {
+    using static ModConfigs;
+
     public class FlyBlade
     {
         private const int FLY_COUNT = 10;
         private const float FLY_STEP = 2f;
         private const float BLADE_SIZE = 3f;
-        private const float BLADE_STRENGTH = 0.5f;
         private const float STEP_INTERVAL = 0.1f;
 
         static Collider[] hitCache = new Collider[10];
@@ -56,14 +58,23 @@ namespace YukkuriC.Skills
                     bleedChance = melee.BleedChance,
                 };
                 damageInfo.damagePoint.y = melee.transform.position.y;
+                var healthBefore = health.CurrentHealth;
                 component.Hurt(damageInfo);
                 component.AddBuff(GameplayDataSettings.Buffs.Pain, player);
+                var healthAfter = health.CurrentHealth;
                 if (melee.hitFx != null)
                     Object.Instantiate(melee.hitFx, damageInfo.damagePoint,
                         Quaternion.LookRotation(damageInfo.damageNormal, Vector3.up));
 
                 // add to ignore
                 ignore?.Add(component);
+
+                // vampire
+                var damaged = healthBefore - healthAfter;
+                if (damaged > 0 && FLYING_BLADE_VAMPIRISM > 0)
+                {
+                    player.AddHealth(damaged * FLYING_BLADE_VAMPIRISM);
+                }
             }
         }
 
@@ -85,7 +96,7 @@ namespace YukkuriC.Skills
             {
                 if (player == null) return;
                 start += step;
-                CreateBlade(player, melee, start, dir, BLADE_SIZE, BLADE_STRENGTH, ignore);
+                CreateBlade(player, melee, start, dir, BLADE_SIZE, FLYING_BLADE_STRENGTH, ignore);
                 await UniTask.Delay(TimeSpan.FromSeconds(STEP_INTERVAL));
             }
         }

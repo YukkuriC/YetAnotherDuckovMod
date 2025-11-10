@@ -34,6 +34,8 @@ namespace ProjectileReflector
         public static float ACTIVE_EXPLOSION_DAMAGE_FACTOR { get => ModConfigEntry.INSTANCE.ACTIVE_EXPLOSION_DAMAGE_FACTOR; }
         public static float ACTIVE_EXPLOSION_RANGE { get => ModConfigEntry.INSTANCE.ACTIVE_EXPLOSION_RANGE; }
         public static bool ENABLES_FLYING_BLADE { get => ModConfigEntry.INSTANCE.ENABLES_FLYING_BLADE; }
+        public static float FLYING_BLADE_STRENGTH { get => ModConfigEntry.INSTANCE.FLYING_BLADE_STRENGTH; }
+        public static float FLYING_BLADE_VAMPIRISM { get => ModConfigEntry.INSTANCE.FLYING_BLADE_VAMPIRISM; }
         public static float SFX_VOLUME { get => ModConfigEntry.INSTANCE.SFX_VOLUME; }
     }
 
@@ -67,6 +69,8 @@ namespace ProjectileReflector
         public float ACTIVE_EXPLOSION_DAMAGE_FACTOR = 1;
         public float ACTIVE_EXPLOSION_RANGE = 1;
         public bool ENABLES_FLYING_BLADE = false;
+        public float FLYING_BLADE_STRENGTH = 0.5f;
+        public float FLYING_BLADE_VAMPIRISM = 0.5f;
         public float SFX_VOLUME = 0.5f;
     }
 
@@ -105,6 +109,8 @@ namespace ProjectileReflector
                 ModSettingAPI.SetValue("ACTIVE_EXPLOSION_DAMAGE_FACTOR", config.ACTIVE_EXPLOSION_DAMAGE_FACTOR);
                 ModSettingAPI.SetValue("ACTIVE_EXPLOSION_RANGE", config.ACTIVE_EXPLOSION_RANGE);
                 ModSettingAPI.SetValue("ENABLES_FLYING_BLADE", config.ENABLES_FLYING_BLADE);
+                ModSettingAPI.SetValue("FLYING_BLADE_STRENGTH", config.FLYING_BLADE_STRENGTH);
+                ModSettingAPI.SetValue("FLYING_BLADE_VAMPIRISM", config.FLYING_BLADE_VAMPIRISM);
                 ModSettingAPI.SetValue("SFX_VOLUME", config.SFX_VOLUME);
             }
             static void AddUI(bool isChinese)
@@ -283,6 +289,20 @@ namespace ProjectileReflector
                     WrapOnChange<bool>(v => config.ENABLES_FLYING_BLADE = v)
                 );
                 ModSettingAPI.AddSlider(
+                    "FLYING_BLADE_STRENGTH",
+                    isChinese ? "飞刃伤害乘数" : "Flying blade damage multiplier",
+                    config.FLYING_BLADE_STRENGTH,
+                    new Vector2(0, 5),
+                    WrapOnChange<float>(v => config.FLYING_BLADE_STRENGTH = v)
+                );
+                ModSettingAPI.AddSlider(
+                    "FLYING_BLADE_VAMPIRISM",
+                    isChinese ? "飞刃造成伤害吸血比例" : "Damage HP absorbing ratio for flying blades",
+                    config.FLYING_BLADE_VAMPIRISM,
+                    new Vector2(0, 2),
+                    WrapOnChange<float>(v => config.FLYING_BLADE_VAMPIRISM = v)
+                );
+                ModSettingAPI.AddSlider(
                     "SFX_VOLUME",
                     isChinese ? "反射音效强度" : "Reflection sound effect volume",
                     config.SFX_VOLUME,
@@ -292,7 +312,7 @@ namespace ProjectileReflector
                 ModSettingAPI.AddGroup("Version 1.3", "Version 1.3", new List<string>() { "ModVersion_1_3" });
                 ModSettingAPI.AddGroup("Functions", "Functions", new List<string>() { "ENABLE_ACTIVE_REFLECT", "ENABLE_PASSIVE_REFLECT", "PASSIVE_REFLECT_BY_ADS", "PASSIVE_REFLECT_WHEN_RUNNING", "PASSIVE_REFLECT_WHEN_DASHING" });
                 ModSettingAPI.AddGroup("Parameters", "Parameters", new List<string>() { "REFLECT_RANGE", "REFLECT_RANGE_PASSIVE", "TIME_PASSIVE_EXTEND", "TIME_ACTIVE_EXTEND", "TIME_SWING_ACTIVE", "TIME_ADS_ACTIVE", "CHANCE_BACK_ACTIVE", "CHANCE_BACK_PASSIVE", "PASSIVE_STAMINA_COST", "ACTIVE_STAMINA_GAIN", "DAMAGE_MULT_ACTIVE", "DAMAGE_MULT_PASSIVE", "DISTANCE_MULT_ACTIVE", "DISTANCE_MULT_PASSIVE" });
-                ModSettingAPI.AddGroup("Misc", "Misc", new List<string>() { "IGNORES_ANGLE", "ACTIVE_CRITICAL", "ACTIVE_EXPLOSION", "ACTIVE_EXPLOSION_DAMAGE_FACTOR", "ACTIVE_EXPLOSION_RANGE", "ENABLES_FLYING_BLADE" });
+                ModSettingAPI.AddGroup("Misc", "Misc", new List<string>() { "IGNORES_ANGLE", "ACTIVE_CRITICAL", "ACTIVE_EXPLOSION", "ACTIVE_EXPLOSION_DAMAGE_FACTOR", "ACTIVE_EXPLOSION_RANGE", "ENABLES_FLYING_BLADE", "FLYING_BLADE_STRENGTH", "FLYING_BLADE_VAMPIRISM" });
                 ModSettingAPI.AddGroup("Sound", "Sound", new List<string>() { "SFX_VOLUME" });
             }
         }
@@ -308,6 +328,22 @@ namespace ProjectileReflector
                     typeof(float),
                     config.SFX_VOLUME,
                     new Vector2(0, 1)
+                );
+                ModConfigAPI.SafeAddInputWithSlider(
+                    MOD_NAME,
+                    "FLYING_BLADE_VAMPIRISM",
+                    isChinese ? "飞刃造成伤害吸血比例" : "Damage HP absorbing ratio for flying blades",
+                    typeof(float),
+                    config.FLYING_BLADE_VAMPIRISM,
+                    new Vector2(0, 2)
+                );
+                ModConfigAPI.SafeAddInputWithSlider(
+                    MOD_NAME,
+                    "FLYING_BLADE_STRENGTH",
+                    isChinese ? "飞刃伤害乘数" : "Flying blade damage multiplier",
+                    typeof(float),
+                    config.FLYING_BLADE_STRENGTH,
+                    new Vector2(0, 5)
                 );
                 ModConfigAPI.SafeAddBoolDropdownList(
                     MOD_NAME,
@@ -527,6 +563,8 @@ namespace ProjectileReflector
                 config.ACTIVE_EXPLOSION_DAMAGE_FACTOR = ModConfigAPI.SafeLoad(MOD_NAME, "ACTIVE_EXPLOSION_DAMAGE_FACTOR", config.ACTIVE_EXPLOSION_DAMAGE_FACTOR);
                 config.ACTIVE_EXPLOSION_RANGE = ModConfigAPI.SafeLoad(MOD_NAME, "ACTIVE_EXPLOSION_RANGE", config.ACTIVE_EXPLOSION_RANGE);
                 config.ENABLES_FLYING_BLADE = ModConfigAPI.SafeLoad(MOD_NAME, "ENABLES_FLYING_BLADE", config.ENABLES_FLYING_BLADE);
+                config.FLYING_BLADE_STRENGTH = ModConfigAPI.SafeLoad(MOD_NAME, "FLYING_BLADE_STRENGTH", config.FLYING_BLADE_STRENGTH);
+                config.FLYING_BLADE_VAMPIRISM = ModConfigAPI.SafeLoad(MOD_NAME, "FLYING_BLADE_VAMPIRISM", config.FLYING_BLADE_VAMPIRISM);
                 config.SFX_VOLUME = ModConfigAPI.SafeLoad(MOD_NAME, "SFX_VOLUME", config.SFX_VOLUME);
             }
         }
