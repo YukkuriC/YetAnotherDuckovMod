@@ -5,6 +5,7 @@ Functions,bool,ENABLE_PASSIVE_REFLECT,true,foo,bar,启用被动反射,Enables pa
 Functions,bool,PASSIVE_REFLECT_BY_ADS,false,foo,bar,仅在机瞄状态下启用被动反射,Enables passive reflection only during ADS mode
 Functions,bool,PASSIVE_REFLECT_WHEN_RUNNING,false,foo,bar,是否在跑动中被动反射,Whether passive reflection enables when running
 Functions,bool,PASSIVE_REFLECT_WHEN_DASHING,false,foo,bar,是否在翻滚中被动反射,Whether passive reflection enables when dashing
+Functions,bool,AUTO_SCALE_MELEE_RANGE,true,foo,bar,根据持有武器攻击范围自动放缩反射范围（以1.5为分母）,Auto scale reflection ranges based on actual melee range (divided by 1.5)
 Parameters,float,REFLECT_RANGE,2,0,10,主动反射触发范围,Active reflection trigger range
 Parameters,float,REFLECT_RANGE_PASSIVE,1.5f,0,10,被动反射触发范围,Passive reflection trigger range
 Parameters,float,TIME_PASSIVE_EXTEND,0.1f,0,1,每次被动反射延续状态时长（秒）,State duration extension per passive reflection (seconds)

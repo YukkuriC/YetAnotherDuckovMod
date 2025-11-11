@@ -34,6 +34,7 @@ All config entries are listed as follows:
 [tr][td]PASSIVE_REFLECT_BY_ADS[/td][td]bool[/td][td]false[/td][td]Enables passive reflection only during ADS mode[/td][/tr]
 [tr][td]PASSIVE_REFLECT_WHEN_RUNNING[/td][td]bool[/td][td]false[/td][td]Whether passive reflection enables when running[/td][/tr]
 [tr][td]PASSIVE_REFLECT_WHEN_DASHING[/td][td]bool[/td][td]false[/td][td]Whether passive reflection enables when dashing[/td][/tr]
+[tr][td]AUTO_SCALE_MELEE_RANGE[/td][td]bool[/td][td]true[/td][td]Auto scale reflection ranges based on actual melee range (divided by 1.5)[/td][/tr]
 [/table]
 [h3]Group: Parameters[/h3]
 [table]

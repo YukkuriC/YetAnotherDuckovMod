@@ -14,6 +14,7 @@ namespace ProjectileReflector
         public static bool PASSIVE_REFLECT_BY_ADS { get => ModConfigEntry.INSTANCE.PASSIVE_REFLECT_BY_ADS; }
         public static bool PASSIVE_REFLECT_WHEN_RUNNING { get => ModConfigEntry.INSTANCE.PASSIVE_REFLECT_WHEN_RUNNING; }
         public static bool PASSIVE_REFLECT_WHEN_DASHING { get => ModConfigEntry.INSTANCE.PASSIVE_REFLECT_WHEN_DASHING; }
+        public static bool AUTO_SCALE_MELEE_RANGE { get => ModConfigEntry.INSTANCE.AUTO_SCALE_MELEE_RANGE; }
         public static float REFLECT_RANGE { get => ModConfigEntry.INSTANCE.REFLECT_RANGE; }
         public static float REFLECT_RANGE_PASSIVE { get => ModConfigEntry.INSTANCE.REFLECT_RANGE_PASSIVE; }
         public static float TIME_PASSIVE_EXTEND { get => ModConfigEntry.INSTANCE.TIME_PASSIVE_EXTEND; }
@@ -53,6 +54,7 @@ namespace ProjectileReflector
         public bool PASSIVE_REFLECT_BY_ADS = false;
         public bool PASSIVE_REFLECT_WHEN_RUNNING = false;
         public bool PASSIVE_REFLECT_WHEN_DASHING = false;
+        public bool AUTO_SCALE_MELEE_RANGE = true;
         public float REFLECT_RANGE = 2;
         public float REFLECT_RANGE_PASSIVE = 1.5f;
         public float TIME_PASSIVE_EXTEND = 0.1f;
@@ -97,6 +99,7 @@ namespace ProjectileReflector
                 ModSettingAPI.SetValue("PASSIVE_REFLECT_BY_ADS", config.PASSIVE_REFLECT_BY_ADS);
                 ModSettingAPI.SetValue("PASSIVE_REFLECT_WHEN_RUNNING", config.PASSIVE_REFLECT_WHEN_RUNNING);
                 ModSettingAPI.SetValue("PASSIVE_REFLECT_WHEN_DASHING", config.PASSIVE_REFLECT_WHEN_DASHING);
+                ModSettingAPI.SetValue("AUTO_SCALE_MELEE_RANGE", config.AUTO_SCALE_MELEE_RANGE);
                 ModSettingAPI.SetValue("REFLECT_RANGE", config.REFLECT_RANGE);
                 ModSettingAPI.SetValue("REFLECT_RANGE_PASSIVE", config.REFLECT_RANGE_PASSIVE);
                 ModSettingAPI.SetValue("TIME_PASSIVE_EXTEND", config.TIME_PASSIVE_EXTEND);
@@ -163,6 +166,12 @@ namespace ProjectileReflector
                     isChinese ? "是否在翻滚中被动反射" : "Whether passive reflection enables when dashing",
                     config.PASSIVE_REFLECT_WHEN_DASHING,
                     WrapOnChange<bool>(v => config.PASSIVE_REFLECT_WHEN_DASHING = v)
+                );
+                ModSettingAPI.AddToggle(
+                    "AUTO_SCALE_MELEE_RANGE",
+                    isChinese ? "根据持有武器攻击范围自动放缩反射范围（以1.5为分母）" : "Auto scale reflection ranges based on actual melee range (divided by 1.5)",
+                    config.AUTO_SCALE_MELEE_RANGE,
+                    WrapOnChange<bool>(v => config.AUTO_SCALE_MELEE_RANGE = v)
                 );
                 ModSettingAPI.AddSlider(
                     "REFLECT_RANGE",
@@ -348,7 +357,7 @@ namespace ProjectileReflector
                     WrapOnChange<float>(v => config.SFX_VOLUME = v)
                 );
                 ModSettingAPI.AddGroup("Version 1.3", "Version 1.3", new List<string>() { "ModVersion_1_3" });
-                ModSettingAPI.AddGroup("Functions", "Functions", new List<string>() { "ENABLE_ACTIVE_REFLECT", "ENABLE_PASSIVE_REFLECT", "PASSIVE_REFLECT_BY_ADS", "PASSIVE_REFLECT_WHEN_RUNNING", "PASSIVE_REFLECT_WHEN_DASHING" });
+                ModSettingAPI.AddGroup("Functions", "Functions", new List<string>() { "ENABLE_ACTIVE_REFLECT", "ENABLE_PASSIVE_REFLECT", "PASSIVE_REFLECT_BY_ADS", "PASSIVE_REFLECT_WHEN_RUNNING", "PASSIVE_REFLECT_WHEN_DASHING", "AUTO_SCALE_MELEE_RANGE" });
                 ModSettingAPI.AddGroup("Parameters", "Parameters", new List<string>() { "REFLECT_RANGE", "REFLECT_RANGE_PASSIVE", "TIME_PASSIVE_EXTEND", "TIME_ACTIVE_EXTEND", "TIME_SWING_ACTIVE", "TIME_ADS_ACTIVE", "CHANCE_BACK_ACTIVE", "CHANCE_BACK_PASSIVE", "PASSIVE_STAMINA_COST", "ACTIVE_STAMINA_GAIN", "DAMAGE_MULT_ACTIVE", "DAMAGE_MULT_PASSIVE", "DISTANCE_MULT_ACTIVE", "DISTANCE_MULT_PASSIVE" });
                 ModSettingAPI.AddGroup("Grenade Reflection", "Grenade Reflection", new List<string>() { "ENABLE_GRENADE_REFLECT", "AIM_GRENADE_OWNER", "GRENADE_REFLECT_HORIZONTAL_SPEED", "GRENADE_REFLECT_VERTICAL_SPEED" });
                 ModSettingAPI.AddGroup("Misc", "Misc", new List<string>() { "IGNORES_ANGLE", "ACTIVE_CRITICAL", "ACTIVE_EXPLOSION", "ACTIVE_EXPLOSION_DAMAGE_FACTOR", "ACTIVE_EXPLOSION_RANGE", "ENABLES_FLYING_BLADE", "FLYING_BLADE_STRENGTH", "FLYING_BLADE_VAMPIRISM" });
@@ -566,6 +575,12 @@ namespace ProjectileReflector
                 );
                 ModConfigAPI.SafeAddBoolDropdownList(
                     MOD_NAME,
+                    "AUTO_SCALE_MELEE_RANGE",
+                    isChinese ? "根据持有武器攻击范围自动放缩反射范围（以1.5为分母）" : "Auto scale reflection ranges based on actual melee range (divided by 1.5)",
+                    config.AUTO_SCALE_MELEE_RANGE
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
                     "PASSIVE_REFLECT_WHEN_DASHING",
                     isChinese ? "是否在翻滚中被动反射" : "Whether passive reflection enables when dashing",
                     config.PASSIVE_REFLECT_WHEN_DASHING
@@ -610,6 +625,7 @@ namespace ProjectileReflector
                 config.PASSIVE_REFLECT_BY_ADS = ModConfigAPI.SafeLoad(MOD_NAME, "PASSIVE_REFLECT_BY_ADS", config.PASSIVE_REFLECT_BY_ADS);
                 config.PASSIVE_REFLECT_WHEN_RUNNING = ModConfigAPI.SafeLoad(MOD_NAME, "PASSIVE_REFLECT_WHEN_RUNNING", config.PASSIVE_REFLECT_WHEN_RUNNING);
                 config.PASSIVE_REFLECT_WHEN_DASHING = ModConfigAPI.SafeLoad(MOD_NAME, "PASSIVE_REFLECT_WHEN_DASHING", config.PASSIVE_REFLECT_WHEN_DASHING);
+                config.AUTO_SCALE_MELEE_RANGE = ModConfigAPI.SafeLoad(MOD_NAME, "AUTO_SCALE_MELEE_RANGE", config.AUTO_SCALE_MELEE_RANGE);
                 config.REFLECT_RANGE = ModConfigAPI.SafeLoad(MOD_NAME, "REFLECT_RANGE", config.REFLECT_RANGE);
                 config.REFLECT_RANGE_PASSIVE = ModConfigAPI.SafeLoad(MOD_NAME, "REFLECT_RANGE_PASSIVE", config.REFLECT_RANGE_PASSIVE);
                 config.TIME_PASSIVE_EXTEND = ModConfigAPI.SafeLoad(MOD_NAME, "TIME_PASSIVE_EXTEND", config.TIME_PASSIVE_EXTEND);

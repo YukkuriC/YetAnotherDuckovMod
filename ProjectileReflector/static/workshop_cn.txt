@@ -34,6 +34,7 @@
 [tr][td]PASSIVE_REFLECT_BY_ADS[/td][td]bool[/td][td]false[/td][td]仅在机瞄状态下启用被动反射[/td][/tr]
 [tr][td]PASSIVE_REFLECT_WHEN_RUNNING[/td][td]bool[/td][td]false[/td][td]是否在跑动中被动反射[/td][/tr]
 [tr][td]PASSIVE_REFLECT_WHEN_DASHING[/td][td]bool[/td][td]false[/td][td]是否在翻滚中被动反射[/td][/tr]
+[tr][td]AUTO_SCALE_MELEE_RANGE[/td][td]bool[/td][td]true[/td][td]根据持有武器攻击范围自动放缩反射范围（以1.5为分母）[/td][/tr]
 [/table]
 [h3]分组：Parameters[/h3]
 [table]
