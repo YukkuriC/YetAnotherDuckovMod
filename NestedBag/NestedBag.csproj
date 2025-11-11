@@ -22,6 +22,16 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <Publicize Include="ItemStatsSystem:ItemStatsSystem.Item.slots" />
+    <Publicize Include="ItemStatsSystem:ItemStatsSystem.Item.stats" />
+    <Publicize Include="ItemStatsSystem:ItemStatsSystem.Item.modifiers" />
+    <Publicize Include="ItemStatsSystem:ItemStatsSystem.ItemComponent.initialized" />
+    <Publicize Include="ItemStatsSystem:ItemStatsSystem.ItemComponent.master" />
+    <Publicize Include="ItemStatsSystem:ItemStatsSystem.ModifierDescriptionCollection.list" />
+    <Publicize Include="ItemStatsSystem:ItemStatsSystem.StatCollection.list" />
+    <Publicize Include="ItemStatsSystem" MemberPattern="^ItemStatsSystem.Stats.Modifier.overrideOrder.*" />
+    <Publicize Include="TeamSoda.Duckov.Utilities:Duckov.Utilities.Tag.show" />
+
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="call copier.bat" />
