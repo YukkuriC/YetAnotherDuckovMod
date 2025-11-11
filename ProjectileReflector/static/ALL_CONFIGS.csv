@@ -14,11 +14,15 @@ Parameters,float,TIME_ADS_ACTIVE,0.3f,0,3,机瞄后主动反射状态持续时�
 Parameters,float,CHANCE_BACK_ACTIVE,0.9f,0,1,主动反射回弹子弹概率,Chance for active reflection to return bullet to shooter
 Parameters,float,CHANCE_BACK_PASSIVE,0.05f,0,1,被动反射回弹子弹概率,Chance for passive reflection to return bullet to shooter
 Parameters,float,PASSIVE_STAMINA_COST,0.5f,0,10,被动反射体力消耗率（基于子弹伤害）,Passive reflection stamina cost rate (based on bullet damage)
-Parameters,float,ACTIVE_STAMINA_GAIN,5,0,100,主动反射单颗子弹恢复体力量,Stamina amount gain after each single active bullet reflection
+Parameters,float,ACTIVE_STAMINA_GAIN,5,-10,100,主动反射单颗子弹恢复体力量,Stamina amount gain after each single active bullet reflection
 Parameters,float,DAMAGE_MULT_ACTIVE,1,0,10,主动反射后子弹伤害乘数,Reflected bullet damage multiplier after active reflection
 Parameters,float,DAMAGE_MULT_PASSIVE,0.5f,0,10,被动反射后子弹伤害乘数,Reflected bullet damage multiplier after passive reflection
 Parameters,float,DISTANCE_MULT_ACTIVE,5,0,10,主动反射后子弹射程乘数,Reflected bullet range multiplier after active reflection
 Parameters,float,DISTANCE_MULT_PASSIVE,1,0,10,被动反射后子弹射程乘数,Reflected bullet range multiplier after passive reflection
+Grenade Reflection,bool,ENABLE_GRENADE_REFLECT,true,foo,bar,启用手雷反射,Enables grenade reflection
+Grenade Reflection,bool,AIM_GRENADE_OWNER,true,foo,bar,反射方向瞄准投掷者（如果非自己）,Aims grenade thrower (if not self) at reflection
+Grenade Reflection,float,GRENADE_REFLECT_HORIZONTAL_SPEED,10,0,30,手雷反射横向速度,Grenade reflection horizontal speed
+Grenade Reflection,float,GRENADE_REFLECT_VERTICAL_SPEED,3,0,15,手雷反射纵向速度,Grenade reflection vertical speed
 Misc,bool,IGNORES_ANGLE,false,foo,bar,后方子弹也可反射；或许可解决部分高速子弹穿透防御问题,Also reflects bullets from behind; might solve the issue that some high-speed bullets go through the barrier
 Misc,bool,ACTIVE_CRITICAL,true,foo,bar,主动反射子弹是否暴击,Whether actively reflected bullets are critical hits
 Misc,bool,ACTIVE_EXPLOSION,false,foo,bar,主动反射子弹是否爆炸,Whether actively reflected bullets explode

@@ -1,4 +1,4 @@
-﻿# Projectile Reflector 刀反子弹 v1.2
+﻿# Projectile Reflector 刀反子弹 v1.3
 
 [中文] [[English](./README_en.md)]  
 [Steam 创意工坊](https://steamcommunity.com/sharedfiles/filedetails/?id=3597305916)
@@ -12,10 +12,10 @@
 配置文件位于`<存档目录>/YukkuriC.ProjectileReflector.json`（Windows 系统下通常为`C:\Users\<用户名>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json`）；若安装了 [ModConfig](https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339) 或 [ModSetting](https://steamcommunity.com/sharedfiles/filedetails/?id=3595729494) 也可直接在游戏内更改。  
 所有配置项内容如下：
 
-### 分组：Version 1.2
+### 分组：Version 1.3
 配置名|类型|默认值|描述
 --|--|--|--
-ModVersion_1_2|bool|true|（仅展示）Mod版本：1.2
+ModVersion_1_3|bool|true|（仅展示）Mod版本：1.3
 ### 分组：Functions
 配置名|类型|默认值|描述
 --|--|--|--
@@ -41,6 +41,13 @@ DAMAGE_MULT_ACTIVE|float|1|主动反射后子弹伤害乘数
 DAMAGE_MULT_PASSIVE|float|0.5f|被动反射后子弹伤害乘数
 DISTANCE_MULT_ACTIVE|float|5|主动反射后子弹射程乘数
 DISTANCE_MULT_PASSIVE|float|1|被动反射后子弹射程乘数
+### 分组：Grenade Reflection
+配置名|类型|默认值|描述
+--|--|--|--
+ENABLE_GRENADE_REFLECT|bool|true|启用手雷反射
+AIM_GRENADE_OWNER|bool|true|反射方向瞄准投掷者（如果非自己）
+GRENADE_REFLECT_HORIZONTAL_SPEED|float|10|手雷反射横向速度
+GRENADE_REFLECT_VERTICAL_SPEED|float|3|手雷反射纵向速度
 ### 分组：Misc
 配置名|类型|默认值|描述
 --|--|--|--
@@ -50,6 +57,8 @@ ACTIVE_EXPLOSION|bool|false|主动反射子弹是否爆炸
 ACTIVE_EXPLOSION_DAMAGE_FACTOR|float|1|主动反射爆炸额外伤害乘数（基于反射后子弹伤害）
 ACTIVE_EXPLOSION_RANGE|float|1|主动反射爆炸范围
 ENABLES_FLYING_BLADE|bool|false|启用飞刃（？）
+FLYING_BLADE_STRENGTH|float|0.5f|飞刃伤害乘数
+FLYING_BLADE_VAMPIRISM|float|0.5f|飞刃造成伤害吸血比例
 ### 分组：Sound
 配置名|类型|默认值|描述
 --|--|--|--

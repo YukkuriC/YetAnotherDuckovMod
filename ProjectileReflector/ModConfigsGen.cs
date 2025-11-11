@@ -28,6 +28,10 @@ namespace ProjectileReflector
         public static float DAMAGE_MULT_PASSIVE { get => ModConfigEntry.INSTANCE.DAMAGE_MULT_PASSIVE; }
         public static float DISTANCE_MULT_ACTIVE { get => ModConfigEntry.INSTANCE.DISTANCE_MULT_ACTIVE; }
         public static float DISTANCE_MULT_PASSIVE { get => ModConfigEntry.INSTANCE.DISTANCE_MULT_PASSIVE; }
+        public static bool ENABLE_GRENADE_REFLECT { get => ModConfigEntry.INSTANCE.ENABLE_GRENADE_REFLECT; }
+        public static bool AIM_GRENADE_OWNER { get => ModConfigEntry.INSTANCE.AIM_GRENADE_OWNER; }
+        public static float GRENADE_REFLECT_HORIZONTAL_SPEED { get => ModConfigEntry.INSTANCE.GRENADE_REFLECT_HORIZONTAL_SPEED; }
+        public static float GRENADE_REFLECT_VERTICAL_SPEED { get => ModConfigEntry.INSTANCE.GRENADE_REFLECT_VERTICAL_SPEED; }
         public static bool IGNORES_ANGLE { get => ModConfigEntry.INSTANCE.IGNORES_ANGLE; }
         public static bool ACTIVE_CRITICAL { get => ModConfigEntry.INSTANCE.ACTIVE_CRITICAL; }
         public static bool ACTIVE_EXPLOSION { get => ModConfigEntry.INSTANCE.ACTIVE_EXPLOSION; }
@@ -63,6 +67,10 @@ namespace ProjectileReflector
         public float DAMAGE_MULT_PASSIVE = 0.5f;
         public float DISTANCE_MULT_ACTIVE = 5;
         public float DISTANCE_MULT_PASSIVE = 1;
+        public bool ENABLE_GRENADE_REFLECT = true;
+        public bool AIM_GRENADE_OWNER = true;
+        public float GRENADE_REFLECT_HORIZONTAL_SPEED = 10;
+        public float GRENADE_REFLECT_VERTICAL_SPEED = 3;
         public bool IGNORES_ANGLE = false;
         public bool ACTIVE_CRITICAL = true;
         public bool ACTIVE_EXPLOSION = false;
@@ -103,6 +111,10 @@ namespace ProjectileReflector
                 ModSettingAPI.SetValue("DAMAGE_MULT_PASSIVE", config.DAMAGE_MULT_PASSIVE);
                 ModSettingAPI.SetValue("DISTANCE_MULT_ACTIVE", config.DISTANCE_MULT_ACTIVE);
                 ModSettingAPI.SetValue("DISTANCE_MULT_PASSIVE", config.DISTANCE_MULT_PASSIVE);
+                ModSettingAPI.SetValue("ENABLE_GRENADE_REFLECT", config.ENABLE_GRENADE_REFLECT);
+                ModSettingAPI.SetValue("AIM_GRENADE_OWNER", config.AIM_GRENADE_OWNER);
+                ModSettingAPI.SetValue("GRENADE_REFLECT_HORIZONTAL_SPEED", config.GRENADE_REFLECT_HORIZONTAL_SPEED);
+                ModSettingAPI.SetValue("GRENADE_REFLECT_VERTICAL_SPEED", config.GRENADE_REFLECT_VERTICAL_SPEED);
                 ModSettingAPI.SetValue("IGNORES_ANGLE", config.IGNORES_ANGLE);
                 ModSettingAPI.SetValue("ACTIVE_CRITICAL", config.ACTIVE_CRITICAL);
                 ModSettingAPI.SetValue("ACTIVE_EXPLOSION", config.ACTIVE_EXPLOSION);
@@ -219,7 +231,7 @@ namespace ProjectileReflector
                     "ACTIVE_STAMINA_GAIN",
                     isChinese ? "主动反射单颗子弹恢复体力量" : "Stamina amount gain after each single active bullet reflection",
                     config.ACTIVE_STAMINA_GAIN,
-                    new Vector2(0, 100),
+                    new Vector2(-10, 100),
                     WrapOnChange<float>(v => config.ACTIVE_STAMINA_GAIN = v)
                 );
                 ModSettingAPI.AddSlider(
@@ -249,6 +261,32 @@ namespace ProjectileReflector
                     config.DISTANCE_MULT_PASSIVE,
                     new Vector2(0, 10),
                     WrapOnChange<float>(v => config.DISTANCE_MULT_PASSIVE = v)
+                );
+                ModSettingAPI.AddToggle(
+                    "ENABLE_GRENADE_REFLECT",
+                    isChinese ? "启用手雷反射" : "Enables grenade reflection",
+                    config.ENABLE_GRENADE_REFLECT,
+                    WrapOnChange<bool>(v => config.ENABLE_GRENADE_REFLECT = v)
+                );
+                ModSettingAPI.AddToggle(
+                    "AIM_GRENADE_OWNER",
+                    isChinese ? "反射方向瞄准投掷者（如果非自己）" : "Aims grenade thrower (if not self) at reflection",
+                    config.AIM_GRENADE_OWNER,
+                    WrapOnChange<bool>(v => config.AIM_GRENADE_OWNER = v)
+                );
+                ModSettingAPI.AddSlider(
+                    "GRENADE_REFLECT_HORIZONTAL_SPEED",
+                    isChinese ? "手雷反射横向速度" : "Grenade reflection horizontal speed",
+                    config.GRENADE_REFLECT_HORIZONTAL_SPEED,
+                    new Vector2(0, 30),
+                    WrapOnChange<float>(v => config.GRENADE_REFLECT_HORIZONTAL_SPEED = v)
+                );
+                ModSettingAPI.AddSlider(
+                    "GRENADE_REFLECT_VERTICAL_SPEED",
+                    isChinese ? "手雷反射纵向速度" : "Grenade reflection vertical speed",
+                    config.GRENADE_REFLECT_VERTICAL_SPEED,
+                    new Vector2(0, 15),
+                    WrapOnChange<float>(v => config.GRENADE_REFLECT_VERTICAL_SPEED = v)
                 );
                 ModSettingAPI.AddToggle(
                     "IGNORES_ANGLE",
@@ -312,6 +350,7 @@ namespace ProjectileReflector
                 ModSettingAPI.AddGroup("Version 1.3", "Version 1.3", new List<string>() { "ModVersion_1_3" });
                 ModSettingAPI.AddGroup("Functions", "Functions", new List<string>() { "ENABLE_ACTIVE_REFLECT", "ENABLE_PASSIVE_REFLECT", "PASSIVE_REFLECT_BY_ADS", "PASSIVE_REFLECT_WHEN_RUNNING", "PASSIVE_REFLECT_WHEN_DASHING" });
                 ModSettingAPI.AddGroup("Parameters", "Parameters", new List<string>() { "REFLECT_RANGE", "REFLECT_RANGE_PASSIVE", "TIME_PASSIVE_EXTEND", "TIME_ACTIVE_EXTEND", "TIME_SWING_ACTIVE", "TIME_ADS_ACTIVE", "CHANCE_BACK_ACTIVE", "CHANCE_BACK_PASSIVE", "PASSIVE_STAMINA_COST", "ACTIVE_STAMINA_GAIN", "DAMAGE_MULT_ACTIVE", "DAMAGE_MULT_PASSIVE", "DISTANCE_MULT_ACTIVE", "DISTANCE_MULT_PASSIVE" });
+                ModSettingAPI.AddGroup("Grenade Reflection", "Grenade Reflection", new List<string>() { "ENABLE_GRENADE_REFLECT", "AIM_GRENADE_OWNER", "GRENADE_REFLECT_HORIZONTAL_SPEED", "GRENADE_REFLECT_VERTICAL_SPEED" });
                 ModSettingAPI.AddGroup("Misc", "Misc", new List<string>() { "IGNORES_ANGLE", "ACTIVE_CRITICAL", "ACTIVE_EXPLOSION", "ACTIVE_EXPLOSION_DAMAGE_FACTOR", "ACTIVE_EXPLOSION_RANGE", "ENABLES_FLYING_BLADE", "FLYING_BLADE_STRENGTH", "FLYING_BLADE_VAMPIRISM" });
                 ModSettingAPI.AddGroup("Sound", "Sound", new List<string>() { "SFX_VOLUME" });
             }
@@ -387,6 +426,34 @@ namespace ProjectileReflector
                 );
                 ModConfigAPI.SafeAddInputWithSlider(
                     MOD_NAME,
+                    "GRENADE_REFLECT_VERTICAL_SPEED",
+                    isChinese ? "手雷反射纵向速度" : "Grenade reflection vertical speed",
+                    typeof(float),
+                    config.GRENADE_REFLECT_VERTICAL_SPEED,
+                    new Vector2(0, 15)
+                );
+                ModConfigAPI.SafeAddInputWithSlider(
+                    MOD_NAME,
+                    "GRENADE_REFLECT_HORIZONTAL_SPEED",
+                    isChinese ? "手雷反射横向速度" : "Grenade reflection horizontal speed",
+                    typeof(float),
+                    config.GRENADE_REFLECT_HORIZONTAL_SPEED,
+                    new Vector2(0, 30)
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
+                    "AIM_GRENADE_OWNER",
+                    isChinese ? "反射方向瞄准投掷者（如果非自己）" : "Aims grenade thrower (if not self) at reflection",
+                    config.AIM_GRENADE_OWNER
+                );
+                ModConfigAPI.SafeAddBoolDropdownList(
+                    MOD_NAME,
+                    "ENABLE_GRENADE_REFLECT",
+                    isChinese ? "启用手雷反射" : "Enables grenade reflection",
+                    config.ENABLE_GRENADE_REFLECT
+                );
+                ModConfigAPI.SafeAddInputWithSlider(
+                    MOD_NAME,
                     "DISTANCE_MULT_PASSIVE",
                     isChinese ? "被动反射后子弹射程乘数" : "Reflected bullet range multiplier after passive reflection",
                     typeof(float),
@@ -423,7 +490,7 @@ namespace ProjectileReflector
                     isChinese ? "主动反射单颗子弹恢复体力量" : "Stamina amount gain after each single active bullet reflection",
                     typeof(float),
                     config.ACTIVE_STAMINA_GAIN,
-                    new Vector2(0, 100)
+                    new Vector2(-10, 100)
                 );
                 ModConfigAPI.SafeAddInputWithSlider(
                     MOD_NAME,
@@ -557,6 +624,10 @@ namespace ProjectileReflector
                 config.DAMAGE_MULT_PASSIVE = ModConfigAPI.SafeLoad(MOD_NAME, "DAMAGE_MULT_PASSIVE", config.DAMAGE_MULT_PASSIVE);
                 config.DISTANCE_MULT_ACTIVE = ModConfigAPI.SafeLoad(MOD_NAME, "DISTANCE_MULT_ACTIVE", config.DISTANCE_MULT_ACTIVE);
                 config.DISTANCE_MULT_PASSIVE = ModConfigAPI.SafeLoad(MOD_NAME, "DISTANCE_MULT_PASSIVE", config.DISTANCE_MULT_PASSIVE);
+                config.ENABLE_GRENADE_REFLECT = ModConfigAPI.SafeLoad(MOD_NAME, "ENABLE_GRENADE_REFLECT", config.ENABLE_GRENADE_REFLECT);
+                config.AIM_GRENADE_OWNER = ModConfigAPI.SafeLoad(MOD_NAME, "AIM_GRENADE_OWNER", config.AIM_GRENADE_OWNER);
+                config.GRENADE_REFLECT_HORIZONTAL_SPEED = ModConfigAPI.SafeLoad(MOD_NAME, "GRENADE_REFLECT_HORIZONTAL_SPEED", config.GRENADE_REFLECT_HORIZONTAL_SPEED);
+                config.GRENADE_REFLECT_VERTICAL_SPEED = ModConfigAPI.SafeLoad(MOD_NAME, "GRENADE_REFLECT_VERTICAL_SPEED", config.GRENADE_REFLECT_VERTICAL_SPEED);
                 config.IGNORES_ANGLE = ModConfigAPI.SafeLoad(MOD_NAME, "IGNORES_ANGLE", config.IGNORES_ANGLE);
                 config.ACTIVE_CRITICAL = ModConfigAPI.SafeLoad(MOD_NAME, "ACTIVE_CRITICAL", config.ACTIVE_CRITICAL);
                 config.ACTIVE_EXPLOSION = ModConfigAPI.SafeLoad(MOD_NAME, "ACTIVE_EXPLOSION", config.ACTIVE_EXPLOSION);

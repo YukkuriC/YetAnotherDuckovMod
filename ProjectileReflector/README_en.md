@@ -1,4 +1,4 @@
-﻿# Projectile Reflector 刀反子弹 v1.2
+﻿# Projectile Reflector 刀反子弹 v1.3
 
 [[中文](./README.md)] [English]  
 [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3597305916)
@@ -12,10 +12,10 @@ Passive reflection triggers when the player is hit while holding the weapon and 
 The configuration file is located at `<SaveDirectory>/YukkuriC.ProjectileReflector.json` (typically `C:\Users\<Username>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json` for Windows OS); if installed with [ModConfig](https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339) or [ModSetting](https://steamcommunity.com/sharedfiles/filedetails/?id=3595729494) then the config can also be edited in game.  
 All config entries are listed as follows:
 
-### Group：Version 1.2
+### Group：Version 1.3
 Configuration Name|Type|Default Value|Description
 --|--|--|--
-ModVersion_1_2|bool|true|（仅展示）Mod版本：1.2
+ModVersion_1_3|bool|true|（仅展示）Mod版本：1.3
 ### Group：Functions
 Configuration Name|Type|Default Value|Description
 --|--|--|--
@@ -41,6 +41,13 @@ DAMAGE_MULT_ACTIVE|float|1|主动反射后子弹伤害乘数
 DAMAGE_MULT_PASSIVE|float|0.5f|被动反射后子弹伤害乘数
 DISTANCE_MULT_ACTIVE|float|5|主动反射后子弹射程乘数
 DISTANCE_MULT_PASSIVE|float|1|被动反射后子弹射程乘数
+### Group：Grenade Reflection
+Configuration Name|Type|Default Value|Description
+--|--|--|--
+ENABLE_GRENADE_REFLECT|bool|true|启用手雷反射
+AIM_GRENADE_OWNER|bool|true|反射方向瞄准投掷者（如果非自己）
+GRENADE_REFLECT_HORIZONTAL_SPEED|float|10|手雷反射横向速度
+GRENADE_REFLECT_VERTICAL_SPEED|float|3|手雷反射纵向速度
 ### Group：Misc
 Configuration Name|Type|Default Value|Description
 --|--|--|--
@@ -50,6 +57,8 @@ ACTIVE_EXPLOSION|bool|false|主动反射子弹是否爆炸
 ACTIVE_EXPLOSION_DAMAGE_FACTOR|float|1|主动反射爆炸额外伤害乘数（基于反射后子弹伤害）
 ACTIVE_EXPLOSION_RANGE|float|1|主动反射爆炸范围
 ENABLES_FLYING_BLADE|bool|false|启用飞刃（？）
+FLYING_BLADE_STRENGTH|float|0.5f|飞刃伤害乘数
+FLYING_BLADE_VAMPIRISM|float|0.5f|飞刃造成伤害吸血比例
 ### Group：Sound
 Configuration Name|Type|Default Value|Description
 --|--|--|--

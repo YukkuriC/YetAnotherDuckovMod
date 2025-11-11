@@ -1,4 +1,4 @@
-﻿[h1]Projectile Reflector 刀反子弹 v1.2[/h1]
+﻿[h1]Projectile Reflector 刀反子弹 v1.3[/h1]
 
 [url=https://github.com/YukkuriC/YetAnotherDuckovMod/tree/main/ProjectileReflector] Github Source Code [/url]
 
@@ -11,7 +11,7 @@ Passive reflection triggers when the player is hit while holding the weapon and 
 The configuration file is located at [u]<SaveDirectory>/YukkuriC.ProjectileReflector.json[/u] (typically [u]C:\Users\<Username>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json[/u] for Windows OS); if installed with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339]ModConfig[/url] or [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3595729494]ModSetting[/url] then the config can also be edited in game.  
 All config entries are listed as follows:
 
-[h3]Group: Version 1.2[/h3]
+[h3]Group: Version 1.3[/h3]
 [table]
     [tr]
         [th]Configuration Name[/th]
@@ -19,7 +19,7 @@ All config entries are listed as follows:
         [th]Default Value[/th]
         [th]Description[/th]
     [/tr]
-[tr][td]ModVersion_1_2[/td][td]bool[/td][td]true[/td][td](Display only) Mod version: 1.2[/td][/tr]
+[tr][td]ModVersion_1_3[/td][td]bool[/td][td]true[/td][td](Display only) Mod version: 1.3[/td][/tr]
 [/table]
 [h3]Group: Functions[/h3]
 [table]
@@ -58,6 +58,19 @@ All config entries are listed as follows:
 [tr][td]DISTANCE_MULT_ACTIVE[/td][td]float[/td][td]5[/td][td]Reflected bullet range multiplier after active reflection[/td][/tr]
 [tr][td]DISTANCE_MULT_PASSIVE[/td][td]float[/td][td]1[/td][td]Reflected bullet range multiplier after passive reflection[/td][/tr]
 [/table]
+[h3]Group: Grenade Reflection[/h3]
+[table]
+    [tr]
+        [th]Configuration Name[/th]
+        [th]Type[/th]
+        [th]Default Value[/th]
+        [th]Description[/th]
+    [/tr]
+[tr][td]ENABLE_GRENADE_REFLECT[/td][td]bool[/td][td]true[/td][td]Enables grenade reflection[/td][/tr]
+[tr][td]AIM_GRENADE_OWNER[/td][td]bool[/td][td]true[/td][td]Aims grenade thrower (if not self) at reflection[/td][/tr]
+[tr][td]GRENADE_REFLECT_HORIZONTAL_SPEED[/td][td]float[/td][td]10[/td][td]Grenade reflection horizontal speed[/td][/tr]
+[tr][td]GRENADE_REFLECT_VERTICAL_SPEED[/td][td]float[/td][td]3[/td][td]Grenade reflection vertical speed[/td][/tr]
+[/table]
 [h3]Group: Misc[/h3]
 [table]
     [tr]
@@ -72,6 +85,8 @@ All config entries are listed as follows:
 [tr][td]ACTIVE_EXPLOSION_DAMAGE_FACTOR[/td][td]float[/td][td]1[/td][td]Active reflection explosion extra damage multiplier (based on reflected bullet damage)[/td][/tr]
 [tr][td]ACTIVE_EXPLOSION_RANGE[/td][td]float[/td][td]1[/td][td]Active reflection explosion range[/td][/tr]
 [tr][td]ENABLES_FLYING_BLADE[/td][td]bool[/td][td]false[/td][td]Enables flying blade (?)[/td][/tr]
+[tr][td]FLYING_BLADE_STRENGTH[/td][td]float[/td][td]0.5f[/td][td]Flying blade damage multiplier[/td][/tr]
+[tr][td]FLYING_BLADE_VAMPIRISM[/td][td]float[/td][td]0.5f[/td][td]Damage HP absorbing ratio for flying blades[/td][/tr]
 [/table]
 [h3]Group: Sound[/h3]
 [table]

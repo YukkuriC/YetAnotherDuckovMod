@@ -1,4 +1,4 @@
-﻿[h1]Projectile Reflector 刀反子弹 v1.2[/h1]
+﻿[h1]Projectile Reflector 刀反子弹 v1.3[/h1]
 
 [url=https://github.com/YukkuriC/YetAnotherDuckovMod/tree/main/ProjectileReflector] Github源代码 [/url]
 
@@ -11,7 +11,7 @@
 配置文件位于[u]<存档目录>/YukkuriC.ProjectileReflector.json[/u]（Windows 系统下通常为[u]C:\Users\<用户名>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json[/u]）；若安装了 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339]ModConfig[/url] 或 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3595729494]ModSetting[/url] 也可直接在游戏内更改。
 所有配置项内容如下：
 
-[h3]分组：Version 1.2[/h3]
+[h3]分组：Version 1.3[/h3]
 [table]
     [tr]
         [th]配置名[/th]
@@ -19,7 +19,7 @@
         [th]默认值[/th]
         [th]描述[/th]
     [/tr]
-[tr][td]ModVersion_1_2[/td][td]bool[/td][td]true[/td][td]（仅展示）Mod版本：1.2[/td][/tr]
+[tr][td]ModVersion_1_3[/td][td]bool[/td][td]true[/td][td]（仅展示）Mod版本：1.3[/td][/tr]
 [/table]
 [h3]分组：Functions[/h3]
 [table]
@@ -58,6 +58,19 @@
 [tr][td]DISTANCE_MULT_ACTIVE[/td][td]float[/td][td]5[/td][td]主动反射后子弹射程乘数[/td][/tr]
 [tr][td]DISTANCE_MULT_PASSIVE[/td][td]float[/td][td]1[/td][td]被动反射后子弹射程乘数[/td][/tr]
 [/table]
+[h3]分组：Grenade Reflection[/h3]
+[table]
+    [tr]
+        [th]配置名[/th]
+        [th]类型[/th]
+        [th]默认值[/th]
+        [th]描述[/th]
+    [/tr]
+[tr][td]ENABLE_GRENADE_REFLECT[/td][td]bool[/td][td]true[/td][td]启用手雷反射[/td][/tr]
+[tr][td]AIM_GRENADE_OWNER[/td][td]bool[/td][td]true[/td][td]反射方向瞄准投掷者（如果非自己）[/td][/tr]
+[tr][td]GRENADE_REFLECT_HORIZONTAL_SPEED[/td][td]float[/td][td]10[/td][td]手雷反射横向速度[/td][/tr]
+[tr][td]GRENADE_REFLECT_VERTICAL_SPEED[/td][td]float[/td][td]3[/td][td]手雷反射纵向速度[/td][/tr]
+[/table]
 [h3]分组：Misc[/h3]
 [table]
     [tr]
@@ -72,6 +85,8 @@
 [tr][td]ACTIVE_EXPLOSION_DAMAGE_FACTOR[/td][td]float[/td][td]1[/td][td]主动反射爆炸额外伤害乘数（基于反射后子弹伤害）[/td][/tr]
 [tr][td]ACTIVE_EXPLOSION_RANGE[/td][td]float[/td][td]1[/td][td]主动反射爆炸范围[/td][/tr]
 [tr][td]ENABLES_FLYING_BLADE[/td][td]bool[/td][td]false[/td][td]启用飞刃（？）[/td][/tr]
+[tr][td]FLYING_BLADE_STRENGTH[/td][td]float[/td][td]0.5f[/td][td]飞刃伤害乘数[/td][/tr]
+[tr][td]FLYING_BLADE_VAMPIRISM[/td][td]float[/td][td]0.5f[/td][td]飞刃造成伤害吸血比例[/td][/tr]
 [/table]
 [h3]分组：Sound[/h3]
 [table]
