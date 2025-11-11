@@ -40,21 +40,9 @@ namespace ProjectileReflector
                 (PASSIVE_REFLECT_BY_ADS && !player.IsInAdsInput)
                 || (!PASSIVE_REFLECT_WHEN_RUNNING && player.Running)
                 || (!PASSIVE_REFLECT_WHEN_DASHING && player.Dashing)
-            ) return false;
+               ) return false;
             staminaCost = self.context.damage * PASSIVE_STAMINA_COST;
             return player.CurrentStamina >= staminaCost;
-        }
-
-        static bool InReflectRange(Projectile self, CharacterMainControl player, Status curStatus)
-        {
-            var delta = self.transform.position - player.transform.position;
-            delta.y = 0;
-            var range = curStatus == Status.ACTIVE ? REFLECT_RANGE : REFLECT_RANGE_PASSIVE;
-            return delta.sqrMagnitude < range * range
-                && (
-                    IGNORES_ANGLE
-                    || Vector3.Angle(delta, player.CurrentAimDirection) <= 90
-                );
         }
         #endregion
 
@@ -67,7 +55,7 @@ namespace ProjectileReflector
             var curStatus = PlayerStatus;
 
             // check melee range & angle
-            if (!InReflectRange(self, player, curStatus)) return;
+            if (!InReflectRange(self.transform, player, curStatus)) return;
 
             // do reflect
             DoReflect(player, self, ref ___velocity, ref ___direction, curStatus);

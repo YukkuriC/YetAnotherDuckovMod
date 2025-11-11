@@ -42,13 +42,20 @@ namespace ProjectileReflector
                 LevelManager.enemySpawnCountFactor = 100;
             }
         }
+        void LateUpdate()
+        {
+            ReflectController.DoReflectGrenade = false;
+        }
     }
 
     public partial class ModConfigEntry
     {
         public const string CONFIG_FILE_NAME = ModBehaviour.HARMONY_ID + ".json";
         public static readonly string CONFIG_FILE_PATH = Path.Combine(SavesSystem.GetFullPathToSavesFolder(), CONFIG_FILE_NAME);
-        public static ModConfigEntry INSTANCE { get => instance; }
+        public static ModConfigEntry INSTANCE
+        {
+            get => instance;
+        }
 
         public static void Init()
         {
