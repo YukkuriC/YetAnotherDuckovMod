@@ -10,7 +10,13 @@ namespace NestedBag
     {
         const int BAG_ID = 1255;
         const int EXTEND_SLOTS_COUNT = 6;
-        static readonly string[] TAGS_ADD = new string[] { "TecEquip", "Totem", "Backpack", "Gem" };
+        static readonly string[] TAGS_ADD = new string[] {
+            "TecEquip",
+            "Totem",
+            "Backpack",
+            "Gem",
+            "ComputerParts_GPU",
+        };
 
         void OnEnable()
         {

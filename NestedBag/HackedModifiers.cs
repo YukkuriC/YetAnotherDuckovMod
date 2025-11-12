@@ -42,7 +42,11 @@ namespace NestedBag
             Clear();
             foreach (var stat in stats)
                 foreach (var modifier in stat.Modifiers)
-                    Add(new ModifierDescription(ModifierTarget.Parent, stat.Key, modifier.Type, modifier.Value, modifier.overrideOrder, modifier.overrideOrderValue));
+                {
+                    var modDesc = new ModifierDescription(ModifierTarget.Parent, stat.Key, modifier.Type, modifier.Value, modifier.overrideOrder, modifier.overrideOrderValue);
+                    modDesc.display = true;
+                    Add(modDesc);
+                }
 
             // apply all
             foreach (ModifierDescription descrip in list) descrip.ReapplyModifier(this);
