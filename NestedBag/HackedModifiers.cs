@@ -64,7 +64,6 @@ namespace NestedBag
                     var modDesc = new ModifierDescription(ModifierTarget.Parent, stat.Key, modifier.Type, modifier.Value, modifier.overrideOrder, modifier.overrideOrderValue);
                     modDesc.display = true;
                     yield return modDesc;
-                    Add(modDesc);
                 }
         }
         IEnumerable<ModifierDescription> GetAllCharacterModifiersFromSlots()
