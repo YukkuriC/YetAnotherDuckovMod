@@ -28,6 +28,7 @@
     <Publicize Include="ItemStatsSystem:ItemStatsSystem.ItemComponent.initialized" />
     <Publicize Include="ItemStatsSystem:ItemStatsSystem.ItemComponent.master" />
     <Publicize Include="ItemStatsSystem:ItemStatsSystem.ModifierDescription.display" />
+    <Publicize Include="ItemStatsSystem:ItemStatsSystem.ModifierDescription.target" />
     <Publicize Include="ItemStatsSystem:ItemStatsSystem.ModifierDescriptionCollection.list" />
     <Publicize Include="ItemStatsSystem:ItemStatsSystem.StatCollection.list" />
     <Publicize Include="ItemStatsSystem" MemberPattern="^ItemStatsSystem.Stats.Modifier.overrideOrder.*" />
