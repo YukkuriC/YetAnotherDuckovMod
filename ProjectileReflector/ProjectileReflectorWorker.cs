@@ -86,7 +86,7 @@ namespace ProjectileReflector
             if (curStatus == Status.ACTIVE) ModAudio.PlaySoundActive();
             else ModAudio.PlaySoundPassive();
 
-            var oldContext = self.context;
+            ref var oldContext = ref self.context;
             self.damagedObjects.Clear();
             Vector3 delta;
             if (aimBack) delta = oldContext.fromCharacter.transform.position - self.transform.position;
@@ -119,8 +119,6 @@ namespace ProjectileReflector
                 oldContext.distance *= DISTANCE_MULT_PASSIVE;
                 oldContext.damage *= DAMAGE_MULT_PASSIVE;
             }
-
-            self.context = oldContext;
         }
     }
 }

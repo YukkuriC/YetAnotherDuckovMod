@@ -23,7 +23,8 @@ namespace ProjectileReflector
 
             // decide horizontal dir
             Vector3 velocity;
-            var thrower = self.damageInfo.fromCharacter;
+            ref var dmgInfo = ref self.damageInfo;
+            var thrower = dmgInfo.fromCharacter;
             if (AIM_GRENADE_OWNER && thrower != null && thrower != player) velocity = thrower.transform.position - self.transform.position;
             else velocity = self.transform.position - player.transform.position;
             velocity.y = 0;
@@ -33,6 +34,7 @@ namespace ProjectileReflector
             velocity *= GRENADE_REFLECT_HORIZONTAL_SPEED;
             velocity.y = GRENADE_REFLECT_VERTICAL_SPEED;
             ___rb.velocity = velocity;
+            dmgInfo.fromCharacter = player;
         }
     }
 }
