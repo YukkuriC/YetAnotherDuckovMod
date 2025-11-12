@@ -1,6 +1,5 @@
 ﻿using ItemStatsSystem;
 using ItemStatsSystem.Items;
-using ItemStatsSystem.Stats;
 using System.Collections.Generic;
 
 namespace NestedBag
@@ -44,14 +43,14 @@ namespace NestedBag
 
             // refresh all modifiers
             Clear();
-            foreach (var modDesc in GrabModDescFromStats())
+            foreach (var modDesc in GrabModDescFromStats().MergedByStat())
                 Add(modDesc);
 
             // apply all
             foreach (ModifierDescription descrip in list) descrip.ReapplyModifier(this);
 
             // collect character modifier for display
-            foreach (var modDesc in GetAllCharacterModifiersFromSlots())
+            foreach (var modDesc in GetAllCharacterModifiersFromSlots().MergedByStat())
                 Add(modDesc);
         }
 
