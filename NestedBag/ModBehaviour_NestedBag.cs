@@ -1,6 +1,7 @@
 ﻿using Duckov.Utilities;
 using ItemStatsSystem;
 using ItemStatsSystem.Items;
+using SodaCraft.Localizations;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace NestedBag
             "Gem",
             "ComputerParts_GPU",
         };
+        static Slot oldSlot;
 
         void OnEnable()
         {
@@ -26,7 +28,11 @@ namespace NestedBag
             // slots: create new slots
             var slots = bag.slots;
             if (slots == null) slots = bag.slots = go.AddComponent<SlotCollection>();
-            else slots.Clear();
+            else
+            {
+                if (slots.Count > 0) oldSlot = slots[0];
+                slots.Clear();
+            }
             for (int i = 0; i < EXTEND_SLOTS_COUNT; i++)
             {
                 slots.Add(new Slot($"bag_{i}"));
@@ -52,10 +58,46 @@ namespace NestedBag
                 tag.show = true;
                 bag.Tags.Add(tag);
             }
+
+            // lang
+            LocalizationManager.OnSetLanguage += FillLang;
+            FillLang(LocalizationManager.CurrentLanguage);
         }
         void OnDisable()
         {
-            // give up
+            var bag = ItemAssetsCollection.GetPrefab(BAG_ID);
+            var go = bag.gameObject;
+
+            // simple recovers
+            bag.slots.Clear();
+            if (oldSlot != null) bag.slots.Add(oldSlot);
+            Destroy(bag.stats);
+            Destroy(bag.modifiers);
+            bag.stats = null;
+            bag.modifiers = null;
+            foreach (var tagKey in TAGS_ADD)
+            {
+                var tag = ScriptableObject.CreateInstance<Tag>();
+                tag.name = tagKey;
+                bag.Tags.Remove(tag);
+            }
+
+            // lang
+            LocalizationManager.OnSetLanguage -= FillLang;
+        }
+
+        void FillLang(SystemLanguage lang)
+        {
+            switch (lang)
+            {
+                case SystemLanguage.ChineseSimplified:
+                case SystemLanguage.ChineseTraditional:
+                    LocalizationManager.SetOverrideText("Stat_Performance", "算力");
+                    break;
+                default:
+                    LocalizationManager.SetOverrideText("Stat_Performance", "Performance");
+                    break;
+            }
         }
     }
 }
