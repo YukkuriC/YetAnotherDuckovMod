@@ -44,7 +44,8 @@ namespace NestedBag
                     var dict = groupByType.GetValueOrDefault(modDesc.key, NewDict);
                     if (dict.ContainsKey(modDesc.type))
                     {
-                        dict[modDesc.type].value += modDesc.value;
+                        if (modDesc.type == ModifierType.PercentageMultiply) dict[modDesc.type].value = (1 + dict[modDesc.type].value) * (1 + modDesc.value) - 1;
+                        else dict[modDesc.type].value += modDesc.value;
                     }
                     else
                     {
