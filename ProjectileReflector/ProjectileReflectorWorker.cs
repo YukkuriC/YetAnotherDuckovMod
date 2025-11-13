@@ -63,8 +63,8 @@ namespace ProjectileReflector
             else if (staminaCost < 0)
             {
                 // hack increase stamina
-                var staminaField = Traverse.Create(player).Field<float>("currentStamina");
-                staminaField.Value = Mathf.Min(player.MaxStamina, staminaField.Value - staminaCost);
+                // use publicizer
+                player.currentStamina = Mathf.Min(player.currentStamina - staminaCost, player.MaxStamina);
             }
 
             // play melee fx

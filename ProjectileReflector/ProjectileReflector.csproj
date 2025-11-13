@@ -25,11 +25,18 @@
     <Reference Include="$(DuckovPath)\Duckov_Data\Managed\UniTask*">
       <Private>False</Private>
     </Reference>
+    <PackageReference Include="Krafs.Publicizer" Version="2.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
     <Reference Include="0Harmony">
       <HintPath>..\Harmony\0Harmony.dll</HintPath>
       <Private>True</Private>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Publicize Include="TeamSoda.Duckov.Core:CharacterMainControl.currentStamina" />
   </ItemGroup>
   <ItemGroup>
     <None Update="ModConfigsGen.tt">
