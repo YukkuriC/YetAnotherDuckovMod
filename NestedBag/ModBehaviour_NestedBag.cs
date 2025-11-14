@@ -17,6 +17,7 @@ namespace NestedBag
             "Backpack",
             "Gem",
             "ComputerParts_GPU",
+            "DontDropOnDeadInSlot",
         };
         static Slot oldSlot;
 
@@ -56,6 +57,7 @@ namespace NestedBag
                 var tag = ScriptableObject.CreateInstance<Tag>();
                 tag.name = tagKey;
                 tag.show = true;
+                tag.color = new Color(0.9f, 0.75f, 0.5f);
                 bag.Tags.Add(tag);
             }
 

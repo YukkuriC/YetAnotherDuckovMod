@@ -40,8 +40,9 @@
     <Publicize Include="ItemStatsSystem:ItemStatsSystem.ModifierDescriptionCollection.list" />
     <Publicize Include="ItemStatsSystem:ItemStatsSystem.StatCollection.list" />
     <Publicize Include="ItemStatsSystem" MemberPattern="^ItemStatsSystem.Stats.Modifier.overrideOrder.*" />
+    <Publicize Include="TeamSoda.Duckov.Utilities:Duckov.Utilities.Tag.color" />
     <Publicize Include="TeamSoda.Duckov.Utilities:Duckov.Utilities.Tag.show" />
-
+    <Publicize Include="TeamSoda.Duckov.Utilities:Duckov.Utilities.Tag.showDescription" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="call copier.bat" />
