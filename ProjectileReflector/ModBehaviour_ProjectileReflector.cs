@@ -12,6 +12,8 @@ namespace ProjectileReflector
     {
         public const string HARMONY_ID = "YukkuriC.ProjectileReflector";
         public static readonly string ROOT_PATH = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        private static Assembly manualLoadCommonLib = Assembly.LoadFrom(Path.Combine(ROOT_PATH, "CommonLib.dll"));
+        private static Assembly manualLoadHarmony = Assembly.LoadFrom(Path.Combine(ROOT_PATH, "0Harmony.dll"));
 
         Harmony? patcher;
         void OnEnable()
