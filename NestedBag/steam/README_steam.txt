@@ -1,9 +1,9 @@
 [h1]Nested Bag 套娃尿素袋[/h1]
 
 什么叫[b]顶级奢侈品[/b]啊（战术后仰
+[url=https://github.com/YukkuriC/YetAnotherDuckovMod/tree/main/NestedBag] Github源代码 [/url]
 
 [h2]功能[/h2]
-
 [list]
 [*]尿素袋增加槽位至 6 个
 [*]解除槽位所有限制（包括可互相套娃）
@@ -13,7 +13,6 @@
 [/list]
 
 [h2]注意事项[/h2]
-
 [list]
 [*]开启、关闭或卸载 mod 前请务必在游戏内清空内容物，以防物品丢失
 [*]关闭 mod 后需重启游戏以生效
