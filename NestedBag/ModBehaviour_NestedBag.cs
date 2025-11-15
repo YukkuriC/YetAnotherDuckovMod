@@ -12,12 +12,34 @@ namespace NestedBag
         const int BAG_ID = 1255;
         const int EXTEND_SLOTS_COUNT = 6;
         static readonly string[] TAGS_ADD = new string[] {
+            "Muzzle",
             "TecEquip",
             "Totem",
             "Backpack",
             "Gem",
             "ComputerParts_GPU",
             "DontDropOnDeadInSlot",
+        };
+        static readonly string[] TAGS_ADD_HIDE = new string[] {
+            // for muzzles
+            "GunType_PST",
+            "GunType_AR",
+            "GunType_BR",
+            "GunType_SNP",
+            "GunType_SHT",
+            "GunType_MAG",
+            "GunType_ARR",
+            "GunType_PWS",
+        };
+        static readonly HashSet<string> TAGS_WITH_DESCRIP = new HashSet<string>()
+        {
+            "ComputerParts_GPU",
+            "DontDropOnDeadInSlot",
+        };
+        static readonly Dictionary<string, Color> TAG_COLORS = new Dictionary<string, Color>()
+        {
+            ["Gem"] = new Color(0.127f, 0.527f, 1),
+            ["ComputerParts_GPU"] = new Color(1, 0.597f, 0.42f),
         };
         static Slot oldSlot;
 
@@ -54,12 +76,13 @@ namespace NestedBag
             // tags
             foreach (var tagKey in TAGS_ADD)
             {
-                var tag = ScriptableObject.CreateInstance<Tag>();
-                tag.name = tagKey;
+                var tag = CreateTagWithKey(tagKey);
                 tag.show = true;
-                tag.color = new Color(0.9f, 0.75f, 0.5f);
+                tag.color = TAG_COLORS.GetValueOrDefault(tagKey, Color.black);
+                tag.showDescription = TAGS_WITH_DESCRIP.Contains(tagKey);
                 bag.Tags.Add(tag);
             }
+            foreach (var tagKey in TAGS_ADD_HIDE) bag.Tags.Add(CreateTagWithKey(tagKey));
 
             // lang
             LocalizationManager.OnSetLanguage += FillLang;
@@ -77,12 +100,8 @@ namespace NestedBag
             Destroy(bag.modifiers);
             bag.stats = null;
             bag.modifiers = null;
-            foreach (var tagKey in TAGS_ADD)
-            {
-                var tag = ScriptableObject.CreateInstance<Tag>();
-                tag.name = tagKey;
-                bag.Tags.Remove(tag);
-            }
+            foreach (var tagKey in TAGS_ADD) bag.Tags.Remove(CreateTagWithKey(tagKey));
+            foreach (var tagKey in TAGS_ADD_HIDE) bag.Tags.Remove(CreateTagWithKey(tagKey));
 
             // lang
             LocalizationManager.OnSetLanguage -= FillLang;
@@ -100,6 +119,12 @@ namespace NestedBag
                     LocalizationManager.SetOverrideText("Stat_Performance", "Performance");
                     break;
             }
+        }
+        Tag CreateTagWithKey(string tagKey)
+        {
+            var tag = ScriptableObject.CreateInstance<Tag>();
+            tag.name = tagKey;
+            return tag;
         }
     }
 }
