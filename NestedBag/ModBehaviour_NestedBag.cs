@@ -87,6 +87,10 @@ namespace NestedBag
             // lang
             LocalizationManager.OnSetLanguage += FillLang;
             FillLang(LocalizationManager.CurrentLanguage);
+
+            // 顺手帮官方修个bug，不用谢:3
+            var totemHunger = ItemAssetsCollection.GetPrefab(371);
+            totemHunger.modifiers.list[1].target = ModifierTarget.Character;
         }
         void OnDisable()
         {
