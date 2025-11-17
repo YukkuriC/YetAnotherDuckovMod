@@ -1,11 +1,22 @@
 ﻿using ItemStatsSystem;
 using ItemStatsSystem.Items;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NestedBag
 {
     public class HackedModifiers : ModifierDescriptionCollection
     {
+        static Dictionary<int, DisplayQuality> SLOT_COLOR_MAP = new Dictionary<int, DisplayQuality>()
+        {
+            [1] = DisplayQuality.Green,
+            [2] = DisplayQuality.Green,
+            [3] = DisplayQuality.Blue,
+            [4] = DisplayQuality.Blue,
+            [5] = DisplayQuality.Purple,
+            [6] = DisplayQuality.Orange,
+        };
+
         StatCollection stats;
         SlotCollection slots;
 
@@ -52,6 +63,10 @@ namespace NestedBag
             // collect character modifier for display
             foreach (var modDesc in GetAllCharacterModifiersFromSlots().MergedByStat())
                 Add(modDesc);
+
+            // update display quality btw
+            var count = (from s in master.slots.list where s.Content != null select s).Count();
+            master.DisplayQuality = SLOT_COLOR_MAP.GetValueOrDefault(count, DisplayQuality.None);
         }
 
         // helpers
