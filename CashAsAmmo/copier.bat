@@ -1,0 +1,1 @@
+move /Y "bin\Release\netstandard2.1\*.dll" "..\ReleaseMod\CashAsAmmo"

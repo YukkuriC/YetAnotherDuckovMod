@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NestedBag", "NestedBag\Nest
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YukkuriC.UITweaks", "UITweaks\YukkuriC.UITweaks.csproj", "{15285346-45F2-4C5C-93A6-AF7EDEFA5E9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLibHarmony", "CommonLibHarmony\CommonLibHarmony.csproj", "{4856A4A8-D602-403D-B3D5-5D8890C33AA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonLibHarmony", "CommonLibHarmony\CommonLibHarmony.csproj", "{4856A4A8-D602-403D-B3D5-5D8890C33AA7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashAsAmmo", "CashAsAmmo\CashAsAmmo.csproj", "{809ACD02-A156-49F3-9AF3-4F602B488BC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,8 @@ Global
 		{15285346-45F2-4C5C-93A6-AF7EDEFA5E9E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4856A4A8-D602-403D-B3D5-5D8890C33AA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4856A4A8-D602-403D-B3D5-5D8890C33AA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{809ACD02-A156-49F3-9AF3-4F602B488BC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{809ACD02-A156-49F3-9AF3-4F602B488BC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
