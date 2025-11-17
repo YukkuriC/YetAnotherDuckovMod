@@ -12,8 +12,7 @@ namespace NestedBag
         const int BAG_ID = 1255;
         const int EXTEND_SLOTS_COUNT = 6;
         static readonly string[] TAGS_ADD = new string[] {
-            "Muzzle",
-            "TecEquip",
+            "Accessory",
             "Totem",
             "Backpack",
             "Gem",
@@ -21,15 +20,20 @@ namespace NestedBag
             "DontDropOnDeadInSlot",
         };
         static readonly string[] TAGS_ADD_HIDE = new string[] {
+            // all gun parts
+            "Muzzle",
+            "Grip",
+            "Stock",
+            "Scope",
+            "TecEquip",
+            "Magazine",
             // for muzzles
             "GunType_PST",
             "GunType_AR",
-            "GunType_BR",
+            "GunType_SMG",
             "GunType_SNP",
             "GunType_SHT",
             "GunType_MAG",
-            "GunType_ARR",
-            "GunType_PWS",
         };
         static readonly HashSet<string> TAGS_WITH_DESCRIP = new HashSet<string>()
         {
