@@ -34,6 +34,12 @@ namespace CashAsAmmo
 
             // constants
             foreach (var entry in BULLET_CONSTANTS) cash.Constants.Add(entry);
+
+            // debug code
+            if (!SteamManager.Initialized)
+            {
+                LevelManager.enemySpawnCountFactor = 100;
+            }
         }
         void OnDisable()
         {

@@ -35,13 +35,8 @@ namespace ProjectileReflector
         }
         void Awake()
         {
-            // seems it auto loads DLLs next to it
             ModAudio.InitAudio();
             ModConfigEntry.Init();
-            if (!SteamManager.Initialized)
-            {
-                LevelManager.enemySpawnCountFactor = 100;
-            }
         }
         void LateUpdate()
         {
