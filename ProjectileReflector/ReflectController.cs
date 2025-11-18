@@ -9,14 +9,14 @@ namespace ProjectileReflector
     [HarmonyPatch]
     public static class ReflectController
     {
-        const float MELEE_RANGE_BASE = 1.5f;
+        public const float MELEE_RANGE_BASE = 1.5f;
 
         #region checks
-        public static bool InReflectRange(Transform self, CharacterMainControl player, Status curStatus)
+        public static bool InReflectRange(Transform self, CharacterMainControl player, Status curStatus, out float range)
         {
             var delta = self.position - player.transform.position;
             delta.y = 0;
-            var range = curStatus == Status.ACTIVE ? REFLECT_RANGE : REFLECT_RANGE_PASSIVE;
+            range = curStatus == Status.ACTIVE ? REFLECT_RANGE : REFLECT_RANGE_PASSIVE;
             if (AUTO_SCALE_MELEE_RANGE)
             {
                 var melee = player.GetMeleeWeapon();

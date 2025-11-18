@@ -55,7 +55,7 @@ namespace ProjectileReflector
             var curStatus = PlayerStatus;
 
             // check melee range & angle
-            if (!InReflectRange(self.transform, player, curStatus)) return;
+            if (!InReflectRange(self.transform, player, curStatus, out var range)) return;
 
             // do reflect
             DoReflect(player, self, ref ___velocity, ref ___direction, curStatus);
@@ -70,8 +70,7 @@ namespace ProjectileReflector
             // play melee fx
             var isActive = curStatus == Status.ACTIVE;
             if (!isActive) ExtendStatus(Status.PASSIVE, TIME_PASSIVE_EXTEND);
-            var fxSize = curStatus == Status.ACTIVE ? REFLECT_RANGE : REFLECT_RANGE_PASSIVE;
-            FxLib.CreateSlash(player.GetMeleeWeapon(), player, fxSize);
+            FxLib.CreateSlash(player.GetMeleeWeapon(), player, range);
             if (curStatus == Status.ACTIVE) ExtendStatus(Status.ACTIVE, TIME_ACTIVE_EXTEND);
             else ExtendStatus(Status.PASSIVE, TIME_PASSIVE_EXTEND);
         }

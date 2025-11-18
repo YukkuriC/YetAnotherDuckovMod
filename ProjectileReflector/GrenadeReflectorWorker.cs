@@ -18,7 +18,7 @@ namespace ProjectileReflector
             if (
                 player == null
                 || !(player.CurrentHoldItemAgent is ItemAgent_MeleeWeapon melee)
-                || !InReflectRange(self.transform, player, Status.ACTIVE)
+                || !InReflectRange(self.transform, player, Status.ACTIVE, out var _)
             ) return;
 
             // decide horizontal dir
