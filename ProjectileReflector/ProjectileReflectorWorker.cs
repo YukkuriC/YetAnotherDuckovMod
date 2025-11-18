@@ -68,10 +68,12 @@ namespace ProjectileReflector
             }
 
             // play melee fx
-            var isActive = curStatus == Status.ACTIVE;
-            if (!isActive) ExtendStatus(Status.PASSIVE, TIME_PASSIVE_EXTEND);
             FxLib.CreateSlash(player.GetMeleeWeapon(), player, range);
-            if (curStatus == Status.ACTIVE) ExtendStatus(Status.ACTIVE, TIME_ACTIVE_EXTEND);
+            if (curStatus == Status.ACTIVE)
+            {
+                ExtendStatus(Status.ACTIVE, TIME_ACTIVE_EXTEND);
+                player.attackAction.lastAttackTime = -114514; // 二番目の记忆
+            }
             else ExtendStatus(Status.PASSIVE, TIME_PASSIVE_EXTEND);
         }
 
