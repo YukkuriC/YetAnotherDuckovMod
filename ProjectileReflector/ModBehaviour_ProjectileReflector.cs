@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using Saves;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace ProjectileReflector
             patcher.PatchAll();
             Debug.Log("[ProjectileReflector] Harmony patched");
             Compat.ModConfigMenu.Init();
+            SavesSystem.OnSetFile += ModConfigEntry.ExtractConfig;
         }
         protected override void OnAfterSetup()
         {

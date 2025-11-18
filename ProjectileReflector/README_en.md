@@ -1,4 +1,4 @@
-﻿# Projectile Reflector 刀反子弹 v1.3
+﻿# Projectile Reflector 刀反子弹 v1.4
 
 [[中文](./README.md)] [English]  
 [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3597305916)
@@ -12,10 +12,10 @@ Passive reflection triggers when the player is hit while holding the weapon and 
 The configuration file is located at `<SaveDirectory>/YukkuriC.ProjectileReflector.json` (typically `C:\Users\<Username>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json` for Windows OS); if installed with [ModConfig](https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339) or [ModSetting](https://steamcommunity.com/sharedfiles/filedetails/?id=3595729494) then the config can also be edited in game.  
 All config entries are listed as follows:
 
-### Group：Version 1.3
+### Group：Version 1.4
 Configuration Name|Type|Default Value|Description
 --|--|--|--
-ModVersion_1_3|bool|true|（仅展示）Mod版本：1.3
+ModVersion_1_4|bool|true|（仅展示）Mod版本：1.4
 ### Group：Functions
 Configuration Name|Type|Default Value|Description
 --|--|--|--

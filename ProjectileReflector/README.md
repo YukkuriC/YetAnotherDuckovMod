@@ -1,4 +1,4 @@
-﻿# Projectile Reflector 刀反子弹 v1.3
+﻿# Projectile Reflector 刀反子弹 v1.4
 
 [中文] [[English](./README_en.md)]  
 [Steam 创意工坊](https://steamcommunity.com/sharedfiles/filedetails/?id=3597305916)
@@ -12,10 +12,10 @@
 配置文件位于`<存档目录>/YukkuriC.ProjectileReflector.json`（Windows 系统下通常为`C:\Users\<用户名>\AppData\LocalLow\TeamSoda\Duckov\Saves\YukkuriC.ProjectileReflector.json`）；若安装了 [ModConfig](https://steamcommunity.com/sharedfiles/filedetails/?id=3590674339) 或 [ModSetting](https://steamcommunity.com/sharedfiles/filedetails/?id=3595729494) 也可直接在游戏内更改。  
 所有配置项内容如下：
 
-### 分组：Version 1.3
+### 分组：Version 1.4
 配置名|类型|默认值|描述
 --|--|--|--
-ModVersion_1_3|bool|true|（仅展示）Mod版本：1.3
+ModVersion_1_4|bool|true|（仅展示）Mod版本：1.4
 ### 分组：Functions
 配置名|类型|默认值|描述
 --|--|--|--

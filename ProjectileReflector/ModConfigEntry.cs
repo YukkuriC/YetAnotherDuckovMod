@@ -6,6 +6,11 @@ using UnityEngine;
 
 namespace ProjectileReflector
 {
+    // init -> ExtractConfig / TryLoadConfig
+    // TryLoadConfig -> SaveConfig -> AttachConfig
+    // inner changes -> SaveConfig -> AttachConfig
+    // outer changes -> configWatcher -> TryLoadConfig
+    // change save file -> ExtractConfig -> SaveConfig(0) -> outer changes
     public partial class ModConfigEntry
     {
         public const string CONFIG_FILE_NAME = ModBehaviour.HARMONY_ID + ".json";
@@ -18,7 +23,8 @@ namespace ProjectileReflector
         public static void Init()
         {
             InitWatcher();
-            TryLoadConfig();
+            if (AttachedConfigExists()) ExtractConfig();
+            else TryLoadConfig();
         }
 
         static FileSystemWatcher configWatcher;
@@ -67,13 +73,14 @@ namespace ProjectileReflector
             // always save for updated entries
             SaveConfig();
         }
-        public static void SaveConfig()
+        public static void SaveConfig(bool skipChange = true, string output = null)
         {
-            skipNextChange = true;
+            skipNextChange = skipChange;
             try
             {
-                var output = JsonUtility.ToJson(instance, true);
+                if (output == null) output = JsonUtility.ToJson(instance, true);
                 File.WriteAllText(CONFIG_FILE_PATH, output, System.Text.Encoding.UTF8);
+                AttachConfig(output);
             }
             catch (Exception e)
             {
@@ -81,6 +88,30 @@ namespace ProjectileReflector
                 Debug.LogException(e);
                 skipNextChange = false;
             }
+        }
+
+        // bind to save file
+        public static bool AttachedConfigExists() => SavesSystem.KeyExisits(ModBehaviour.HARMONY_ID);
+        public static void ExtractConfig()
+        {
+            try
+            {
+                if (!AttachedConfigExists()) return;
+                Debug.Log("[ProjectileReflector] load from savefile");
+                var content = SavesSystem.Load<string>(ModBehaviour.HARMONY_ID);
+                SaveConfig(false, content);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("[ProjectileReflector] error when extracting config:");
+                Debug.LogException(e);
+                TryLoadConfig();
+            }
+        }
+        public static void AttachConfig(string data)
+        {
+            SavesSystem.Save(ModBehaviour.HARMONY_ID, data);
+            SavesSystem.SaveFile();
         }
     }
 }
