@@ -1,5 +1,6 @@
 import os, subprocess
 
+os.chdir(os.path.dirname(__file__))
 mod_folder = r'C:\SteamLibrary\steamapps\common\Escape from Duckov\Duckov_Data\Mods'
 targets = list(filter(lambda f: os.path.isdir(f), os.listdir('.')))
 
