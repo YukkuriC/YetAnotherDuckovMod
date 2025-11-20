@@ -54,7 +54,7 @@ namespace NestedBag
 
             // slots: create new slots
             var slots = bag.slots;
-            if (slots == null) slots = bag.slots = go.AddComponent<SlotCollection>();
+            if (slots == null) slots = bag.slots = go.AddComponent<SlotCollection>().SetMaster(bag);
             else
             {
                 if (slots.Count > 0) oldSlot = slots[0];
@@ -69,7 +69,7 @@ namespace NestedBag
             var stats = bag.stats;
             if (stats == null)
             {
-                stats = bag.stats = go.AddComponent<StatCollection>();
+                stats = bag.stats = go.AddComponent<StatCollection>().SetMaster(bag);
                 stats.list = new List<Stat>();
             }
 

@@ -68,5 +68,11 @@ namespace NestedBag
                 foreach (var sub in list) yield return sub;
             }
         }
+
+        public static T SetMaster<T>(this T inst, Item master) where T : ItemComponent
+        {
+            inst.master = master;
+            return inst;
+        }
     }
 }
