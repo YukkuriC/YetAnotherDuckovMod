@@ -49,6 +49,7 @@ namespace ProjectileReflector
         [HarmonyPrefix, HarmonyPatch(typeof(Projectile), "UpdateMoveAndCheck")]
         public static void UpdateMove(Projectile __instance, ref Vector3 ___velocity, ref Vector3 ___direction)
         {
+            if(!LevelManager.LevelInited) return;
             var self = __instance;
             var player = LevelManager.Instance.MainCharacter;
             if (!ShouldCheckReflect(self, player, out float staminaCost)) return;

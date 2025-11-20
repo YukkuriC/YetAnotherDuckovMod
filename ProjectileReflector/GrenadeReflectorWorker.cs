@@ -12,6 +12,7 @@ namespace ProjectileReflector
         [HarmonyPrefix, HarmonyPatch(typeof(Grenade), "Update")]
         static void DoGrenadeReflect(Grenade __instance, Rigidbody ___rb)
         {
+            if (!LevelManager.LevelInited) return;
             if (!ReflectController.DoReflectGrenade) return;
             var self = __instance;
             var player = LevelManager.Instance.MainCharacter;
