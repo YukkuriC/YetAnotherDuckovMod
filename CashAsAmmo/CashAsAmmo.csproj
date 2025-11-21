@@ -28,6 +28,7 @@
     <Publicize Include="TeamSoda.Duckov.Utilities:Duckov.Utilities.Tag.color" />
     <Publicize Include="TeamSoda.Duckov.Utilities:Duckov.Utilities.Tag.show" />
     <Publicize Include="TeamSoda.Duckov.Utilities:Duckov.Utilities.Tag.showDescription" />
+    <Publicize Include="ItemStatsSystem:ItemStatsSystem.Item.usageUtilities" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="call copier.bat" />
