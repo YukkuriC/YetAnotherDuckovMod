@@ -2,6 +2,7 @@
 using Duckov.Utilities;
 using ItemStatsSystem;
 using UnityEngine;
+using YukkuriC.Misc;
 
 namespace YukkuriC
 {
@@ -24,7 +25,7 @@ namespace YukkuriC
 
         /// <summary>
         /// required context params:
-        /// team, speed, damage, fromCharacter <br/>
+        /// damage, fromCharacter <br/>
         /// secondary params:
         /// critDamageFactor, explosionRange, explosionDamage, fromWeaponItemID, ignoreHalfObsticle
         /// </summary>
@@ -45,6 +46,7 @@ namespace YukkuriC
             var projInst = LevelManager.Instance.BulletPool.GetABullet(prefab ?? GameplayDataSettings.Prefabs.DefaultBullet);
             projInst.transform.position = _muzzlePoint;
             projInst.transform.rotation = Quaternion.LookRotation(_shootDirection, Vector3.up);
+            if (projectileContext.fromCharacter) projectileContext.team = projectileContext.fromCharacter.Team;
             projectileContext.firstFrameCheck = true;
             projectileContext.firstFrameCheckStartPoint = firstFrameCheckStartPoint ?? _muzzlePoint;
             projectileContext.direction = _shootDirection;
@@ -77,6 +79,33 @@ namespace YukkuriC
             }
             projInst.Init(projectileContext);
             return projInst;
+        }
+        public static class Bullets
+        {
+            public static readonly Projectile BulletDelegate;
+            public static readonly Projectile BulletStorm = GetOriginalBulletPrefab(902);
+            public static readonly Projectile BulletRed = GetOriginalBulletPrefab(1239);
+
+            public static Projectile GetOriginalBulletPrefab(int gunId, bool copy = false, bool dontDestroy = true)
+            {
+                Projectile ret = ItemAssetsCollection.GetPrefab(gunId)
+                    ?.GetComponent<ItemSetting_Gun>()
+                    ?.bulletPfb
+                    ?? GameplayDataSettings.Prefabs.DefaultBullet;
+                if (copy) ret = Object.Instantiate(ret);
+                if (dontDestroy) Object.DontDestroyOnLoad(ret);
+                ret.gameObject.SetActive(false);
+                return ret;
+            }
+
+            static Bullets()
+            {
+                BulletDelegate = GetOriginalBulletPrefab(0, true);
+                var copyProj = GetOriginalBulletPrefab(0, true);
+                var go = copyProj.gameObject;
+                Object.Destroy(go.GetComponent<Projectile>());
+                BulletDelegate = go.AddComponent<DelegateProjectile>().SetPrefab();
+            }
         }
     }
 }
