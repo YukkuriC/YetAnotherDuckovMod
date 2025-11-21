@@ -15,7 +15,7 @@ namespace ProjectileReflector
             if (!LevelManager.LevelInited) return;
             if (!ReflectController.DoReflectGrenade) return;
             var self = __instance;
-            var player = LevelManager.Instance.MainCharacter;
+            var player = LevelManager.Instance?.MainCharacter;
             if (
                 player == null
                 || !(player.CurrentHoldItemAgent is ItemAgent_MeleeWeapon melee)

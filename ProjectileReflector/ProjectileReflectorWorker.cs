@@ -22,8 +22,8 @@ namespace ProjectileReflector
         {
             staminaCost = 0;
             if (
-                self.context.team == Teams.player
-                || player == null
+                player == null
+                || self.context.team == player.Team
                 || !(player.CurrentHoldItemAgent is ItemAgent_MeleeWeapon)
             ) return false;
 
@@ -49,9 +49,9 @@ namespace ProjectileReflector
         [HarmonyPrefix, HarmonyPatch(typeof(Projectile), "UpdateMoveAndCheck")]
         public static void UpdateMove(Projectile __instance, ref Vector3 ___velocity, ref Vector3 ___direction)
         {
-            if(!LevelManager.LevelInited) return;
+            if (!LevelManager.LevelInited) return;
             var self = __instance;
-            var player = LevelManager.Instance.MainCharacter;
+            var player = LevelManager.Instance?.MainCharacter;
             if (!ShouldCheckReflect(self, player, out float staminaCost)) return;
             var curStatus = PlayerStatus;
 
@@ -96,7 +96,7 @@ namespace ProjectileReflector
             delta.y = 0;
             oldContext.direction = ___direction = delta.normalized;
             ___velocity = ___direction * oldContext.speed;
-            oldContext.team = Teams.player;
+            oldContext.team = player.Team;
             oldContext.fromCharacter = player;
 
             // hit fx
