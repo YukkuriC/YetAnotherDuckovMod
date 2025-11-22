@@ -27,5 +27,20 @@ namespace YukkuriC.UITweaks.Patches
             if (!HasShift()) return true;
             return ForceJump(___index, 0);
         }
+        [HarmonyPostfix, HarmonyPatch(typeof(ModEntry), "OnToggleButtonClicked")]
+        static void ShiftActivateAll(ModInfo ___info)
+        {
+            if (!HasShift()) return;
+            var followState = ModManager.IsModActive(___info, out var _);
+            foreach (var info in ModManager.modInfos)
+            {
+                var myState = ModManager.IsModActive(info, out var _);
+                if (myState != followState)
+                {
+                    if (myState) ModManager.Instance.DeactivateMod(info);
+                    else ModManager.Instance.ActivateMod(info);
+                }
+            }
+        }
     }
 }
