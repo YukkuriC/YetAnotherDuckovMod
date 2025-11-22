@@ -13,17 +13,20 @@ namespace YukkuriC.AlienGuns
         void Awake()
         {
             GunRegistry.Init();
+            FormulaRegistry.Init();
         }
 
         void OnEnable()
         {
             Events.AlienGunFireEvents.OnEnable();
             LangEvents.OnEnable();
+            FormulaRegistry.Load();
         }
         void OnDisable()
         {
             Events.AlienGunFireEvents.OnDisable();
             LangEvents.OnDisable();
+            FormulaRegistry.Unload();
         }
 
 #if DEBUG_MENU
