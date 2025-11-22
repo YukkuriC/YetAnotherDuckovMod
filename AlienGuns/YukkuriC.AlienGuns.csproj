@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+    <!-- This should be the folder that contains Duckov.exe -->
+    <!-- 下面这行里填写你的鸭科夫安装路径，这样编译器就能找到相关的dll文件 -->
+    <DuckovPath>C:\SteamLibrary\steamapps\common\Escape from Duckov</DuckovPath>
+    <RootNamespace>$(MSBuildProjectName)</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;DEBUG_MENU</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;DEBUG_MENU</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="$(DuckovPath)\Duckov_Data\Managed\TeamSoda.*">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(DuckovPath)\Duckov_Data\Managed\ItemStatsSystem.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(DuckovPath)\Duckov_Data\Managed\SodaLocalization.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(DuckovPath)\Duckov_Data\Managed\Newtonsoft.Json.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(DuckovPath)\Duckov_Data\Managed\UnityEngine*">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(DuckovPath)\Duckov_Data\Managed\Unitask*">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets\lang\ChineseSimplified.json" />
+    <None Remove="assets\lang\English.json" />
+    <None Remove="assets\textures\icon_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="assets\lang\English.json" />
+    <EmbeddedResource Include="assets\lang\ChineseSimplified.json" />
+    <EmbeddedResource Include="assets\textures\icon_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Krafs.Publicizer" Version="2.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <Publicize Include="ItemStatsSystem:ItemStatsSystem.ItemAgentUtilities.agents" />
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="call copier.bat" />
+  </Target>
+</Project>
