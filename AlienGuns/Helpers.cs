@@ -31,13 +31,19 @@ namespace YukkuriC.AlienGuns
         #region resources
         static Assembly _myDll;
         static string _myDllName;
-        public static Stream GetResourceStream(string path)
+        static string _myDllPath;
+        static void InitDll()
         {
             if (_myDll == null)
             {
                 _myDll = Assembly.GetExecutingAssembly();
                 _myDllName = _myDll.GetName().Name;
+                _myDllPath = Path.GetDirectoryName(_myDll.Location);
             }
+        }
+        public static Stream GetResourceStream(string path)
+        {
+            InitDll();
             return _myDll.GetManifestResourceStream($"{_myDllName}.assets.{path}");
         }
         public static byte[] GetResourceData(string path)
@@ -47,6 +53,18 @@ namespace YukkuriC.AlienGuns
             var raw = new byte[stream.Length];
             stream.Read(raw, 0, raw.Length);
             return raw;
+        }
+        public static byte[] GetLooseData(string path)
+        {
+            InitDll();
+            var fullPath = Path.Combine(_myDllPath, path);
+            if (!File.Exists(fullPath)) return null;
+            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                var raw = new byte[stream.Length];
+                stream.Read(raw, 0, raw.Length);
+                return raw;
+            }
         }
         public static T ToResourceJson<T>(this string path) where T : class
         {
