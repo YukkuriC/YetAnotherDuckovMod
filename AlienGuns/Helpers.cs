@@ -53,17 +53,14 @@ namespace YukkuriC.AlienGuns
             stream.Read(raw, 0, raw.Length);
             return raw;
         }
-        public static byte[] GetLooseData(string path)
+        static Dictionary<string, AssetBundle> _cachedABs = new Dictionary<string, AssetBundle>();
+        public static AssetBundle ToAB(this string path)
         {
             InitDll();
+            if (_cachedABs.TryGetValue(path, out var ab)) return ab;
             var fullPath = Path.Combine(_myDllPath, path);
             if (!File.Exists(fullPath)) return null;
-            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-            {
-                var raw = new byte[stream.Length];
-                stream.Read(raw, 0, raw.Length);
-                return raw;
-            }
+            return _cachedABs[path] = AssetBundle.LoadFromFile(fullPath);
         }
         public static T ToResourceJson<T>(this string path) where T : class
         {
