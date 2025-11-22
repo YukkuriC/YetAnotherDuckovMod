@@ -49,7 +49,6 @@ namespace YukkuriC.AlienGuns.Items
                     context.element_Fire = 0;
                     var gunItem = p.GetGun()?.Item;
                     var isRed = gunItem?.Constants.GetBool(redHash) ?? false;
-                    Debug.Log($"test red {gunItem} {isRed}");
                     var bullet = isRed ? FxLib.Bullets.BulletRed : FxLib.Bullets.BulletStorm;
                     gunItem?.Constants.SetBool("red", !isRed);
                     var left = context.direction.RotateY(90);

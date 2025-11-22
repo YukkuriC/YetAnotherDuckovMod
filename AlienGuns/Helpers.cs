@@ -23,7 +23,6 @@ namespace YukkuriC.AlienGuns
         public static ItemSetting_Gun GetGun(this Projectile proj)
         {
             var agent = proj.context.fromCharacter?.CurrentHoldItemAgent;
-            Debug.Log(agent);
             return agent is ItemAgent_Gun gun ? gun.GunItemSetting : null;
         }
         #endregion
