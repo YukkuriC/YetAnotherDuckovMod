@@ -21,16 +21,23 @@ namespace YukkuriC.AlienGuns.Items
                 tags = COMMON_WORKBENCH,
                 id = $"YukkuriC.AlienGun.{id}",
                 result = new CraftingFormula.ItemEntry { amount = 1, id = id + ItemUtils.ITEM_START_ID },
-                cost = new Cost
-                {
-                    items = (
-                        from s in items.Split(",")
-                        select FromString(s)
-                    ).ToArray()
-                },
+                cost = BuildCost(),
+            };
+            public DecomposeFormula ToDecomposing() => new DecomposeFormula
+            {
+                item = id + ItemUtils.ITEM_START_ID,
+                result = BuildCost(),
+                valid = true,
+            };
+            Cost BuildCost() => new Cost
+            {
+                items = (
+                    from s in items.Split(",")
+                    select FromString(s)
+                ).ToArray()
             };
 
-            public static Cost.ItemEntry FromString(string pattern)
+            static Cost.ItemEntry FromString(string pattern)
             {
                 var parts = pattern.Split('x');
                 return new Cost.ItemEntry
@@ -42,20 +49,31 @@ namespace YukkuriC.AlienGuns.Items
         }
 
         static CraftingFormula[] CraftingList;
+        static DecomposeFormula[] DecomposingList;
         public static void Init()
         {
             CraftingList = (
                 from i in "formulas.crafting.json".ToResourceJson<MyCraftingFormula[]>()
                 select i.ToCrafting()
             ).ToArray();
+            DecomposingList = (
+                from i in "formulas.decomposing.json".ToResourceJson<MyCraftingFormula[]>()
+                select i.ToDecomposing()
+            ).ToArray();
         }
         public static void Load()
         {
             CraftingFormulaCollection.Instance.list.AddRange(CraftingList);
+            DecomposeDatabase.Instance.entries = DecomposeDatabase.Instance.entries.Concat(DecomposingList).ToArray();
         }
         public static void Unload()
         {
             CraftingFormulaCollection.Instance.list.RemoveAll(x => CraftingList.Contains(x));
+            DecomposeDatabase.Instance.entries = (
+                from x in DecomposeDatabase.Instance.entries
+                where !DecomposingList.Contains(x)
+                select x
+            ).ToArray();
         }
     }
 }
