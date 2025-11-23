@@ -58,7 +58,7 @@ namespace YukkuriC.AlienGuns
             InitDll();
             var fullPath = Path.Combine(_myDllPath, path);
             if (!File.Exists(fullPath)) return null;
-            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream(fullPath, FileMode.Open, FileAccess.Read))
             {
                 var raw = new byte[stream.Length];
                 stream.Read(raw, 0, raw.Length);
@@ -72,14 +72,15 @@ namespace YukkuriC.AlienGuns
             var text = Encoding.UTF8.GetString(raw);
             return JsonConvert.DeserializeObject<T>(text);
         }
-        public static Texture2D ToResourceTexture(this string path, int width = 256, int height = 256)
+        static Texture2D ToTexture(byte[] raw, int width = 256, int height = 256)
         {
-            var raw = GetResourceData(path);
             if (raw == null) return null;
             var texture = new Texture2D(width, height);
             texture.LoadImage(raw);
             return texture;
         }
+        public static Texture2D ToResourceTexture(this string path, int width = 256, int height = 256) => ToTexture(GetResourceData(path), width, height);
+        public static Texture2D ToLooseTexture(this string path, int width = 256, int height = 256) => ToTexture(GetLooseData(path), width, height);
         #endregion
     }
 }

@@ -19,7 +19,7 @@ namespace YukkuriC.AlienGuns.Items
             res.DisplayNameRaw = $"YukkuriC.AlienGun.{idOffset}";
             Debug.Log($"[AlienGun] register item #{res.TypeID} from {res.DisplayName}#{templateId}");
             AddedGuns.Add(res);
-            var icon = $"textures.icon_{idOffset}.png".ToResourceTexture();
+            var icon = $"assets/textures/icon_{idOffset}.png".ToLooseTexture();
             if (icon != null) res.Icon = Sprite.Create(icon, new Rect(0, 0, icon.width, icon.height), Vector2.zero);
             idOffset++;
             gun = res.GetComponent<ItemSetting_Gun>();
@@ -73,9 +73,9 @@ namespace YukkuriC.AlienGuns.Items
                 {
                     var subHand = Object.Instantiate(handModel);
                     subHand.transform.SetParent(handModel.parent);
-                    subHand.localRotation = Quaternion.Euler(69, 79 * i, 98 * i);
+                    subHand.localRotation = Quaternion.Euler(69, 85 * i, 100 * i);
                     subHand.localScale = handModel.localScale;
-                    subHand.localPosition = handModel.localPosition;
+                    subHand.localPosition = new Vector3(-0.15f * i, 0, -0.77f);
                     agentSubVisuals.renderers.Add(subHand.GetComponent<Renderer>());
                 }
                 var renderer = handModel.GetComponent<Renderer>();

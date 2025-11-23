@@ -38,14 +38,12 @@
     <None Remove="assets\formulas\decomposing.json" />
     <None Remove="assets\lang\ChineseSimplified.json" />
     <None Remove="assets\lang\English.json" />
-    <None Remove="assets\textures\icon_0.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="assets\formulas\crafting.json" />
     <EmbeddedResource Include="assets\formulas\decomposing.json" />
     <EmbeddedResource Include="assets\lang\English.json" />
     <EmbeddedResource Include="assets\lang\ChineseSimplified.json" />
-    <EmbeddedResource Include="assets\textures\icon_0.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
