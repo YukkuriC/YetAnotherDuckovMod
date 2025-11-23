@@ -2,6 +2,7 @@
 using ItemStatsSystem.Items;
 using System.Collections.Generic;
 using UnityEngine;
+using YukkuriC.AlienGuns.Components;
 using YukkuriC.Ext;
 
 namespace YukkuriC.AlienGuns.Items
@@ -69,6 +70,7 @@ namespace YukkuriC.AlienGuns.Items
                 agentHand.transform.SetParent(hand.transform);
                 var handModel = agentHand.transform.Find("Model/GunModel/WPN_DryHand");
                 handModel.localRotation = Quaternion.Euler(85, 0, 0);
+                var armWaver = handModel.gameObject.AddComponent<MageHandWaver>();
                 for (int i = -1; i <= 1; i += 2)
                 {
                     var subHand = Object.Instantiate(handModel);
@@ -77,6 +79,8 @@ namespace YukkuriC.AlienGuns.Items
                     subHand.localScale = handModel.localScale;
                     subHand.localPosition = new Vector3(-0.15f * i, 0, -0.77f);
                     agentSubVisuals.renderers.Add(subHand.GetComponent<Renderer>());
+                    if (i < 0) armWaver.arm1 = subHand;
+                    else armWaver.arm2 = subHand;
                 }
                 var renderer = handModel.GetComponent<Renderer>();
                 var mat = renderer.material;
