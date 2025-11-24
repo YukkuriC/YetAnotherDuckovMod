@@ -3,7 +3,7 @@ using ItemStatsSystem.Items;
 using System.Collections.Generic;
 using UnityEngine;
 using YukkuriC.AlienGuns.Components;
-using YukkuriC.Ext;
+using YukkuriC.AlienGuns.Ext;
 
 namespace YukkuriC.AlienGuns.Items
 {
@@ -50,7 +50,7 @@ namespace YukkuriC.AlienGuns.Items
                     context.element_Fire = 0;
                     var gunItem = p.GetGun()?.Item;
                     var isRed = gunItem?.Constants.GetBool(redHash) ?? false;
-                    var bullet = isRed ? FxLib.Bullets.BulletRed : FxLib.Bullets.BulletStorm;
+                    var bullet = isRed ? BulletLib.Bullets.BulletRed : BulletLib.Bullets.BulletStorm;
                     gunItem?.Constants.SetBool("red", !isRed);
                     var left = context.direction.RotateY(90);
                     for (var i = -2; i <= 2; i++)
@@ -58,7 +58,7 @@ namespace YukkuriC.AlienGuns.Items
                         var dir = context.direction.RotateY(i * 10 * (isRed ? 1 : -0.2f));
                         var speed = (context.speed - Mathf.Abs(i) * 2);
                         if (!isRed) speed *= 1.2f;
-                        FxLib.ShootOneBullet(bullet, context, p.transform.position + left * (i * 0.2f), dir, isRed ? ElementTypes.fire : ElementTypes.space, speed, context.distance - Mathf.Abs(i), 20 - Mathf.Abs(i) * 5, context.firstFrameCheckStartPoint);
+                        BulletLib.ShootOneBullet(bullet, context, p.transform.position + left * (i * 0.2f), dir, isRed ? ElementTypes.fire : ElementTypes.space, speed, context.distance - Mathf.Abs(i), 20 - Mathf.Abs(i) * 5, context.firstFrameCheckStartPoint);
                     }
                 });
 
@@ -86,6 +86,12 @@ namespace YukkuriC.AlienGuns.Items
                 var mat = renderer.material;
                 mat.SetColor("_EdgeLightColor", new Color(4.5f, 0.5f, 4.5f));
                 renderer.material = mat;
+            }
+
+            // 1. reversed rocket
+            {
+                var rpg = GetNew(327, out var gun);
+
             }
         }
 

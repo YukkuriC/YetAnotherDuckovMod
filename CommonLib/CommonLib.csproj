@@ -31,6 +31,7 @@
     </PackageReference>
     <Publicize Include="TeamSoda.Duckov.Core:Projectile.Release" />
     <Publicize Include="TeamSoda.Duckov.Core:Projectile.direction" />
+    <Publicize Include="TeamSoda.Duckov.Utilities:Duckov.Utilities.Tag.color" />
     <Publicize Include="TeamSoda.Duckov.Utilities:Duckov.Utilities.Tag.show" />
   </ItemGroup>
 </Project>

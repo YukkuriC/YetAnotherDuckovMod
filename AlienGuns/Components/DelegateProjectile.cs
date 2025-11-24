@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using YukkuriC.Events;
+using YukkuriC.AlienGuns.Events;
 
 namespace YukkuriC.Misc
 {
@@ -18,7 +18,7 @@ namespace YukkuriC.Misc
         void Update()
         {
             if (isPrefab) return;
-            CommonEvents.OnDelegateBulletShoot?.Invoke(this);
+            AlienGunFireEvents.OnDelegateBulletShoot?.Invoke(this);
             Release();
         }
     }

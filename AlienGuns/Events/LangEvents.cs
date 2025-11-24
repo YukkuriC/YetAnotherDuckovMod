@@ -3,8 +3,9 @@ using SodaCraft.Localizations;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using YukkuriC.AlienGuns.Ext;
 
-namespace YukkuriC.AlienGuns
+namespace YukkuriC.AlienGuns.Events
 {
     public static class LangEvents
     {

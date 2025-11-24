@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using YukkuriC.AlienGuns.Ext;
 
 namespace YukkuriC.AlienGuns.Items
 {

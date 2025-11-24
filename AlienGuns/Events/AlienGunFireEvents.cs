@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using YukkuriC.Events;
 
 namespace YukkuriC.AlienGuns.Events
 {
     public static class AlienGunFireEvents
     {
+        public static Action<Projectile> OnDelegateBulletShoot;
         public static readonly Dictionary<int, Action<Projectile>> EventsById = new Dictionary<int, Action<Projectile>>();
 
         public static void OnEnable()
         {
-            CommonEvents.OnDelegateBulletShoot += HandleShoot;
+            OnDelegateBulletShoot += HandleShoot;
         }
         public static void OnDisable()
         {
-            CommonEvents.OnDelegateBulletShoot -= HandleShoot;
+            OnDelegateBulletShoot -= HandleShoot;
         }
 
         static void HandleShoot(Projectile handle)

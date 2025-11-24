@@ -3,10 +3,14 @@ using ItemStatsSystem.Items;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace YukkuriC.Ext
+namespace YukkuriC.AlienGuns.Ext
 {
     public static class TagExt
     {
+        static Dictionary<string, Color> specialColors = new Dictionary<string, Color>()
+        {
+            ["Repairable"] = new Color(0.2924528f, 0.2924528f, 0.2924528f)
+        };
         static Dictionary<string, Tag> _cachedTags = new Dictionary<string, Tag>();
         public static Tag AsTag(this string str)
         {
@@ -15,6 +19,7 @@ namespace YukkuriC.Ext
                 _cachedTags[str] = ret = ScriptableObject.CreateInstance<Tag>();
                 ret.name = str;
                 ret.show = true;
+                if (specialColors.TryGetValue(str, out var color)) ret.color = color;
             }
             return ret;
         }

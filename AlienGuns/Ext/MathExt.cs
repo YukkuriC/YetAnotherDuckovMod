@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace YukkuriC.Ext
+namespace YukkuriC.AlienGuns.Ext
 {
     public static class MathExt
     {

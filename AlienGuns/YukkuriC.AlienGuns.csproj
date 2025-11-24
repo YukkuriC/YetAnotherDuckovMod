@@ -46,9 +46,6 @@
     <EmbeddedResource Include="assets\lang\ChineseSimplified.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Krafs.Publicizer" Version="2.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -58,6 +55,10 @@
     <Publicize Include="TeamSoda.Duckov.Core:CraftingFormulaCollection._entries_ReadOnly" />
     <Publicize Include="TeamSoda.Duckov.Core:DecomposeDatabase.entries" />
     <Publicize Include="TeamSoda.Duckov.Core:DecomposeDatabase._dic" />
+	<Publicize Include="TeamSoda.Duckov.Core:Projectile.Release" />
+	<Publicize Include="TeamSoda.Duckov.Core:Projectile.direction" />
+	<Publicize Include="TeamSoda.Duckov.Utilities:Duckov.Utilities.Tag.color" />
+	<Publicize Include="TeamSoda.Duckov.Utilities:Duckov.Utilities.Tag.show" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="call copier.bat" />

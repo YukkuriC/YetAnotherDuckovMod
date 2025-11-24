@@ -2,11 +2,23 @@
 using Duckov.Utilities;
 using ItemStatsSystem;
 using ItemStatsSystem.Items;
+using System;
+using YukkuriC.AlienGuns.Events;
 
-namespace YukkuriC.Ext
+namespace YukkuriC.AlienGuns.Ext
 {
-    public static class ItemBuilderExt
+    public static class ItemExt
     {
+        public static void BindCustomFire(this ItemSetting_Gun gun, Action<Projectile> sub)
+        {
+            gun.bulletPfb = BulletLib.Bullets.BulletDelegate;
+            AlienGunFireEvents.EventsById[gun.Item.TypeID] = sub;
+        }
+        public static ItemSetting_Gun GetGun(this Projectile proj)
+        {
+            var agent = proj.context.fromCharacter?.CurrentHoldItemAgent;
+            return agent is ItemAgent_Gun gun ? gun.GunItemSetting : null;
+        }
         public static ItemBuilder ApplyOverride(this ItemBuilder builder, Item item)
         {
             item.CreateSlotsComponent();

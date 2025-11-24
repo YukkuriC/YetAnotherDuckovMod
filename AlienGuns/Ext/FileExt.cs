@@ -9,25 +9,10 @@ using System.Text;
 using UnityEngine;
 using YukkuriC.AlienGuns.Events;
 
-namespace YukkuriC.AlienGuns
+namespace YukkuriC.AlienGuns.Ext
 {
-    public static class Helpers
+    public static class FileExt
     {
-
-        #region items
-        public static void BindCustomFire(this ItemSetting_Gun gun, Action<Projectile> sub)
-        {
-            gun.bulletPfb = FxLib.Bullets.BulletDelegate;
-            AlienGunFireEvents.EventsById[gun.Item.TypeID] = sub;
-        }
-        public static ItemSetting_Gun GetGun(this Projectile proj)
-        {
-            var agent = proj.context.fromCharacter?.CurrentHoldItemAgent;
-            return agent is ItemAgent_Gun gun ? gun.GunItemSetting : null;
-        }
-        #endregion
-
-        #region resources
         static Assembly _myDll;
         static string _myDllName;
         static string _myDllPath;
@@ -81,6 +66,5 @@ namespace YukkuriC.AlienGuns
         }
         public static Texture2D ToResourceTexture(this string path, int width = 256, int height = 256) => ToTexture(GetResourceData(path), width, height);
         public static Texture2D ToLooseTexture(this string path, int width = 256, int height = 256) => ToTexture(GetLooseData(path), width, height);
-        #endregion
     }
 }
