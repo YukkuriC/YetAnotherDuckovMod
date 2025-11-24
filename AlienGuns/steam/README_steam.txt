@@ -1,10 +1,11 @@
 [h1]Alien Guns 外星枪械[/h1]
 
 [url=https://github.com/YukkuriC/YetAnotherDuckovMod/tree/main/AlienGuns] Github源代码 [/url]
+[url=https://www.bilibili.com/video/BV1qsU1BCEDY] 演示视频 [/url]
 
 一堆什么都能射，就是射不了常规子弹的枪；???最有用的一集
 
-[i]注：本 mod 所有物品 id 号段从 [b]"YukkuriC".GetHashCode() = 1206528349[/b]；以下标注 id 均为此基础上的偏移量[/i]
+[i]注：本 mod 所有物品 id 号段从 [b]"YukkuriC".GetHashCode() = 1206528349[/b]开始；以下标注 id 均为此基础上的偏移量[/i]
 
 [h2]当前内容[/h2]
 
