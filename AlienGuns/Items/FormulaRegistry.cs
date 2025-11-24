@@ -1,4 +1,5 @@
 ﻿using Duckov.Economy;
+using ItemStatsSystem;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -61,6 +62,15 @@ namespace YukkuriC.AlienGuns.Items
                 from i in "formulas.decomposing.json".ToResourceJson<MyCraftingFormula[]>()
                 select i.ToDecomposing()
             ).ToArray();
+
+            // auto pricing
+            foreach (var c in CraftingList)
+            {
+                var gun = ItemAssetsCollection.GetPrefab(c.result.id);
+                float price = 0;
+                foreach (var i in c.cost.items) price += ItemAssetsCollection.GetPrefab(i.id).Value * i.amount;
+                gun.Value = (int)(price * 0.9f);
+            }
         }
         public static void Load()
         {

@@ -20,8 +20,8 @@ namespace YukkuriC.AlienGuns.Items
         static Item GetNew(int templateId, out ItemSetting_Gun gun)
         {
             var res = ItemUtils.CopyItem(templateId, idOffset);
-            res.DisplayNameRaw = $"YukkuriC.AlienGun.{idOffset}";
             Debug.Log($"[AlienGun] register item #{res.TypeID} from {res.DisplayName}#{templateId}");
+            res.DisplayNameRaw = $"YukkuriC.AlienGun.{idOffset}";
             AddedGuns.Add(res);
             var icon = $"assets/textures/icon_{idOffset}.png".ToLooseTexture();
             if (icon != null) res.Icon = Sprite.Create(icon, new Rect(0, 0, icon.width, icon.height), Vector2.zero);
