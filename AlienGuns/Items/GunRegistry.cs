@@ -1,7 +1,10 @@
 ﻿using ItemStatsSystem;
 using ItemStatsSystem.Items;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Analytics;
+using UnityEngine.XR;
 using YukkuriC.AlienGuns.Components;
 using YukkuriC.AlienGuns.Ext;
 
@@ -63,11 +66,8 @@ namespace YukkuriC.AlienGuns.Items
                 });
 
                 // edit model
-                var originalAgentHolder = hand.AgentUtilities.agents[0];
-                var agentHand = originalAgentHolder.agentPrefab = Object.Instantiate(originalAgentHolder.agentPrefab);
+                var agentHand = hand.CopyAgent();
                 var agentSubVisuals = agentHand.GetComponent<CharacterSubVisuals>();
-                agentHand.gameObject.SetActive(false);
-                agentHand.transform.SetParent(hand.transform);
                 var handModel = agentHand.transform.Find("Model/GunModel/WPN_DryHand");
                 handModel.localRotation = Quaternion.Euler(85, 0, 0);
                 var armWaver = handModel.gameObject.AddComponent<MageHandWaver>();
@@ -91,7 +91,44 @@ namespace YukkuriC.AlienGuns.Items
             // 1. reversed rocket
             {
                 var rpg = GetNew(327, out var gun);
+                rpg.Constants.SetString(HASH_CALIBER, "PWL");
+                gun.autoReload = true;
 
+                // custom fire
+                gun.BindCustomFire(p =>
+                {
+                    var player = p.context.fromCharacter;
+                    if (player == null) return;
+
+                    // explode & hurt self
+                    var center = p.transform.position;
+                    var dmgInfo = new DamageInfo(player)
+                    {
+                        damageValue = 50,
+                        fromCharacter = player,
+                        fromWeaponItemID = p.context.fromWeaponItemID,
+                    };
+                    LevelManager.Instance.ExplosionManager.CreateExplosion(center, 5, dmgInfo, canHurtSelf: false);
+                    dmgInfo.damageValue /= 2;
+                    dmgInfo.toDamageReceiver = player.mainDamageReceiver;
+                    dmgInfo.damagePoint = player.transform.position + Vector3.up * 0.6f;
+                    dmgInfo.damageNormal = (dmgInfo.damagePoint - center).normalized;
+                    player.mainDamageReceiver.Hurt(dmgInfo);
+
+                    // push chara
+                    var mover = player.movementControl.characterMovement;
+                    if (mover.isOnGround)
+                    {
+                        ref var vel = ref mover.velocity;
+                        mover.PauseGroundConstraint();
+                        vel += (player.CurrentAimDirection * 6 + Vector3.up * 15);
+                    }
+                });
+
+                // model alter
+                var agent = rpg.CopyAgent();
+                foreach (var target in new string[] { "Model", "Sockets" })
+                    agent.transform.Find(target).localEulerAngles = new Vector3(45, 180);
             }
         }
 

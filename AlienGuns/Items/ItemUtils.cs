@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace YukkuriC.AlienGuns.Items
 {
-    public class ItemUtils
+    public static class ItemUtils
     {
         public static readonly int ITEM_START_ID = "YukkuriC".GetHashCode();
 
@@ -14,6 +14,15 @@ namespace YukkuriC.AlienGuns.Items
             Object.DontDestroyOnLoad(template);
             if (writeBack) ItemAssetsCollection.AddDynamicEntry(template);
             return template;
+        }
+
+        public static ItemAgent CopyAgent(this Item item, int idx = 0)
+        {
+            var originalAgentHolder = item.AgentUtilities.agents[idx];
+            var agent = originalAgentHolder.agentPrefab = Object.Instantiate(originalAgentHolder.agentPrefab);
+            agent.gameObject.SetActive(false);
+            Object.DontDestroyOnLoad(agent.gameObject);
+            return agent;
         }
     }
 }
