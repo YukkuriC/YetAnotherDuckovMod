@@ -11,7 +11,7 @@
     <DefineConstants>$(DefineConstants)TRACE;DEBUG_MENU</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DefineConstants>$(DefineConstants)TRACE;DEBUG_MENU</DefineConstants>
+    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="$(DuckovPath)\Duckov_Data\Managed\TeamSoda.*">
