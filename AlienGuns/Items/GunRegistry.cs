@@ -1,10 +1,7 @@
 ﻿using ItemStatsSystem;
 using ItemStatsSystem.Items;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
-using UnityEngine.Analytics;
-using UnityEngine.XR;
 using YukkuriC.AlienGuns.Components;
 using YukkuriC.AlienGuns.Ext;
 
@@ -12,7 +9,7 @@ namespace YukkuriC.AlienGuns.Items
 {
     public static class GunRegistry
     {
-        static List<Item> AddedGuns = new List<Item>();
+        public static List<Item> AddedGuns = new List<Item>();
 
         static int HASH_CALIBER = "Caliber".GetHashCode();
         static bool inited = false;
@@ -36,6 +33,7 @@ namespace YukkuriC.AlienGuns.Items
             inited = true;
 
             // 0. alien hand
+            Material redMat;
             {
                 var redHash = "red".GetHashCode();
                 var hand = GetNew(1239, out var gun);
@@ -84,6 +82,7 @@ namespace YukkuriC.AlienGuns.Items
                 }
                 var renderer = handModel.GetComponent<Renderer>();
                 var mat = renderer.material;
+                redMat = new Material(mat);
                 mat.SetColor("_EdgeLightColor", new Color(4.5f, 0.5f, 4.5f));
                 renderer.material = mat;
             }
@@ -129,24 +128,9 @@ namespace YukkuriC.AlienGuns.Items
                 var agent = rpg.CopyAgent();
                 foreach (var target in new string[] { "Model", "Sockets" })
                     agent.transform.Find(target).localEulerAngles = new Vector3(45, 180);
+                var renderer = agent.transform.Find("Model").GetChild(0).GetComponent<Renderer>();
+                renderer.materials = new Material[] { redMat };
             }
         }
-
-#if DEBUG_MENU
-        static Rect windowRect = new Rect(200, 200, 300, 500);
-        public static void OnDebugGUI()
-        {
-            var player = LevelManager.Instance?.MainCharacter;
-            GUILayout.BeginArea(windowRect);
-            foreach (var prefab in AddedGuns)
-            {
-                if (GUILayout.Button($"#{prefab.TypeID}: {prefab.DisplayName}"))
-                {
-                    ItemUtilities.SendToPlayer(ItemAssetsCollection.InstantiateSync(prefab.TypeID));
-                }
-            }
-            GUILayout.EndArea();
-        }
-#endif
     }
 }

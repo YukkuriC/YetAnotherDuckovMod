@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 using UnityEngine;
+using YukkuriC.AlienGuns.Components;
 using YukkuriC.AlienGuns.Events;
 using YukkuriC.AlienGuns.Items;
 
@@ -15,6 +16,10 @@ namespace YukkuriC.AlienGuns
         {
             GunRegistry.Init();
             FormulaRegistry.Init();
+            if (!SteamManager.Initialized)
+            {
+                gameObject.AddComponent<DebugMenu>();
+            }
         }
 
         void OnEnable()
@@ -29,20 +34,5 @@ namespace YukkuriC.AlienGuns
             LangEvents.OnDisable();
             FormulaRegistry.Unload();
         }
-
-#if DEBUG_MENU
-        bool debugGUIShow = false;
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Keypad0))
-            {
-                debugGUIShow = !debugGUIShow;
-            }
-        }
-        void OnGUI()
-        {
-            if (debugGUIShow) GunRegistry.OnDebugGUI();
-        }
-#endif
     }
 }
