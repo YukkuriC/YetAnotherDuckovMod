@@ -67,9 +67,19 @@ namespace YukkuriC
         }
         public static class Bullets
         {
+            // event trigger
             public static readonly Projectile BulletDelegate;
+            // red/space balls
             public static readonly Projectile BulletStorm = GetOriginalBulletPrefab(902);
             public static readonly Projectile BulletRed = GetOriginalBulletPrefab(1239);
+            // elemental boss bullets
+            public static readonly Projectile
+                BulletPoison = GetOriginalBulletPrefab(914),
+                BulletFire = GetOriginalBulletPrefab(916),
+                BulletElectric = GetOriginalBulletPrefab(917),
+                BulletSpace = GetOriginalBulletPrefab(915);
+            public static readonly Projectile[] ElementalBullets = new Projectile[] { BulletPoison, BulletFire, BulletElectric, BulletSpace };
+            public static readonly ElementTypes[] ElementalBulletTypes = new ElementTypes[] { ElementTypes.poison, ElementTypes.fire, ElementTypes.electricity, ElementTypes.space };
 
             public static Projectile GetOriginalBulletPrefab(int gunId, bool copy = false, bool dontDestroy = true)
             {
@@ -90,6 +100,7 @@ namespace YukkuriC
                 var go = copyProj.gameObject;
                 Object.Destroy(go.GetComponent<Projectile>());
                 BulletDelegate = go.AddComponent<DelegateProjectile>().SetPrefab();
+                foreach (var b in ElementalBullets) Debug.Log(b);
             }
         }
     }

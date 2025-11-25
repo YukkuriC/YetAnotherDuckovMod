@@ -131,6 +131,23 @@ namespace YukkuriC.AlienGuns.Items
                 var renderer = agent.transform.Find("Model").GetChild(0).GetComponent<Renderer>();
                 renderer.materials = new Material[] { redMat };
             }
+
+            // 2. elemental shotgun
+            {
+                var item = GetNew(876, out var gun);
+
+                gun.BindCustomFire(p =>
+                {
+                    var context = p.context;
+                    context.element_Physics = 0;
+                    var randIdx = Random.Range(0, BulletLib.Bullets.ElementalBullets.Length);
+                    BulletLib.ShootOneBullet(
+                        BulletLib.Bullets.ElementalBullets[randIdx], context, p.transform.position, context.direction,
+                        BulletLib.Bullets.ElementalBulletTypes[randIdx], context.speed, context.distance,
+                        0, p.context.firstFrameCheckStartPoint
+                    );
+                });
+            }
         }
     }
 }

@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace YukkuriC.AlienGuns.Ext
 {
     public static class MathExt
     {
         public static Vector3 RotateY(this Vector3 vec, float degree) => Quaternion.Euler(0, degree, 0) * vec;
+        public static T GetRandom<T>(this T[] pool) => pool[Random.Range(0, pool.Length)];
+        public static T GetRandom<T>(this IList<T> pool) => pool[Random.Range(0, pool.Count)];
     }
 }
