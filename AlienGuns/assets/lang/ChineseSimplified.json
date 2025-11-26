@@ -2,5 +2,7 @@
   "YukkuriC.AlienGun.0": "法师之手",
   "YukkuriC.AlienGun.0_Desc": "神话生物的残片。\n会交替射出分散的<color=orange>火属性</color>与相对集中的<color=purple>空间属性</color>子弹。",
   "YukkuriC.AlienGun.1": "反方向的筒",
-  "YukkuriC.AlienGun.1_Desc": "在脚下产生爆炸，并将玩家推离地面。"
+  "YukkuriC.AlienGun.1_Desc": "在脚下产生爆炸，并将玩家推离地面。",
+  "YukkuriC.AlienGun.2": "MP-155 瘟疫",
+  "YukkuriC.AlienGun.2_Desc": "射出随机属性的子弹；在击中敌人后分裂并部分弹射至周围敌人。\n子弹穿甲等级越高，可分裂的级数越多。"
 }

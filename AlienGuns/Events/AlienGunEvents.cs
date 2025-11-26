@@ -5,7 +5,7 @@ namespace YukkuriC.AlienGuns.Events
 {
     public static class AlienGunEvents
     {
-        public static event Action<Projectile> OnDelegateBulletShoot;
+        public static Action<Projectile> OnDelegateBulletShoot;
         public static readonly Dictionary<int, Action<Projectile>> FireEventsById = new Dictionary<int, Action<Projectile>>();
         public static readonly Dictionary<int, Action<Health, DamageInfo>> HurtEventsById = new Dictionary<int, Action<Health, DamageInfo>>();
 

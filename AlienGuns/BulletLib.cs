@@ -1,6 +1,7 @@
 ﻿using Duckov;
 using Duckov.Utilities;
 using ItemStatsSystem;
+using System.Collections.Generic;
 using UnityEngine;
 using YukkuriC.Misc;
 
@@ -80,6 +81,8 @@ namespace YukkuriC
                 BulletSpace = GetOriginalBulletPrefab(915);
             public static readonly Projectile[] ElementalBullets = new Projectile[] { BulletPoison, BulletFire, BulletElectric, BulletSpace };
             public static readonly ElementTypes[] ElementalBulletTypes = new ElementTypes[] { ElementTypes.poison, ElementTypes.fire, ElementTypes.electricity, ElementTypes.space };
+            public static readonly Dictionary<Projectile, ElementTypes> BulletElementMap = new Dictionary<Projectile, ElementTypes>();
+            public static readonly Dictionary<ElementTypes, Projectile> ElementalBulletMap = new Dictionary<ElementTypes, Projectile>();
 
             public static Projectile GetOriginalBulletPrefab(int gunId, bool copy = false, bool dontDestroy = true)
             {
@@ -101,6 +104,15 @@ namespace YukkuriC
                 Object.Destroy(go.GetComponent<Projectile>());
                 BulletDelegate = go.AddComponent<DelegateProjectile>().SetPrefab();
                 foreach (var b in ElementalBullets) Debug.Log(b);
+
+                // element map
+                for (var i = 0; i < ElementalBullets.Length; i++)
+                {
+                    var bullet = ElementalBullets[i];
+                    var elem = ElementalBulletTypes[i];
+                    BulletElementMap[bullet] = elem;
+                    ElementalBulletMap[elem] = bullet;
+                }
             }
         }
     }
