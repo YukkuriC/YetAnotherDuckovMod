@@ -12,7 +12,11 @@ namespace YukkuriC.AlienGuns.Ext
         public static void BindCustomFire(this ItemSetting_Gun gun, Action<Projectile> sub)
         {
             gun.bulletPfb = BulletLib.Bullets.BulletDelegate;
-            AlienGunFireEvents.EventsById[gun.Item.TypeID] = sub;
+            AlienGunEvents.FireEventsById[gun.Item.TypeID] = sub;
+        }
+        public static void BindCustomHurt(this ItemSetting_Gun gun, Action<Health, DamageInfo> sub)
+        {
+            AlienGunEvents.HurtEventsById[gun.Item.TypeID] = sub;
         }
         public static ItemSetting_Gun GetGun(this Projectile proj)
         {

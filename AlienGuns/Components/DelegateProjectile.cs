@@ -18,7 +18,7 @@ namespace YukkuriC.Misc
         void Update()
         {
             if (isPrefab) return;
-            AlienGunFireEvents.OnDelegateBulletShoot?.Invoke(this);
+            AlienGunEvents.OnDelegateBulletShoot?.Invoke(this);
             Release();
         }
     }

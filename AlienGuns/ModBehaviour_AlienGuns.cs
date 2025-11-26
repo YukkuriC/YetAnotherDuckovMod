@@ -24,13 +24,13 @@ namespace YukkuriC.AlienGuns
 
         void OnEnable()
         {
-            Events.AlienGunFireEvents.OnEnable();
+            Events.AlienGunEvents.OnEnable();
             LangEvents.OnEnable();
             FormulaRegistry.Load();
         }
         void OnDisable()
         {
-            Events.AlienGunFireEvents.OnDisable();
+            Events.AlienGunEvents.OnDisable();
             LangEvents.OnDisable();
             FormulaRegistry.Unload();
         }
