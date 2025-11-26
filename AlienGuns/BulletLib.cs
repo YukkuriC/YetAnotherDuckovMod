@@ -17,7 +17,7 @@ namespace YukkuriC
         public static Projectile ShootOneBullet(
             Projectile prefab, ProjectileContext projectileContext,
             Vector3 _muzzlePoint, Vector3 _shootDirection, ElementTypes element = ElementTypes.physics,
-            float speed = 3, float distance = 20, float scatter = 0,
+            float? speed = null, float? distance = null, float scatter = 0,
             Vector3? firstFrameCheckStartPoint = null
         )
         {
@@ -35,8 +35,8 @@ namespace YukkuriC
             projectileContext.firstFrameCheck = true;
             projectileContext.firstFrameCheckStartPoint = firstFrameCheckStartPoint ?? _muzzlePoint;
             projectileContext.direction = _shootDirection;
-            projectileContext.speed = speed;
-            projectileContext.distance = distance;
+            if (speed != null) projectileContext.speed = (float)speed;
+            if (distance != null) projectileContext.distance = (float)distance;
             projectileContext.halfDamageDistance = projectileContext.distance * 0.5f;
             if (projectileContext.critDamageFactor <= 0) projectileContext.critDamageFactor = 2;
             switch (element)
