@@ -1,4 +1,5 @@
-﻿using Duckov.Utilities;
+﻿using Duckov.Buffs;
+using Duckov.Utilities;
 using ItemStatsSystem;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,17 +9,36 @@ namespace YukkuriC.AlienGuns.Items.Guns
 {
     public static class PlagueShotgun
     {
+        static Buff FromElement(ElementTypes elem)
+        {
+            switch (elem)
+            {
+                case ElementTypes.fire:
+                    return GameplayDataSettings.Buffs.Burn;
+                case ElementTypes.poison:
+                    return GameplayDataSettings.Buffs.Poison;
+                case ElementTypes.electricity:
+                    return GameplayDataSettings.Buffs.Electric;
+                case ElementTypes.space:
+                    return GameplayDataSettings.Buffs.Space;
+            }
+            return null;
+        }
+
         static Collider[] cachedColliders = new Collider[10];
         public static void Init(Item item, ItemSetting_Gun gun)
         {
+            item.Stats.Add(new Stat("BuffChance", 0.2f, true));
             gun.BindCustomFire(p =>
             {
                 var context = p.context;
                 context.element_Physics = 0;
                 var randIdx = Random.Range(0, BulletLib.Bullets.ElementalBullets.Length);
+                var elem = BulletLib.Bullets.ElementalBulletTypes[randIdx];
+                context.buff = FromElement(elem);
                 BulletLib.ShootOneBullet(
                     BulletLib.Bullets.ElementalBullets[randIdx], context, p.transform.position, context.direction,
-                    BulletLib.Bullets.ElementalBulletTypes[randIdx], context.speed, context.distance,
+                    elem, context.speed, context.distance,
                     0, p.context.firstFrameCheckStartPoint
                 );
             });
@@ -36,6 +56,8 @@ namespace YukkuriC.AlienGuns.Items.Guns
                     distance = agent.BulletDistance,
                     armorBreak = dmgInfo.armorBreak,
                     armorPiercing = dmgInfo.armorPiercing - 0.5f,
+                    buff = dmgInfo.buff,
+                    buffChance = dmgInfo.buffChance,
                 };
                 if (context.armorPiercing < 0) return;
                 var victimChara = victim.TryGetCharacter();

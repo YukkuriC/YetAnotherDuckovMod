@@ -23,6 +23,7 @@ namespace CashAsAmmo
         {
             new CustomData("Caliber", ALL_BULLET_TYPES[0]) { Display=true },
             new CustomData("damageMultiplier", 1f) { Display=true },
+            new CustomData("buffChanceMultiplier", 1f) { Display=true },
         };
 
         void OnEnable()
