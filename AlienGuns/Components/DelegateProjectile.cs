@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using YukkuriC.AlienGuns.Events;
 
-namespace YukkuriC.Misc
+namespace YukkuriC.Components
 {
     public class DelegateProjectile : Projectile
     {

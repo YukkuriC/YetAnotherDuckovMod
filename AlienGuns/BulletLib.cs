@@ -1,11 +1,10 @@
-﻿using Duckov;
-using Duckov.Utilities;
+﻿using Duckov.Utilities;
 using ItemStatsSystem;
 using System.Collections.Generic;
 using UnityEngine;
-using YukkuriC.Misc;
+using YukkuriC.Components;
 
-namespace YukkuriC
+namespace YukkuriC.AlienGuns
 {
     public static class BulletLib
     {
