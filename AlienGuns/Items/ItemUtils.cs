@@ -16,6 +16,7 @@ namespace YukkuriC.AlienGuns.Items
             return template;
         }
 
+        public static ItemAgent GetAgent(this Item item, int idx = 0) => item.AgentUtilities.agents[idx].agentPrefab;
         public static ItemAgent CopyAgent(this Item item, int idx = 0)
         {
             var originalAgentHolder = item.AgentUtilities.agents[idx];

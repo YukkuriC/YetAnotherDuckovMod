@@ -33,6 +33,12 @@ namespace YukkuriC.AlienGuns.Items
             if (inited) return;
             inited = true;
 
+            // prepare parts
+            Transform partStormFist;
+            {
+                partStormFist = ItemAssetsCollection.GetPrefab(915).GetAgent().transform.Find("Model/GunModel/Pfb_WPN_SonicFist_P/pCylinder6");
+            }
+
             // 0. alien hand
             Material redMat;
             {
@@ -49,7 +55,7 @@ namespace YukkuriC.AlienGuns.Items
             // 2. elemental shotgun
             {
                 var item = GetNew(876, out var gun);
-                PlagueShotgun.Init(item, gun);
+                PlagueShotgun.Init(item, gun, partStormFist);
             }
         }
     }

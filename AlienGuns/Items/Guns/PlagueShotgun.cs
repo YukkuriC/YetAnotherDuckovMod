@@ -26,7 +26,7 @@ namespace YukkuriC.AlienGuns.Items.Guns
         }
 
         static Collider[] cachedColliders = new Collider[10];
-        public static void Init(Item item, ItemSetting_Gun gun)
+        public static void Init(Item item, ItemSetting_Gun gun,Transform stormFist)
         {
             item.Stats.Add(new Stat("BuffChance", 0.2f, true));
             gun.BindCustomFire(p =>
@@ -100,6 +100,15 @@ namespace YukkuriC.AlienGuns.Items.Guns
                     }
                 }
             });
+
+            var agent = item.CopyAgent();
+            var modelRoot = agent.transform.Find("Model");
+            stormFist = Object.Instantiate(stormFist);
+            stormFist.SetParent(modelRoot);
+            stormFist.localPosition = new Vector3(0, 0.07f, 0.74f);
+            stormFist.localEulerAngles = new Vector3(0, 90, 0);
+            stormFist.localScale = Vector3.one * 0.5f;
+            agent.GetComponent<CharacterSubVisuals>().SetRenderers();
         }
     }
 }
