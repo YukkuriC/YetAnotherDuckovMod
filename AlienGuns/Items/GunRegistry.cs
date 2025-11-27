@@ -57,6 +57,11 @@ namespace YukkuriC.AlienGuns.Items
                 var item = GetNew(876, out var gun);
                 PlagueShotgun.Init(item, gun, partStormFist);
             }
+
+            // 3. laser gun
+            {
+                var item = GetNew(655, out var gun);
+            }
         }
     }
 }

@@ -55,6 +55,7 @@
     <Publicize Include="TeamSoda.Duckov.Core:Movement.characterMovement" />
     <Publicize Include="TeamSoda.Duckov.Core:Projectile.Release" />
     <Publicize Include="TeamSoda.Duckov.Core:Projectile.direction" />
+    <Publicize Include="TeamSoda.Duckov.Core:Projectile.hitLayers" />
     <Publicize Include="TeamSoda.Duckov.Utilities:Duckov.Utilities.Tag.color" />
     <Publicize Include="TeamSoda.Duckov.Utilities:Duckov.Utilities.Tag.show" />
   </ItemGroup>
