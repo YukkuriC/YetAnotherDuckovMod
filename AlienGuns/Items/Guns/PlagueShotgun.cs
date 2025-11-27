@@ -44,7 +44,10 @@ namespace YukkuriC.AlienGuns.Items.Guns
             });
             gun.BindCustomHurt((victim, dmgInfo) =>
             {
+                if (dmgInfo.isFromBuffOrEffect) return;
                 if (!(dmgInfo.fromCharacter?.CurrentHoldItemAgent is ItemAgent_Gun agent)) return;
+                var newPiercing = dmgInfo.armorPiercing - 0.5f;
+                if (newPiercing < 0) return;
                 var context = new ProjectileContext
                 {
                     damage = dmgInfo.damageValue,
@@ -55,17 +58,16 @@ namespace YukkuriC.AlienGuns.Items.Guns
                     speed = agent.BulletSpeed,
                     distance = agent.BulletDistance,
                     armorBreak = dmgInfo.armorBreak,
-                    armorPiercing = dmgInfo.armorPiercing - 0.5f,
+                    armorPiercing = newPiercing,
                     buff = dmgInfo.buff,
                     buffChance = dmgInfo.buffChance,
                 };
-                if (context.armorPiercing < 0) return;
                 var victimChara = victim.TryGetCharacter();
                 if (victimChara == null) return;
                 var victimDmgReceiver = victimChara.mainDamageReceiver.gameObject;
                 var srcPos = dmgInfo.damagePoint;
-                var splitCount = victim.IsDead ? 4 : 2;
-                var splitAimCount = victim.IsDead ? 2 : 1;
+                var splitCount = victim.IsDead ? 6 : 2;
+                var splitAimCount = victim.IsDead ? 4 : 1;
                 var offsetY = dmgInfo.damagePoint.y - victimChara.transform.position.y;
 
                 // search nearby enemy pos
