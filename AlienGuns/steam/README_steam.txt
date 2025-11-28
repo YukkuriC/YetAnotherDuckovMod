@@ -1,7 +1,7 @@
 [h1]Alien Guns 外星枪械[/h1]
 
 [url=https://github.com/YukkuriC/YetAnotherDuckovMod/tree/main/AlienGuns] Github源代码 [/url]
-[url=https://www.bilibili.com/video/BV1qsU1BCEDY] 演示视频 [/url]
+[url=https://www.bilibili.com/video/BV1qsU1BCEDY] 演示视频 [/url] [url=https://www.bilibili.com/video/BV197SnBKEtp] 演示视频2 [/url]
 
 一堆什么都能射，就是射不了常规子弹的枪；???最有用的一集
 
@@ -23,5 +23,9 @@
     [list]
     [*]射出随机属性的子弹；在击中敌人后分裂并部分弹射至周围敌人。
     [*]子弹穿甲等级越高，可分裂的级数越多。
+    [/list]
+[*]M107 风暴(#3)
+    [list]
+    [*]射出高穿透性，且可以在障碍物表面反射的 [b]空间属性[/b] 光束。
     [/list]
 [/list]

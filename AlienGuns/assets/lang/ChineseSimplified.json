@@ -4,5 +4,7 @@
   "YukkuriC.AlienGun.1": "反方向的筒",
   "YukkuriC.AlienGun.1_Desc": "在脚下产生爆炸，并将玩家推离地面。",
   "YukkuriC.AlienGun.2": "MP-155 瘟疫",
-  "YukkuriC.AlienGun.2_Desc": "射出随机属性的子弹；在击中敌人后分裂并部分弹射至周围敌人。\n子弹穿甲等级越高，可分裂的级数越多。"
+  "YukkuriC.AlienGun.2_Desc": "射出随机属性的子弹；在击中敌人后分裂并部分弹射至周围敌人。\n子弹穿甲等级越高，可分裂的级数越多。",
+  "YukkuriC.AlienGun.3": "M107 风暴",
+  "YukkuriC.AlienGun.3_Desc": "射出高穿透性，且可以在障碍物表面反射的<color=purple>空间属性</color>光束。"
 }

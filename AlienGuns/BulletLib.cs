@@ -2,6 +2,7 @@
 using ItemStatsSystem;
 using System.Collections.Generic;
 using UnityEngine;
+using YukkuriC.AlienGuns.Components;
 using YukkuriC.Components;
 
 namespace YukkuriC.AlienGuns
@@ -94,6 +95,17 @@ namespace YukkuriC.AlienGuns
             if (dontDestroy) Object.DontDestroyOnLoad(ret);
             ret.gameObject.SetActive(false);
             return ret;
+        }
+        public static Projectile MakeLaserBullet(Projectile original, bool copy = true, bool dontDestroy = true)
+        {
+            if (copy) original = Object.Instantiate(original);
+            var trail = original.trail;
+            var obj = original.gameObject;
+            Object.Destroy(original);
+            var laser = obj.AddComponent<LaserProjectile>();
+            laser.trail = trail;
+            if (dontDestroy) Object.DontDestroyOnLoad(obj);
+            return laser;
         }
 
         static BulletLib()

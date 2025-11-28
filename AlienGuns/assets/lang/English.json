@@ -4,5 +4,7 @@
   "YukkuriC.AlienGun.1": "Reversed RPG",
   "YukkuriC.AlienGun.1_Desc": "Generates explosion beneath player, and pushes player into air.",
   "YukkuriC.AlienGun.2": "MP-155 PLAGUE",
-  "YukkuriC.AlienGun.2_Desc": "Shoots bullets of random elements, which split and ricochet to nearby enemies when hitting one.\nThe higher bullets' armor-piercing level they have, the more stages they will split and spread.'"
+  "YukkuriC.AlienGun.2_Desc": "Shoots bullets of random elements, which split and ricochet to nearby enemies when hitting one.\nThe higher bullets' armor-piercing level they have, the more stages they will split and spread.'",
+  "YukkuriC.AlienGun.3": "M107 Storm",
+  "YukkuriC.AlienGun.3_Desc": "Shoots high-penetration <color=purple>space</color> beam, which reflects on obstacle surfaces."
 }
