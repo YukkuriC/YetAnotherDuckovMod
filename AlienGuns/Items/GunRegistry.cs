@@ -20,6 +20,7 @@ namespace YukkuriC.AlienGuns.Items
             var res = ItemUtils.CopyItem(templateId, idOffset);
             Debug.Log($"[AlienGun] register item #{res.TypeID} from {res.DisplayName}#{templateId}");
             res.DisplayNameRaw = $"YukkuriC.AlienGun.{idOffset}";
+            res.Quality = 8;
             AddedGuns.Add(res);
             var icon = $"assets/textures/icon_{idOffset}.png".ToLooseTexture();
             if (icon != null) res.Icon = Sprite.Create(icon, new Rect(0, 0, icon.width, icon.height), Vector2.zero);
@@ -60,7 +61,8 @@ namespace YukkuriC.AlienGuns.Items
 
             // 3. laser gun
             {
-                var item = GetNew(655, out var gun);
+                var item = GetNew(407, out var gun);
+                GaussSniper.Init(item, gun);
             }
         }
     }

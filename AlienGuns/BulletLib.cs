@@ -65,53 +65,53 @@ namespace YukkuriC.AlienGuns
             projInst.Init(projectileContext);
             return projInst;
         }
-        public static class Bullets
+
+        #region bullets ref
+        // event trigger
+        public static readonly Projectile BulletDelegate;
+        // red/space balls
+        public static readonly Projectile BulletStorm = GetOriginalBulletPrefab(902);
+        public static readonly Projectile BulletRed = GetOriginalBulletPrefab(1239);
+        // elemental boss bullets
+        public static readonly Projectile
+            BulletPoison = GetOriginalBulletPrefab(914),
+            BulletFire = GetOriginalBulletPrefab(916),
+            BulletElectric = GetOriginalBulletPrefab(917),
+            BulletSpace = GetOriginalBulletPrefab(915);
+        public static readonly Projectile[] ElementalBullets = new Projectile[] { BulletPoison, BulletFire, BulletElectric, BulletSpace };
+        public static readonly ElementTypes[] ElementalBulletTypes = new ElementTypes[] { ElementTypes.poison, ElementTypes.fire, ElementTypes.electricity, ElementTypes.space };
+        public static readonly Dictionary<Projectile, ElementTypes> BulletElementMap = new Dictionary<Projectile, ElementTypes>();
+        public static readonly Dictionary<ElementTypes, Projectile> ElementalBulletMap = new Dictionary<ElementTypes, Projectile>();
+        #endregion
+
+        public static Projectile GetOriginalBulletPrefab(int gunId, bool copy = false, bool dontDestroy = true)
         {
-            // event trigger
-            public static readonly Projectile BulletDelegate;
-            // red/space balls
-            public static readonly Projectile BulletStorm = GetOriginalBulletPrefab(902);
-            public static readonly Projectile BulletRed = GetOriginalBulletPrefab(1239);
-            // elemental boss bullets
-            public static readonly Projectile
-                BulletPoison = GetOriginalBulletPrefab(914),
-                BulletFire = GetOriginalBulletPrefab(916),
-                BulletElectric = GetOriginalBulletPrefab(917),
-                BulletSpace = GetOriginalBulletPrefab(915);
-            public static readonly Projectile[] ElementalBullets = new Projectile[] { BulletPoison, BulletFire, BulletElectric, BulletSpace };
-            public static readonly ElementTypes[] ElementalBulletTypes = new ElementTypes[] { ElementTypes.poison, ElementTypes.fire, ElementTypes.electricity, ElementTypes.space };
-            public static readonly Dictionary<Projectile, ElementTypes> BulletElementMap = new Dictionary<Projectile, ElementTypes>();
-            public static readonly Dictionary<ElementTypes, Projectile> ElementalBulletMap = new Dictionary<ElementTypes, Projectile>();
+            Projectile ret = ItemAssetsCollection.GetPrefab(gunId)
+                ?.GetComponent<ItemSetting_Gun>()
+                ?.bulletPfb
+                ?? GameplayDataSettings.Prefabs.DefaultBullet;
+            if (copy) ret = Object.Instantiate(ret);
+            if (dontDestroy) Object.DontDestroyOnLoad(ret);
+            ret.gameObject.SetActive(false);
+            return ret;
+        }
 
-            public static Projectile GetOriginalBulletPrefab(int gunId, bool copy = false, bool dontDestroy = true)
+        static BulletLib()
+        {
+            BulletDelegate = GetOriginalBulletPrefab(0, true);
+            var copyProj = GetOriginalBulletPrefab(0, true);
+            var go = copyProj.gameObject;
+            Object.Destroy(go.GetComponent<Projectile>());
+            BulletDelegate = go.AddComponent<DelegateProjectile>().SetPrefab();
+            foreach (var b in ElementalBullets) Debug.Log(b);
+
+            // element map
+            for (var i = 0; i < ElementalBullets.Length; i++)
             {
-                Projectile ret = ItemAssetsCollection.GetPrefab(gunId)
-                    ?.GetComponent<ItemSetting_Gun>()
-                    ?.bulletPfb
-                    ?? GameplayDataSettings.Prefabs.DefaultBullet;
-                if (copy) ret = Object.Instantiate(ret);
-                if (dontDestroy) Object.DontDestroyOnLoad(ret);
-                ret.gameObject.SetActive(false);
-                return ret;
-            }
-
-            static Bullets()
-            {
-                BulletDelegate = GetOriginalBulletPrefab(0, true);
-                var copyProj = GetOriginalBulletPrefab(0, true);
-                var go = copyProj.gameObject;
-                Object.Destroy(go.GetComponent<Projectile>());
-                BulletDelegate = go.AddComponent<DelegateProjectile>().SetPrefab();
-                foreach (var b in ElementalBullets) Debug.Log(b);
-
-                // element map
-                for (var i = 0; i < ElementalBullets.Length; i++)
-                {
-                    var bullet = ElementalBullets[i];
-                    var elem = ElementalBulletTypes[i];
-                    BulletElementMap[bullet] = elem;
-                    ElementalBulletMap[elem] = bullet;
-                }
+                var bullet = ElementalBullets[i];
+                var elem = ElementalBulletTypes[i];
+                BulletElementMap[bullet] = elem;
+                ElementalBulletMap[elem] = bullet;
             }
         }
     }

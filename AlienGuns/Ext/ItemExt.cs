@@ -3,6 +3,7 @@ using Duckov.Utilities;
 using ItemStatsSystem;
 using ItemStatsSystem.Items;
 using System;
+using UnityEngine;
 using YukkuriC.AlienGuns.Events;
 
 namespace YukkuriC.AlienGuns.Ext
@@ -11,7 +12,7 @@ namespace YukkuriC.AlienGuns.Ext
     {
         public static void BindCustomFire(this ItemSetting_Gun gun, Action<Projectile> sub)
         {
-            gun.bulletPfb = BulletLib.Bullets.BulletDelegate;
+            gun.bulletPfb = BulletLib.BulletDelegate;
             AlienGunEvents.FireEventsById[gun.Item.TypeID] = sub;
         }
         public static void BindCustomHurt(this ItemSetting_Gun gun, Action<Health, DamageInfo> sub)
@@ -51,6 +52,33 @@ namespace YukkuriC.AlienGuns.Ext
         {
             builder.ApplyOverride(item);
             return item;
+        }
+
+        /// <summary>
+        /// var not handled: halfDamageDistance, damagePoint, damageNormal
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static DamageInfo ToDamage(this ProjectileContext context)
+        {
+            DamageInfo damageInfo = new DamageInfo(context.fromCharacter);
+            damageInfo.damageValue = context.damage;
+            damageInfo.critDamageFactor = context.critDamageFactor;
+            damageInfo.critRate = context.critRate;
+            damageInfo.armorPiercing = context.armorPiercing;
+            damageInfo.armorBreak = context.armorBreak;
+            damageInfo.elementFactors.Add(new ElementFactor(ElementTypes.physics, context.element_Physics));
+            damageInfo.elementFactors.Add(new ElementFactor(ElementTypes.fire, context.element_Fire));
+            damageInfo.elementFactors.Add(new ElementFactor(ElementTypes.poison, context.element_Poison));
+            damageInfo.elementFactors.Add(new ElementFactor(ElementTypes.electricity, context.element_Electricity));
+            damageInfo.elementFactors.Add(new ElementFactor(ElementTypes.space, context.element_Space));
+            damageInfo.elementFactors.Add(new ElementFactor(ElementTypes.ghost, context.element_Ghost));
+            damageInfo.buffChance = context.buffChance;
+            damageInfo.buff = context.buff;
+            damageInfo.bleedChance = context.bleedChance;
+            damageInfo.damageType = DamageTypes.normal;
+            damageInfo.fromWeaponItemID = context.fromWeaponItemID;
+            return damageInfo;
         }
     }
 }

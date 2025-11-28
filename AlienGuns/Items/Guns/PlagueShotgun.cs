@@ -33,11 +33,11 @@ namespace YukkuriC.AlienGuns.Items.Guns
             {
                 var context = p.context;
                 context.element_Physics = 0;
-                var randIdx = Random.Range(0, BulletLib.Bullets.ElementalBullets.Length);
-                var elem = BulletLib.Bullets.ElementalBulletTypes[randIdx];
+                var randIdx = Random.Range(0, BulletLib.ElementalBullets.Length);
+                var elem = BulletLib.ElementalBulletTypes[randIdx];
                 context.buff = FromElement(elem);
                 BulletLib.ShootOneBullet(
-                    BulletLib.Bullets.ElementalBullets[randIdx], context, p.transform.position, context.direction,
+                    BulletLib.ElementalBullets[randIdx], context, p.transform.position, context.direction,
                     elem, context.speed, context.distance,
                     0, p.context.firstFrameCheckStartPoint
                 );
@@ -93,7 +93,7 @@ namespace YukkuriC.AlienGuns.Items.Guns
                 {
                     foreach (var elem in dmgInfo.elementFactors)
                     {
-                        if (elem.factor <= 0 || !BulletLib.Bullets.ElementalBulletMap.TryGetValue(elem.elementType, out var bullet)) continue;
+                        if (elem.factor <= 0 || !BulletLib.ElementalBulletMap.TryGetValue(elem.elementType, out var bullet)) continue;
                         var targetDir = i < splitAimCount && hasTarget ? targets.GetRandom() - srcPos : Vector3.forward.RotateY(Random.value * 360);
                         var shot = BulletLib.ShootOneBullet(bullet, context, srcPos, targetDir, elem.elementType);
                         shot.damagedObjects.Add(victimDmgReceiver);
