@@ -17,11 +17,13 @@ namespace YukkuriC.AlienGuns.Components
         public float trailMaxAlpha = 1;
         public float recycleTarget = 0.5f;
         public bool doDamage = true;
+        public int maxReflectCount = 999;
 
         // tmp vars
         bool usedUp;
         float recycleTimer;
         Collider lastHitCollider;
+        int reflectCount;
 
         public void Awake()
         {
@@ -36,6 +38,7 @@ namespace YukkuriC.AlienGuns.Components
             usedUp = false;
             recycleTimer = 0;
             lastHitCollider = null;
+            reflectCount = maxReflectCount;
         }
         public void Update()
         {
@@ -70,7 +73,9 @@ namespace YukkuriC.AlienGuns.Components
                 {
                     context.distance -= hit.distance;
                     MoveSelf(hit.point, Vector3.Reflect(direction, hit.normal));
-                    if (hitFx) Instantiate<GameObject>(hitFx, hit.point, Quaternion.LookRotation(hit.normal, Vector3.up));
+                    if (hitFx) Instantiate(hitFx, hit.point, Quaternion.LookRotation(hit.normal, Vector3.up));
+                    reflectCount--;
+                    if (reflectCount < 0) usedUp = true;
                     return;
                 }
 

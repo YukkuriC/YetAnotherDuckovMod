@@ -29,6 +29,9 @@ namespace YukkuriC.AlienGuns
             }
             _shootDirection.Normalize();
 
+            Debug.Log($"shoot speed={speed} distance={distance} firstPoint={firstFrameCheckStartPoint}");
+            Debug.Log($"self speed={projectileContext.speed} distance={projectileContext.distance} firstPoint={projectileContext.firstFrameCheckStartPoint}");
+
             var projInst = LevelManager.Instance.BulletPool.GetABullet(prefab ?? GameplayDataSettings.Prefabs.DefaultBullet);
             projInst.transform.position = _muzzlePoint;
             projInst.transform.rotation = Quaternion.LookRotation(_shootDirection, Vector3.up);
@@ -96,7 +99,7 @@ namespace YukkuriC.AlienGuns
             ret.gameObject.SetActive(false);
             return ret;
         }
-        public static Projectile MakeLaserBullet(Projectile original, bool copy = true, bool dontDestroy = true)
+        public static LaserProjectile MakeLaserBullet(Projectile original, bool copy = true, bool dontDestroy = true)
         {
             if (copy) original = Object.Instantiate(original);
             var trail = original.trail;
@@ -104,6 +107,7 @@ namespace YukkuriC.AlienGuns
             Object.Destroy(original);
             var laser = obj.AddComponent<LaserProjectile>();
             laser.trail = trail;
+            laser.hitFx = original.hitFx;
             if (dontDestroy) Object.DontDestroyOnLoad(obj);
             return laser;
         }
