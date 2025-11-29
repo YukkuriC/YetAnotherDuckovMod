@@ -99,7 +99,13 @@ namespace YukkuriC.AlienGuns
             ret.gameObject.SetActive(false);
             return ret;
         }
-        public static LaserProjectile MakeLaserBullet(Projectile original, bool copy = true, bool dontDestroy = true)
+        public static Projectile CopyBullet(this Projectile bullet, bool dontDestroy = true)
+        {
+            bullet = Object.Instantiate(bullet);
+            if (dontDestroy) Object.DontDestroyOnLoad(bullet);
+            return bullet;
+        }
+        public static LaserProjectile MakeLaserBullet(this Projectile original, bool copy = true, bool dontDestroy = true)
         {
             if (copy) original = Object.Instantiate(original);
             var trail = original.trail;

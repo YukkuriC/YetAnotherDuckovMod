@@ -10,9 +10,9 @@ namespace YukkuriC.AlienGuns.Items.Guns
     {
         public static void Init(Item item, ItemSetting_Gun gun)
         {
-            var originalBullet = gun.bulletPfb;
-            var bulletMarkLowAmmo = BulletLib.BulletRed;
-            var bulletMarkEveryModulo = BulletLib.BulletPoison;
+            var originalBullet = gun.bulletPfb.CopyBullet();
+            var bulletMarkLowAmmo = BulletLib.BulletRed.CopyBullet();
+            var bulletMarkEveryModulo = BulletLib.BulletPoison.CopyBullet();
             gun.BindCustomFire(p =>
             {
                 var agent = p.context.fromCharacter?.CurrentHoldItemAgent;

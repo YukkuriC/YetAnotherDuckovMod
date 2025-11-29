@@ -15,7 +15,7 @@ namespace YukkuriC.AlienGuns.Items.Guns
             gun.element = ElementTypes.space;
             gun.buff = GameplayDataSettings.Buffs.Space;
 
-            var laserBullet = BulletLib.MakeLaserBullet(BulletLib.BulletSpace);
+            var laserBullet = BulletLib.BulletSpace.MakeLaserBullet();
             gun.bulletPfb = laserBullet;
 
             var agent = (ItemAgent_Gun)item.CopyAgent();
