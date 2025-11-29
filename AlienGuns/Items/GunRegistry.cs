@@ -64,6 +64,12 @@ namespace YukkuriC.AlienGuns.Items
                 var item = GetNew(407, out var gun);
                 GaussSniper.Init(item, gun);
             }
+
+            // 4. smart gun
+            {
+                var item = GetNew(788, out var gun);
+                SmartGun.Init(item, gun);
+            }
         }
     }
 }
