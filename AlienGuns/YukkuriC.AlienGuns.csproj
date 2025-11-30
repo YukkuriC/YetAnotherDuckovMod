@@ -58,6 +58,8 @@
     <Publicize Include="TeamSoda.Duckov.Core:Projectile.hitLayers" />
     <Publicize Include="TeamSoda.Duckov.Core:Projectile.hitFx" />
     <Publicize Include="TeamSoda.Duckov.Core:Projectile.trail" />
+    <Publicize Include="TeamSoda.Duckov.Core:Projectile.traveledDistance" />
+    <Publicize Include="TeamSoda.Duckov.Core:Projectile.velocity" />
     <Publicize Include="TeamSoda.Duckov.Core:Projectile.UpdateAimDirection" />
     <Publicize Include="TeamSoda.Duckov.Utilities:Duckov.Utilities.Tag.color" />
     <Publicize Include="TeamSoda.Duckov.Utilities:Duckov.Utilities.Tag.show" />
