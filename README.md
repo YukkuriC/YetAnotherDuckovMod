@@ -5,3 +5,4 @@
 -   [Nested Bag 套娃尿素袋](./NestedBag/README.md)
 -   [UITweaks YukkuriC 的 UI 调整 mod](./UITweaks/README.md)
 -   [Cash As Ammo 打钱](./CashAsAmmo/README.md)
+-   [Alien Guns 怪枪](./AlienGuns/README.md)

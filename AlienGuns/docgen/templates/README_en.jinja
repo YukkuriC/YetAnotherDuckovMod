@@ -1,0 +1,17 @@
+# Alien Guns 怪枪
+
+[[中文](./README.md)] [English]  
+[Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3611676083)
+
+A bunch of guns shooting anything istead of regular bullets; also the most useful case for ??? item :3
+
+_NOTE: all items IDs from this mod start from `"YukkuriC".GetHashCode() = 1206528349`, and all IDs shown below represents for the offset based on this_
+
+## Contents
+{% set data = prepare("English") -%}
+{% for gun in data %}
+-   {{ gun.name }}(#{{ gun.idx }})
+{%- for line in gun.descrip %}
+    -   {{ escape_md(line) }}
+{%- endfor %}
+{%- endfor %}
