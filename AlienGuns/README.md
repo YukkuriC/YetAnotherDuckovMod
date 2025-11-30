@@ -2,6 +2,8 @@
 
 [中文] [[English](./README_en.md)]  
 [Steam 创意工坊](https://steamcommunity.com/sharedfiles/filedetails/?id=3611676083)
+[演示视频](https://www.bilibili.com/video/BV1qsU1BCEDY)
+[演示视频2](https://www.bilibili.com/video/BV197SnBKEtp)
 
 一堆什么都能射，就是射不了常规子弹的枪；???最有用的一集
 

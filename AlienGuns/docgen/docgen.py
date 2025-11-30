@@ -15,6 +15,11 @@ if 'funcs':
         raw = raw.replace("</color>", "**</span>")
         return raw
 
+    def escape_steam(raw):
+        raw = re.sub(r"\<color=(.+?)\>", '[b]', raw)
+        raw = raw.replace("</color>", "[/b]")
+        return raw
+
     def prepare(lang):
         with open(f"../assets/lang/{lang}.json", encoding='utf-8') as f:
             raw = json.load(f)
@@ -41,3 +46,5 @@ if 'funcs':
 
 gen("README_en.jinja", "../README_en.md")
 gen("README_cn.jinja", "../README.md")
+gen("README_steam_cn.jinja", "../steam/README_steam.txt")
+gen("README_steam_en.jinja", "../steam/README_steam_en.txt")

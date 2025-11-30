@@ -1,0 +1,22 @@
+[h1]Alien Guns 怪枪[/h1]
+
+[url=https://github.com/YukkuriC/YetAnotherDuckovMod/tree/main/AlienGuns] Github源代码 [/url]
+[url=https://www.bilibili.com/video/BV1qsU1BCEDY] Showcase Video [/url] [url=https://www.bilibili.com/video/BV197SnBKEtp] Showcase Video 2 [/url]
+
+A bunch of guns shooting anything istead of regular bullets; also the most useful case for ??? item :3
+
+[i]NOTE: all items IDs from this mod start from [b]"YukkuriC".GetHashCode() = 1206528349[/b], and all IDs shown below represents for the offset based on this[/i]
+
+[h2]Contents[/h2]
+
+[list]
+{%- set data = prepare("English") -%}
+{% for gun in data %}
+[*]{{ gun.name }}(#{{ gun.idx }})
+    [list]
+    {%- for line in gun.descrip %}
+    [*]{{ escape_steam(line) }}
+    {%- endfor %}
+    [/list]
+{%- endfor %}
+[/list]

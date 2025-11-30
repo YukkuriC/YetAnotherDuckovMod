@@ -2,6 +2,8 @@
 
 [[中文](./README.md)] [English]  
 [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3611676083)
+[Showcase Video](https://www.bilibili.com/video/BV1qsU1BCEDY)
+[Showcase Video 2](https://www.bilibili.com/video/BV197SnBKEtp)
 
 A bunch of guns shooting anything istead of regular bullets; also the most useful case for ??? item :3
 
@@ -17,5 +19,5 @@ _NOTE: all items IDs from this mod start from `"YukkuriC".GetHashCode() = 120652
 -   MP-155 PLAGUE(#2)
     -   Shoots bullets of random elements, which split and ricochet to nearby enemies when hitting one.
     -   The higher bullets' armor-piercing level they have, the more stages they will split and spread.'
--   M107 Storm(#3)
+-   M107 STORM(#3)
     -   Shoots high-penetration <span style="color=purple">**space**</span> beam, which reflects on obstacle surfaces.

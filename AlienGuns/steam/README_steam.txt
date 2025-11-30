@@ -1,4 +1,4 @@
-[h1]Alien Guns 外星枪械[/h1]
+[h1]Alien Guns 怪枪[/h1]
 
 [url=https://github.com/YukkuriC/YetAnotherDuckovMod/tree/main/AlienGuns] Github源代码 [/url]
 [url=https://www.bilibili.com/video/BV1qsU1BCEDY] 演示视频 [/url] [url=https://www.bilibili.com/video/BV197SnBKEtp] 演示视频2 [/url]
@@ -13,7 +13,7 @@
 [*]法师之手(#0)
     [list]
     [*]神话生物的残片。
-    [*]会交替射出分散的 [b]火属性[/b] 与相对集中的 [b]空间属性[/b] 子弹。
+    [*]会交替射出分散的[b]火属性[/b]与相对集中的[b]空间属性[/b]子弹。
     [/list]
 [*]反方向的筒(#1)
     [list]
@@ -26,6 +26,6 @@
     [/list]
 [*]M107 风暴(#3)
     [list]
-    [*]射出高穿透性，且可以在障碍物表面反射的 [b]空间属性[/b] 光束。
+    [*]射出高穿透性，且可以在障碍物表面反射的[b]空间属性[/b]光束。
     [/list]
 [/list]
