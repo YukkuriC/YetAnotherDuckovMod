@@ -1,5 +1,8 @@
 ﻿using ItemStatsSystem;
+using System.Collections.Generic;
 using UnityEngine;
+using YukkuriC.AlienGuns.Interfaces;
+using static YukkuriC.AlienGuns.Items.Guns.SmartGun;
 
 namespace YukkuriC.AlienGuns.Items
 {
@@ -24,6 +27,15 @@ namespace YukkuriC.AlienGuns.Items
             agent.gameObject.SetActive(false);
             Object.DontDestroyOnLoad(agent.gameObject);
             return agent;
+        }
+
+        public static T AddUseItem<T>(this Item item) where T : UsageBehavior
+        {
+            item.AddUsageUtilitiesComponent();
+            var usage = item.gameObject.AddComponent<T>();
+            item.usageUtilities.behaviors.Add(usage);
+            if (usage is ISetMasterItem binder) binder.SetMaster(item);
+            return usage;
         }
     }
 }

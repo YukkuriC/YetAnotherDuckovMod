@@ -1,8 +1,11 @@
 ﻿using Duckov.Utilities;
 using ItemStatsSystem;
+using NodeCanvas.Tasks.Actions;
+using System.Collections.Generic;
 using UnityEngine;
 using YukkuriC.AlienGuns.Components;
 using YukkuriC.AlienGuns.Ext;
+using YukkuriC.AlienGuns.Interfaces;
 
 namespace YukkuriC.AlienGuns.Items.Guns
 {
@@ -47,18 +50,40 @@ namespace YukkuriC.AlienGuns.Items.Guns
                 if (!(agent is ItemAgent_Gun myGun)) return;
                 var moduloMark = myGun.BulletCount % 5 == 0;
                 var lastAmmos = myGun.BulletCount < 5;
-                var bullet = BulletLib.ShootOneBullet(lastAmmos ? bulletMarkLowAmmo : moduloMark ? bulletMarkEveryModulo : originalBullet,
-                    p.context, p.transform.position,
-                    p.context.direction, firstFrameCheckStartPoint: p.context.firstFrameCheckStartPoint);
-
                 // search near aim target
                 var nearChara = PickNearAim(player);
+                var initDir = p.context.direction;
+                //if (nearChara != null) initDir.y += 1;
+
+                var bullet = BulletLib.ShootOneBullet(lastAmmos ? bulletMarkLowAmmo : moduloMark ? bulletMarkEveryModulo : originalBullet,
+                    p.context, p.transform.position,
+                    initDir, firstFrameCheckStartPoint: p.context.firstFrameCheckStartPoint);
+
                 if (nearChara != null)
                 {
                     bullet.context.ignoreHalfObsticle = true;
                     bullet.GetComponent<SmartBulletTracker>()?.UpdateTarget(nearChara);
                 }
             });
+
+            // using switch ammo type
+            item.AddUseItem<SmartGunControl>();
+        }
+
+        // use item
+        public class SmartGunControl : UsageBehavior, ISetMasterItem
+        {
+            public Item master;
+            public override bool CanBeUsed(Item item, object user) => true;
+            public void SetMaster(Item master) => this.master = master;
+
+            protected override void OnUse(Item item, object user)
+            {
+                var chara = user as CharacterMainControl;
+                if (chara == null) return;
+                // TODO
+                chara.PopText(master.ToString());
+            }
         }
     }
 }
