@@ -1,6 +1,7 @@
 ﻿using Duckov.Utilities;
 using ItemStatsSystem;
 using NodeCanvas.Tasks.Actions;
+using SodaCraft.Localizations;
 using System.Collections.Generic;
 using UnityEngine;
 using YukkuriC.AlienGuns.Components;
@@ -35,9 +36,11 @@ namespace YukkuriC.AlienGuns.Items.Guns
             return res;
         }
 
+        static Vector3[] dirSplitTmp = new Vector3[2];
         public static void Init(Item item, ItemSetting_Gun gun)
         {
             item.DisplayQuality = DisplayQuality.Green;
+            item.Variables.SetInt("TrackMode", 0);
 
             var originalBullet = gun.bulletPfb.MakeSmartBullet();
             var bulletMarkLowAmmo = BulletLib.BulletRed.MakeSmartBullet();
@@ -53,16 +56,36 @@ namespace YukkuriC.AlienGuns.Items.Guns
                 // search near aim target
                 var nearChara = PickNearAim(player);
                 var initDir = p.context.direction;
-                //if (nearChara != null) initDir.y += 1;
-
-                var bullet = BulletLib.ShootOneBullet(lastAmmos ? bulletMarkLowAmmo : moduloMark ? bulletMarkEveryModulo : originalBullet,
-                    p.context, p.transform.position,
-                    initDir, firstFrameCheckStartPoint: p.context.firstFrameCheckStartPoint);
-
+                int splitCount = -1;
                 if (nearChara != null)
+                    switch (GetTrackMode(agent.Item))
+                    {
+                        case 1: initDir.y += 0.577f; break;
+                        case 2: initDir.y += 1; break;
+                        case 3: initDir.y += 1.732f; break;
+                        case 4:
+                            dirSplitTmp[0] = initDir.RotateY(30);
+                            dirSplitTmp[1] = initDir.RotateY(-30);
+                            splitCount = 2;
+                            p.context.damage /= 2;
+                            break;
+                    }
+                if (splitCount <= 0)
                 {
-                    bullet.context.ignoreHalfObsticle = true;
-                    bullet.GetComponent<SmartBulletTracker>()?.UpdateTarget(nearChara);
+                    splitCount = 1;
+                    dirSplitTmp[0] = initDir;
+                }
+                for (int i = 0; i < splitCount; i++)
+                {
+                    var bullet = BulletLib.ShootOneBullet(lastAmmos ? bulletMarkLowAmmo : moduloMark ? bulletMarkEveryModulo : originalBullet,
+                        p.context, p.transform.position,
+                        dirSplitTmp[i], firstFrameCheckStartPoint: p.context.firstFrameCheckStartPoint);
+
+                    if (nearChara != null)
+                    {
+                        bullet.context.ignoreHalfObsticle = true;
+                        bullet.GetComponent<SmartBulletTracker>()?.UpdateTarget(nearChara);
+                    }
                 }
             });
 
@@ -81,9 +104,15 @@ namespace YukkuriC.AlienGuns.Items.Guns
             {
                 var chara = user as CharacterMainControl;
                 if (chara == null) return;
-                // TODO
-                chara.PopText(master.ToString());
+                var oldMode = GetTrackMode(item);
+                var newMode = (oldMode + (chara.runInput ? 4 : 1)) % 5;
+                SetTrackMode(item, newMode);
+                chara.PopText(string.Format(LocalizationManager.GetPlainText("YukkuriC.AlienGun.TrackMode.base"), LocalizationManager.GetPlainText($"YukkuriC.AlienGun.TrackMode.{newMode}")));
             }
         }
+
+        static int trackModeHash = "TrackMode".GetHashCode();
+        static int GetTrackMode(Item item) => item.Variables.GetInt(trackModeHash);
+        static void SetTrackMode(Item item, int newVal) => item.Variables.SetInt(trackModeHash, newVal);
     }
 }

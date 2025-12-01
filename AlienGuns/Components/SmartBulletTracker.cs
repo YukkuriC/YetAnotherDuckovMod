@@ -8,7 +8,6 @@ namespace YukkuriC.AlienGuns.Components
         public Projectile bullet;
         public float updateDistStep = 3;
         public float enemyHeightOffset = 1f;
-        public float checkRange = 8;
         public float trackingSpeedScale = 0.5f;
 
         CharacterMainControl target;
@@ -34,7 +33,7 @@ namespace YukkuriC.AlienGuns.Components
                 var dst = target.transform.position;
                 dst.y += enemyHeightOffset;
                 var dir = (dst - src).normalized;
-                var checkReach = Physics.Raycast(src, dir, out var hit, checkRange, bullet.hitLayers);
+                var checkReach = Physics.Raycast(src, dir, out var hit, bullet.traveledDistance, bullet.hitLayers);
                 if (
                     checkReach
                     && hit.collider.GetComponent<DamageReceiver>()?.health?.TryGetCharacter() == target

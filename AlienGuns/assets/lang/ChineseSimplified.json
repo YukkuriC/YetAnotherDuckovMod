@@ -8,5 +8,11 @@
   "YukkuriC.AlienGun.3": "M107 风暴",
   "YukkuriC.AlienGun.3_Desc": "射出高穿透性，且可以在障碍物表面反射的<color=purple>空间属性</color>光束。",
   "YukkuriC.AlienGun.4": "智能MCX Spear",
-  "YukkuriC.AlienGun.4_Desc": "\"RTX ON!\"\n火控系统全面升级的MCX Spear，在机瞄状态会标记准心附近的敌人，并使子弹具有一定的追踪性。\n另外，每5颗子弹与最后5颗子弹替换为了不同颜色的曳光弹，用于提示使用者剩余弹量。"
+  "YukkuriC.AlienGun.4_Desc": "\"RTX ON!\"\n火控系统全面升级的MCX Spear，在机瞄状态会标记准心附近的敌人，并使子弹具有一定的追踪性。使用武器或双击快捷切换键以轮换追踪子弹发射方式，若按住奔跑键进行则以相反方向轮换。\n另外，每5颗子弹与最后5颗子弹替换为了不同颜色的曳光弹，用于提示使用者剩余弹量。",
+  "YukkuriC.AlienGun.TrackMode.base": "追踪模式：{0}",
+  "YukkuriC.AlienGun.TrackMode.0": "直线",
+  "YukkuriC.AlienGun.TrackMode.1": "30°抛射",
+  "YukkuriC.AlienGun.TrackMode.2": "45°抛射",
+  "YukkuriC.AlienGun.TrackMode.3": "60°抛射",
+  "YukkuriC.AlienGun.TrackMode.4": "30°横向分裂"
 }

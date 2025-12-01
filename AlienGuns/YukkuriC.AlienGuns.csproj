@@ -51,6 +51,7 @@
     <Publicize Include="ItemStatsSystem:ItemStatsSystem.Item.usageUtilities" />
     <Publicize Include="TeamSoda.Duckov.Core:CharacterInputControl.Bind" />
     <Publicize Include="TeamSoda.Duckov.Core:CharacterInputControl.Unbind" />
+    <Publicize Include="TeamSoda.Duckov.Core:CharacterMainControl.runInput" />
     <Publicize Include="TeamSoda.Duckov.Core:CraftingFormulaCollection.list" />
     <Publicize Include="TeamSoda.Duckov.Core:CraftingFormulaCollection._entries_ReadOnly" />
     <Publicize Include="TeamSoda.Duckov.Core:DecomposeDatabase.entries" />
