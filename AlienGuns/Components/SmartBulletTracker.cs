@@ -7,7 +7,7 @@ namespace YukkuriC.AlienGuns.Components
     {
         public Projectile bullet;
         public float updateDistStep = 3;
-        public float enemyHeightOffset = 1.6f;
+        public float enemyHeightOffset = 1f;
         public float checkRange = 8;
         public float trackingSpeedScale = 0.5f;
 

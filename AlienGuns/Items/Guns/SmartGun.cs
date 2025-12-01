@@ -34,6 +34,8 @@ namespace YukkuriC.AlienGuns.Items.Guns
 
         public static void Init(Item item, ItemSetting_Gun gun)
         {
+            item.DisplayQuality = DisplayQuality.Green;
+
             var originalBullet = gun.bulletPfb.MakeSmartBullet();
             var bulletMarkLowAmmo = BulletLib.BulletRed.MakeSmartBullet();
             var bulletMarkEveryModulo = BulletLib.BulletPoison.MakeSmartBullet();

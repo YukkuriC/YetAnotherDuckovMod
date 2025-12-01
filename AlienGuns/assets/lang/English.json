@@ -6,5 +6,7 @@
   "YukkuriC.AlienGun.2": "MP-155 PLAGUE",
   "YukkuriC.AlienGun.2_Desc": "Shoots bullets of random elements, which split and ricochet to nearby enemies when hitting one.\nThe higher bullets' armor-piercing level they have, the more stages they will split and spread.'",
   "YukkuriC.AlienGun.3": "M107 STORM",
-  "YukkuriC.AlienGun.3_Desc": "Shoots high-penetration <color=purple>space</color> beam, which reflects on obstacle surfaces."
+  "YukkuriC.AlienGun.3_Desc": "Shoots high-penetration <color=purple>space</color> beam, which reflects on obstacle surfaces.",
+  "YukkuriC.AlienGun.4": "Smarter MCX Spear",
+  "YukkuriC.AlienGun.4_Desc": "\"RTX ON!\"\nMCX Spear featuring a totally upgraded fire control system, marking enemies near the crosshair in ADS mode and applying tracking feature to bullets. Additionally, every fifth bullets and the last five bullets are replaced with different colored tracer rounds to indicate the user's remaining ammo."
 }

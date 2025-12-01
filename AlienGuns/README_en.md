@@ -21,3 +21,6 @@ _NOTE: all items IDs from this mod start from `"YukkuriC".GetHashCode() = 120652
     -   The higher bullets' armor-piercing level they have, the more stages they will split and spread.'
 -   M107 STORM(#3)
     -   Shoots high-penetration <span style="color=purple">**space**</span> beam, which reflects on obstacle surfaces.
+-   Smarter MCX Spear(#4)
+    -   "RTX ON!"
+    -   MCX Spear featuring a totally upgraded fire control system, marking enemies near the crosshair in ADS mode and applying tracking feature to bullets. Additionally, every fifth bullets and the last five bullets are replaced with different colored tracer rounds to indicate the user's remaining ammo.

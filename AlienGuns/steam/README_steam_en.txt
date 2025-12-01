@@ -28,4 +28,9 @@ A bunch of guns shooting anything istead of regular bullets; also the most usefu
     [list]
     [*]Shoots high-penetration [b]space[/b] beam, which reflects on obstacle surfaces.
     [/list]
+[*]Smarter MCX Spear(#4)
+    [list]
+    [*]"RTX ON!"
+    [*]MCX Spear featuring a totally upgraded fire control system, marking enemies near the crosshair in ADS mode and applying tracking feature to bullets. Additionally, every fifth bullets and the last five bullets are replaced with different colored tracer rounds to indicate the user's remaining ammo.
+    [/list]
 [/list]
