@@ -8,7 +8,9 @@ namespace ProjectileReflector
 {
     public partial class ModConfigEntry
     {
-        public const string CONFIG_FILE_NAME = ModBehaviour.HARMONY_ID + ".json";
+        public const string CONFIG_FILE_NAME_OLD = ModBehaviour.HARMONY_ID + ".json";
+        public const string CONFIG_FILE_NAME = ModBehaviour.HARMONY_ID + ".sav";
+        public static readonly string CONFIG_FILE_PATH_OLD = Path.Combine(SavesSystem.GetFullPathToSavesFolder(), CONFIG_FILE_NAME_OLD);
         public static readonly string CONFIG_FILE_PATH = Path.Combine(SavesSystem.GetFullPathToSavesFolder(), CONFIG_FILE_NAME);
         public static ModConfigEntry INSTANCE
         {
@@ -17,6 +19,21 @@ namespace ProjectileReflector
 
         public static void Init()
         {
+            // try remove old config
+            try
+            {
+                if (File.Exists(CONFIG_FILE_PATH_OLD))
+                {
+                    if (File.Exists(CONFIG_FILE_PATH)) File.Delete(CONFIG_FILE_PATH_OLD);
+                    else File.Move(CONFIG_FILE_PATH_OLD, CONFIG_FILE_PATH);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("[ProjectileReflector] upgrade config failed");
+                Debug.LogException(e);
+            }
+
             InitWatcher();
             TryLoadConfig();
         }
