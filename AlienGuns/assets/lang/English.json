@@ -8,5 +8,11 @@
   "YukkuriC.AlienGun.3": "M107 STORM",
   "YukkuriC.AlienGun.3_Desc": "Shoots high-penetration <color=purple>space</color> beam, which reflects on obstacle surfaces.",
   "YukkuriC.AlienGun.4": "Smarter MCX Spear",
-  "YukkuriC.AlienGun.4_Desc": "\"RTX ON!\"\nMCX Spear featuring a totally upgraded fire control system, marking enemies near the crosshair in ADS mode and applying tracking feature to bullets. Additionally, every fifth bullets and the last five bullets are replaced with different colored tracer rounds to indicate the user's remaining ammo."
+  "YukkuriC.AlienGun.4_Desc": "\"RTX ON!\"\nMCX Spear featuring a totally upgraded fire control system, marking enemies near the crosshair in ADS mode and applying tracking feature to bullets. Double-tap switch weapon hotkey to cycle the way it shoots tracked bullets, and doing so holding running key cycles the modes in the opposite direction.\nAdditionally, every fifth bullets and the last five bullets are replaced with different colored tracer rounds to indicate the user's remaining ammo.",
+  "YukkuriC.AlienGun.TrackMode.base": "{0} (Tracking Mode)",
+  "YukkuriC.AlienGun.TrackMode.0": "Straight line",
+  "YukkuriC.AlienGun.TrackMode.1": "30° Upper",
+  "YukkuriC.AlienGun.TrackMode.2": "45° Upper",
+  "YukkuriC.AlienGun.TrackMode.3": "60° Upper",
+  "YukkuriC.AlienGun.TrackMode.4": "30° Horizontal Split"
 }

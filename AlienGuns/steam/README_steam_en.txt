@@ -31,6 +31,7 @@ A bunch of guns shooting anything istead of regular bullets; also the most usefu
 [*]Smarter MCX Spear(#4)
     [list]
     [*]"RTX ON!"
-    [*]MCX Spear featuring a totally upgraded fire control system, marking enemies near the crosshair in ADS mode and applying tracking feature to bullets. Additionally, every fifth bullets and the last five bullets are replaced with different colored tracer rounds to indicate the user's remaining ammo.
+    [*]MCX Spear featuring a totally upgraded fire control system, marking enemies near the crosshair in ADS mode and applying tracking feature to bullets. Double-tap switch weapon hotkey to cycle the way it shoots tracked bullets, and doing so holding running key cycles the modes in the opposite direction.
+    [*]Additionally, every fifth bullets and the last five bullets are replaced with different colored tracer rounds to indicate the user's remaining ammo.
     [/list]
 [/list]
