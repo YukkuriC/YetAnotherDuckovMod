@@ -56,6 +56,9 @@
     <Publicize Include="TeamSoda.Duckov.Core:CraftingFormulaCollection._entries_ReadOnly" />
     <Publicize Include="TeamSoda.Duckov.Core:DecomposeDatabase.entries" />
     <Publicize Include="TeamSoda.Duckov.Core:DecomposeDatabase._dic" />
+    <Publicize Include="TeamSoda.Duckov.Core:Duckov.UI.HealthBarManager.GetActiveHealthBar" />
+    <Publicize Include="TeamSoda.Duckov.Core:Duckov.UI.HealthBar.Release" />
+    <Publicize Include="TeamSoda.Duckov.Core:ItemAgent_MeleeWeapon.setting" />
     <Publicize Include="TeamSoda.Duckov.Core:Movement.characterMovement" />
     <Publicize Include="TeamSoda.Duckov.Core:Projectile.Release" />
     <Publicize Include="TeamSoda.Duckov.Core:Projectile.direction" />

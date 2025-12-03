@@ -1,8 +1,6 @@
 ﻿using ItemStatsSystem;
-using ItemStatsSystem.Items;
 using System.Collections.Generic;
 using UnityEngine;
-using YukkuriC.AlienGuns.Components;
 using YukkuriC.AlienGuns.Ext;
 using YukkuriC.AlienGuns.Items.Guns;
 
@@ -69,6 +67,12 @@ namespace YukkuriC.AlienGuns.Items
             {
                 var item = GetNew(788, out var gun);
                 SmartGun.Init(item, gun);
+            }
+
+            // 5. chick spawner
+            {
+                var item = GetNew(1260, out var gun);
+                ChickSpawner.Init(item, gun);
             }
         }
     }
