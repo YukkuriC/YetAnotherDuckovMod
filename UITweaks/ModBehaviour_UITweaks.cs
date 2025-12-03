@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using ItemStatsSystem;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
@@ -17,6 +18,10 @@ namespace YukkuriC.UITweaks
             if (patcher == null) patcher = new Harmony(HARMONY_ID);
             patcher.PatchAll();
             Debug.Log("[UITweaks] Harmony patched");
+
+            // 暗改！
+            ItemAssetsCollection.GetPrefab(397).Inventory.SetCapacity(15);
+            ItemAssetsCollection.GetPrefab(388).MaxStackCount = 100;
         }
         void OnDisable()
         {
