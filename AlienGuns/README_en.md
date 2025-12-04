@@ -25,3 +25,5 @@ _NOTE: all items IDs from this mod start from `"YukkuriC".GetHashCode() = 120652
     -   "RTX ON!"
     -   MCX Spear featuring a totally upgraded fire control system, marking enemies near the crosshair in ADS mode and applying tracking feature to bullets. Double-tap switch weapon hotkey to cycle the way it shoots tracked bullets, and doing so holding running key cycles the modes in the opposite direction.
     -   Additionally, every fifth bullets and the last five bullets are replaced with different colored tracer rounds to indicate the user's remaining ammo.
+-   CCB-ChickBombs(#5)
+    -   Grandpa, let us serve your back a CCB massage!
