@@ -24,12 +24,14 @@ namespace YukkuriC.AlienGuns.Items.Guns
             item.Constants.SetString(GunRegistry.HASH_CALIBER, "PWL");
             item.Constants.SetFloat("ExplosionRange", EXPLOSIVE_RANGE);
             item.Stats["BulletSpeed"].BaseValue *= 0.6f;
+            item.Stats["Damage"].BaseValue *= 3;
+            item.Stats["ArmorPiercing"].BaseValue = 3;
 
             gun.BindCustomFire(p =>
             {
                 if (presetChick == null) presetChick = ResourceGrabber.Get<CharacterRandomPreset>("SpawnPreset_Animal_Jinitaimei");
                 var vel = p.velocity * (0.6f + Random.value * 0.4f);
-                vel += Vector3.up * (5 + Random.value * 5);
+                vel += Vector3.up * (5 + Random.value * 10);
                 SpawnChick(p.transform.position, vel, p.context).Forget();
             });
         }
