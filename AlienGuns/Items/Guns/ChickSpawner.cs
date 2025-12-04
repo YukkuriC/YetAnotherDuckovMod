@@ -11,6 +11,7 @@ namespace YukkuriC.AlienGuns.Items.Guns
 {
     public static class ChickSpawner
     {
+        const float PROB_RECURSIVE = 0.3f;
         const float EXPLOSIVE_RANGE = 4;
         static Buff[] FuseBuffs = new Buff[] {
             GameplayDataSettings.Buffs.Burn,
@@ -19,6 +20,7 @@ namespace YukkuriC.AlienGuns.Items.Guns
         };
 
         public static CharacterRandomPreset presetChick;
+        public static Tag tagMelee;
         public static void Init(Item item, ItemSetting_Gun gun)
         {
             item.Constants.SetString(GunRegistry.HASH_CALIBER, "PWL");
@@ -29,20 +31,28 @@ namespace YukkuriC.AlienGuns.Items.Guns
 
             gun.BindCustomFire(p =>
             {
-                if (presetChick == null) presetChick = ResourceGrabber.Get<CharacterRandomPreset>("SpawnPreset_Animal_Jinitaimei");
+                if (presetChick == null)
+                {
+                    presetChick = ResourceGrabber.Get<CharacterRandomPreset>("SpawnPreset_Animal_Jinitaimei");
+                    presetChick = Object.Instantiate(presetChick);
+                    Object.DontDestroyOnLoad(presetChick);
+                    presetChick.nameKey = "Cname_AlienGun.CCB";
+                }
                 var vel = p.velocity * (0.6f + Random.value * 0.4f);
                 vel += Vector3.up * (5 + Random.value * 10);
-                SpawnChick(p.transform.position, vel, p.context).Forget();
+                SpawnChick(p.transform.position, vel, p.context, Random.value < PROB_RECURSIVE).Forget();
             });
         }
 
-        public static async UniTask SpawnChick(Vector3 muzzle, Vector3 velocity, ProjectileContext ctx)
+        public static async UniTask SpawnChick(Vector3 muzzle, Vector3 velocity, ProjectileContext ctx, bool isBig)
         {
             var player = ctx.fromCharacter;
             if (player == null) return;
             var chick = await presetChick.CreateCharacterAsync(muzzle, velocity, MultiSceneCore.MainScene.Value.buildIndex, null, false);
             chick.SetPosition(muzzle);
             chick.dropBoxOnDead = false;
+            chick.CharacterItem.SetInt("Exp", 0);
+            chick.CharacterItem.DisplayNameRaw = "CName_CCB";
 
             // launch
             var mover = chick.movementControl.characterMovement;
@@ -86,6 +96,20 @@ namespace YukkuriC.AlienGuns.Items.Guns
             {
                 if (h.CurrentHealth == 1) h.CurrentHealth = 0;
             });
+
+            // 递归下崽器
+            if (isBig)
+            {
+                chick.transform.localScale *= 2;
+                chick.OnAttackEvent += (melee) =>
+                {
+                    var dir = chick.CurrentAimDirection;
+                    var vel = dir * ctx.speed * 0.5f * (0.6f + Random.value * 0.4f);
+                    vel += Vector3.up * (5 + Random.value * 10);
+                    SpawnChick(chick.transform.position, vel, ctx, false).Forget();
+                };
+                return;
+            }
 
             // hide health bar
             health.showHealthBar = false;
