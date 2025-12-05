@@ -40,12 +40,13 @@ namespace YukkuriC.AlienGuns.Items.Guns
                 }
                 var vel = p.velocity * (0.6f + Random.value * 0.4f);
                 vel += Vector3.up * (5 + Random.value * 10);
-                SpawnChick(p.transform.position, vel, p.context, Random.value < PROB_RECURSIVE).Forget();
+                SpawnChick(p.transform.position, vel, p.context).Forget();
             });
         }
 
-        public static async UniTask SpawnChick(Vector3 muzzle, Vector3 velocity, ProjectileContext ctx, bool isBig)
+        public static async UniTask SpawnChick(Vector3 muzzle, Vector3 velocity, ProjectileContext ctx, CharacterMainControl parentChick = null)
         {
+            var isBig = Random.value < PROB_RECURSIVE;
             var player = ctx.fromCharacter;
             if (player == null) return;
             var chick = await presetChick.CreateCharacterAsync(muzzle, velocity, MultiSceneCore.MainScene.Value.buildIndex, null, false);
@@ -68,20 +69,20 @@ namespace YukkuriC.AlienGuns.Items.Guns
             var fuseBuff = FuseBuffs.GetRandom();
             var changedElement = false;
             health.OnHurtEvent.AddListener(src =>
-            {
-                chick.AddBuff(fuseBuff);
-                if (src.fromCharacter == null && !changedElement)
                 {
-                    changedElement = true;
-                    if (chick.CurrentHoldItemAgent is ItemAgent_MeleeWeapon melee)
+                    chick.AddBuff(fuseBuff);
+                    if (src.fromCharacter == null && !changedElement)
                     {
-                        melee.setting.element = src.elementFactors.Find(x => x.factor > 0).elementType;
-                        melee.setting.buff = fuseBuff;
-                        melee.setting.buffChance = 0.3f;
-                    }
+                        changedElement = true;
+                        if (chick.CurrentHoldItemAgent is ItemAgent_MeleeWeapon melee)
+                        {
+                            melee.setting.element = src.elementFactors.Find(x => x.factor > 0).elementType;
+                            melee.setting.buff = fuseBuff;
+                            melee.setting.buffChance = 0.3f;
+                        }
 
-                }
-            });
+                    }
+                });
             chick.AddBuff(fuseBuff);
             chick.AddBuff(GameplayDataSettings.Buffs.Weight_Light);
 
@@ -106,9 +107,18 @@ namespace YukkuriC.AlienGuns.Items.Guns
                     var dir = chick.CurrentAimDirection;
                     var vel = dir * ctx.speed * 0.5f * (0.6f + Random.value * 0.4f);
                     vel += Vector3.up * (5 + Random.value * 10);
-                    SpawnChick(chick.transform.position, vel, ctx, false).Forget();
+                    SpawnChick(chick.transform.position, vel, ctx, chick).Forget();
                 };
-                return;
+            }
+            if (parentChick != null)
+            {
+                parentChick.Health.OnDeadEvent.AddListener(dmg =>
+                {
+                    if (health == null) return;
+                    dmg.damageValue = health.MaxHealth;
+                    dmg.damageType = DamageTypes.realDamage;
+                    health.Hurt(dmg);
+                });
             }
 
             // hide health bar
