@@ -4,6 +4,13 @@ from jinja2 import Environment, FileSystemLoader
 os.chdir(os.path.dirname(__file__))
 env = Environment(loader=FileSystemLoader('templates'))
 
+videos = [
+    # no single line
+    'BV1qsU1BCEDY',
+    'BV197SnBKEtp',
+    'BV1QC2WBPEcb',
+]
+
 if 'funcs':
 
     def escape_md(raw):

@@ -2,8 +2,9 @@
 
 [[中文](./README.md)] [English]  
 [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3611676083)
-[Showcase Video](https://www.bilibili.com/video/BV1qsU1BCEDY)
+[Showcase Video 1](https://www.bilibili.com/video/BV1qsU1BCEDY)
 [Showcase Video 2](https://www.bilibili.com/video/BV197SnBKEtp)
+[Showcase Video 3](https://www.bilibili.com/video/BV1QC2WBPEcb)
 
 A bunch of guns shooting anything istead of regular bullets; also the most useful case for ??? item :3
 

@@ -1,7 +1,7 @@
 [h1]Alien Guns 怪枪[/h1]
 
 [url=https://github.com/YukkuriC/YetAnotherDuckovMod/tree/main/AlienGuns] Github源代码 [/url]
-[url=https://www.bilibili.com/video/BV1qsU1BCEDY] Showcase Video [/url] [url=https://www.bilibili.com/video/BV197SnBKEtp] Showcase Video 2 [/url]
+[url=https://www.bilibili.com/video/BV1qsU1BCEDY] Showcase Video 1 [/url][url=https://www.bilibili.com/video/BV197SnBKEtp] Showcase Video 2 [/url][url=https://www.bilibili.com/video/BV1QC2WBPEcb] Showcase Video 3 [/url]
 
 A bunch of guns shooting anything istead of regular bullets; also the most useful case for ??? item :3
 

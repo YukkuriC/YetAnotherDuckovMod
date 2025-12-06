@@ -1,7 +1,7 @@
 [h1]Alien Guns 怪枪[/h1]
 
 [url=https://github.com/YukkuriC/YetAnotherDuckovMod/tree/main/AlienGuns] Github源代码 [/url]
-[url=https://www.bilibili.com/video/BV1qsU1BCEDY] 演示视频 [/url] [url=https://www.bilibili.com/video/BV197SnBKEtp] 演示视频2 [/url]
+[url=https://www.bilibili.com/video/BV1qsU1BCEDY] 演示视频1 [/url][url=https://www.bilibili.com/video/BV197SnBKEtp] 演示视频2 [/url][url=https://www.bilibili.com/video/BV1QC2WBPEcb] 演示视频3 [/url]
 
 一堆什么都能射，就是射不了常规子弹的枪；???最有用的一集
 
