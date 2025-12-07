@@ -52,10 +52,17 @@
     <Publicize Include="TeamSoda.Duckov.Core:CharacterInputControl.Bind" />
     <Publicize Include="TeamSoda.Duckov.Core:CharacterInputControl.Unbind" />
     <Publicize Include="TeamSoda.Duckov.Core:CharacterMainControl.runInput" />
+    <Publicize Include="TeamSoda.Duckov.Core:CharacterRandomPreset.characterModel" />
+    <Publicize Include="TeamSoda.Duckov.Core:CharacterRandomPreset.facePreset" />
+    <Publicize Include="TeamSoda.Duckov.Core:CharacterRandomPreset.bulletQualityDistribution" />
+    <Publicize Include="TeamSoda.Duckov.Core:CharacterRandomPreset.itemsToGenerate" />
+    <Publicize Include="TeamSoda.Duckov.Core:CharacterRandomPreset.usePlayerPreset" />
     <Publicize Include="TeamSoda.Duckov.Core:CraftingFormulaCollection.list" />
     <Publicize Include="TeamSoda.Duckov.Core:CraftingFormulaCollection._entries_ReadOnly" />
     <Publicize Include="TeamSoda.Duckov.Core:DecomposeDatabase.entries" />
     <Publicize Include="TeamSoda.Duckov.Core:DecomposeDatabase._dic" />
+    <Publicize Include="TeamSoda.Duckov.Core:Duckov.Economy.StockShop.merchantID" />
+    <Publicize Include="TeamSoda.Duckov.Core:Duckov.Economy.StockShop.refreshAfterTimeSpan" />
     <Publicize Include="TeamSoda.Duckov.Core:Duckov.UI.HealthBarManager.GetActiveHealthBar" />
     <Publicize Include="TeamSoda.Duckov.Core:Duckov.UI.HealthBar.Release" />
     <Publicize Include="TeamSoda.Duckov.Core:ItemAgent_MeleeWeapon.setting" />

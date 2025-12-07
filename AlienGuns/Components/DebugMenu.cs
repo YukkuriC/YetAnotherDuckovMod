@@ -1,4 +1,5 @@
-﻿using ItemStatsSystem;
+﻿using Duckov.Scenes;
+using ItemStatsSystem;
 using UnityEngine;
 using YukkuriC.AlienGuns.Items;
 
@@ -13,6 +14,8 @@ namespace YukkuriC.AlienGuns.Components
             if (Input.GetKeyDown(KeyCode.Keypad0))
             {
                 debugGUIShow = !debugGUIShow;
+                var player = CharacterMainControl.Main;
+                player.PopText($"{MultiSceneCore.Instance.SceneInfo.ID} {player.transform.position}");
             }
         }
         void OnGUI()

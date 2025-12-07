@@ -4,6 +4,7 @@ using UnityEngine;
 using YukkuriC.AlienGuns.Components;
 using YukkuriC.AlienGuns.Events;
 using YukkuriC.AlienGuns.Items;
+using YukkuriC.AlienGuns.Misc;
 
 namespace YukkuriC.AlienGuns
 {
@@ -27,12 +28,14 @@ namespace YukkuriC.AlienGuns
             Events.AlienGunEvents.OnEnable();
             LangEvents.OnEnable();
             FormulaRegistry.Load();
+            CustomMerchant.OnEnable();
         }
         void OnDisable()
         {
             Events.AlienGunEvents.OnDisable();
             LangEvents.OnDisable();
             FormulaRegistry.Unload();
+            CustomMerchant.OnDisable();
         }
     }
 }
