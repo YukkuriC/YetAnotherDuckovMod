@@ -16,6 +16,7 @@ namespace YukkuriC.AlienGuns.Ext
         static Assembly _myDll;
         static string _myDllName;
         static string _myDllPath;
+        static Dictionary<string, AssetBundle> _cachedABs = new Dictionary<string, AssetBundle>();
         static void InitDll()
         {
             if (_myDll == null)
@@ -66,5 +67,14 @@ namespace YukkuriC.AlienGuns.Ext
         }
         public static Texture2D ToResourceTexture(this string path, int width = 256, int height = 256) => ToTexture(GetResourceData(path), width, height);
         public static Texture2D ToLooseTexture(this string path, int width = 256, int height = 256) => ToTexture(GetLooseData(path), width, height);
+
+        public static AssetBundle ToAB(this string path)
+        {
+            InitDll();
+            if (_cachedABs.TryGetValue(path, out var ab)) return ab;
+            var fullPath = Path.Combine(_myDllPath, "ab", path);
+            if (!File.Exists(fullPath)) return null;
+            return _cachedABs[path] = AssetBundle.LoadFromFile(fullPath);
+        }
     }
 }
