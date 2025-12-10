@@ -15,7 +15,7 @@ namespace YukkuriC.AlienGuns.Components.BFG
         float attackTimer;
         Transform parentOrb;
         DamageInfo damage;
-        DamageReceiver victim;
+        Health victim;
 
         void Awake()
         {
@@ -33,7 +33,7 @@ namespace YukkuriC.AlienGuns.Components.BFG
         }
         public void BindVictim(DamageReceiver target)
         {
-            victim = target;
+            victim = target.health;
             transform.SetParent(target.transform);
         }
 

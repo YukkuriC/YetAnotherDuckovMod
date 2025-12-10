@@ -7,7 +7,7 @@ namespace YukkuriC.AlienGuns.Components.BFG
     public class BFGCore : BehaviourWithTimerModules
     {
         const float CHECK_CHARA_INTERVAL = 0.1f;
-        const float RANDOM_ARC_INTERVAL = 0.1f;
+        const float RANDOM_ARC_INTERVAL = 0.2f;
 
         public float CheckRange = 6f;
         public BFGArc prefabArc;
@@ -23,7 +23,7 @@ namespace YukkuriC.AlienGuns.Components.BFG
                 foreach (var collider in Physics.OverlapSphere(transform.position, CheckRange, GameplayDataSettings.Layers.damageReceiverLayerMask))
                 {
                     var receiver = collider.GetComponent<DamageReceiver>();
-                    if (receiver == null) continue;
+                    if (receiver?.health == null) continue;
 
                     // check chara team
                     if (receiver.health?.TryGetCharacter() is CharacterMainControl chara)
@@ -34,9 +34,12 @@ namespace YukkuriC.AlienGuns.Components.BFG
                     SpawnArc(receiver);
                 }
             });
+            var terrainMask = GameplayDataSettings.Layers.groundLayerMask | GameplayDataSettings.Layers.wallLayerMask;
             AddModule(RANDOM_ARC_INTERVAL, () =>
             {
-                // TODO
+                var dir = Random.onUnitSphere;
+                if (!Physics.Raycast(transform.position, dir, out var res, CheckRange, terrainMask)) return;
+                SpawnArc(res.point);
             });
         }
         public ProjectileContext Context => proj.context;
