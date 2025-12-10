@@ -74,6 +74,12 @@ namespace YukkuriC.AlienGuns.Items
                 var item = GetNew(1260, out var gun);
                 ChickSpawner.Init(item, gun);
             }
+
+            // 6. BFG
+            {
+                var item = GetNew(407, out var gun);
+                BFG.Init(item, gun);
+            }
         }
     }
 }
