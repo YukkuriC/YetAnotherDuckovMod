@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using YukkuriC.AlienGuns.Ext;
 
 namespace YukkuriC.AlienGuns.Components.BFG
@@ -12,7 +11,6 @@ namespace YukkuriC.AlienGuns.Components.BFG
         public float keepRange = 10f;
         public Transform srcMarker;
 
-        float attackTimer;
         Transform parentOrb;
         DamageInfo damage;
         Health victim;
@@ -57,6 +55,15 @@ namespace YukkuriC.AlienGuns.Components.BFG
 
             // update attack
             if (victim != null) base.Update();
+        }
+
+        public void ForceUpdateSubVisuals()
+        {
+            foreach (var sub in GetComponentsInChildren<BFGLineVisual>(true)) sub.ForceUpdate();
+        }
+        public void ResetSubVisualsForSave()
+        {
+            foreach (var sub in GetComponentsInChildren<BFGLineVisual>(true)) sub.ResetForSave();
         }
     }
 }
