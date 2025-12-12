@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
 namespace YukkuriC.AlienGuns.Components
@@ -8,7 +7,12 @@ namespace YukkuriC.AlienGuns.Components
     public abstract class BehaviourWithTimerModules : MonoBehaviour
     {
         protected List<TimerModule> modules = new List<TimerModule>();
-        public void AddModule(float _interval, Action _onTimed) => modules.Add(new TimerModule(_interval, _onTimed));
+        public TimerModule AddModule(float _interval, Action _onTimed)
+        {
+            var module = new TimerModule(_interval, _onTimed);
+            modules.Add(module);
+            return module;
+        }
 
         protected virtual void OnEnable()
         {
@@ -21,8 +25,8 @@ namespace YukkuriC.AlienGuns.Components
 
         public class TimerModule
         {
-            float timer, interval;
-            Action onTimed;
+            public float timer, interval;
+            public Action onTimed;
 
             public TimerModule(float _interval, Action _onTimed)
             {
@@ -32,7 +36,7 @@ namespace YukkuriC.AlienGuns.Components
 
             public void OnEnable()
             {
-                timer = 0;
+                timer = UnityEngine.Random.value * interval;
             }
             public void Update()
             {

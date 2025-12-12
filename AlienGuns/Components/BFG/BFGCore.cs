@@ -81,6 +81,7 @@ namespace YukkuriC.AlienGuns.Components.BFG
             {
                 var receiver = collider.GetComponent<DamageReceiver>();
                 if (receiver == null) continue;
+                var chara = receiver.health?.TryGetCharacter();
                 dmgToCheck.Attack(receiver, transform.position);
             }
         }
