@@ -1,6 +1,7 @@
 ﻿using Duckov.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
+using YukkuriC.AlienGuns.Ext;
 
 namespace YukkuriC.AlienGuns.Components.BFG
 {
@@ -10,39 +11,47 @@ namespace YukkuriC.AlienGuns.Components.BFG
         const float RANDOM_ARC_INTERVAL = 0.2f;
 
         public float CheckRange = 6f;
+        public float ExplodeRange = 9f;
         public BFGArc prefabArc;
 
         Projectile proj;
         Dictionary<DamageReceiver, BFGArc> charaMarked;
+        bool grabProjInfo;
+        DamageInfo dmgToCheck;
 
         void Awake()
         {
             proj = GetComponent<Projectile>();
             AddModule(CHECK_CHARA_INTERVAL, () =>
             {
+                if (!grabProjInfo)
+                {
+                    grabProjInfo = true;
+                    dmgToCheck = Context.ToDamage();
+                }
                 foreach (var collider in Physics.OverlapSphere(transform.position, CheckRange, GameplayDataSettings.Layers.damageReceiverLayerMask))
                 {
                     var receiver = collider.GetComponent<DamageReceiver>();
                     if (receiver?.health == null) continue;
-
-                    // check chara team
-                    if (receiver.health?.TryGetCharacter() is CharacterMainControl chara)
-                    {
-                        if (!Team.IsEnemy(chara.Team, Context.team) || chara.Dashing) continue;
-                    }
-
+                    if (!dmgToCheck.Attack(receiver, simulate: true)) continue;
                     SpawnArc(receiver);
                 }
             });
             var terrainMask = GameplayDataSettings.Layers.groundLayerMask | GameplayDataSettings.Layers.wallLayerMask;
             AddModule(RANDOM_ARC_INTERVAL, () =>
             {
-                var dir = Random.onUnitSphere;
+                var dir = Random.onUnitSphere + proj.direction;
                 if (!Physics.Raycast(transform.position, dir, out var res, CheckRange, terrainMask)) return;
                 SpawnArc(res.point);
             });
         }
-        public ProjectileContext Context => proj.context;
+        public ref ProjectileContext Context
+        {
+            get
+            {
+                return ref proj.context;
+            }
+        }
 
         BFGArc SpawnArc(Vector3 worldPos)
         {
@@ -63,7 +72,17 @@ namespace YukkuriC.AlienGuns.Components.BFG
         protected override void OnEnable()
         {
             base.OnEnable();
+            grabProjInfo = false;
             charaMarked = new Dictionary<DamageReceiver, BFGArc>();
+        }
+        void OnDisable()
+        {
+            foreach (var collider in Physics.OverlapSphere(transform.position, ExplodeRange, GameplayDataSettings.Layers.damageReceiverLayerMask))
+            {
+                var receiver = collider.GetComponent<DamageReceiver>();
+                if (receiver == null) continue;
+                dmgToCheck.Attack(receiver, transform.position);
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UIElements;
 using YukkuriC.AlienGuns.Ext;
+using static NodeCanvas.DialogueTrees.LocalizedMultipleChoiceNode;
 
 namespace YukkuriC.AlienGuns.Items.Guns
 {
@@ -31,10 +32,7 @@ namespace YukkuriC.AlienGuns.Items.Guns
                 };
                 LevelManager.Instance.ExplosionManager.CreateExplosion(center, 5, dmgInfo, canHurtSelf: false);
                 dmgInfo.damageValue /= 2;
-                dmgInfo.toDamageReceiver = player.mainDamageReceiver;
-                dmgInfo.damagePoint = player.transform.position + Vector3.up * 0.6f;
-                dmgInfo.damageNormal = (dmgInfo.damagePoint - center).normalized;
-                player.mainDamageReceiver.Hurt(dmgInfo);
+                dmgInfo.Attack(player.mainDamageReceiver, noFriendlyFire: false, dashingEvades: false);
 
                 // push chara
                 var mover = player.movementControl.characterMovement;

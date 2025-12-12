@@ -117,7 +117,7 @@ namespace YukkuriC.AlienGuns.Items.Guns
                     if (health == null) return;
                     dmg.damageValue = health.MaxHealth;
                     dmg.damageType = DamageTypes.realDamage;
-                    health.Hurt(dmg);
+                    dmg.Attack(chick.mainDamageReceiver, noFriendlyFire: false, dashingEvades: false);
                 });
             }
 

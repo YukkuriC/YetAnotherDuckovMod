@@ -19,8 +19,8 @@ namespace YukkuriC.AlienGuns.Components.BFG
             var srcPos = src.position;
             var dstPos = dst.position;
             var list = BuildArc(srcPos, dstPos, true).ToArray();
-            line.SetPositions(list);
             line.positionCount = list.Length;
+            line.SetPositions(list);
         }
 
         IEnumerable<Vector3> BuildArc(Vector3 start, Vector3 end, bool outputEnd = false)

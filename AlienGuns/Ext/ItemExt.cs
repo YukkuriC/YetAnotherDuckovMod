@@ -59,7 +59,7 @@ namespace YukkuriC.AlienGuns.Ext
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static DamageInfo ToDamage(this ProjectileContext context)
+        public static DamageInfo ToDamage(ref this ProjectileContext context)
         {
             DamageInfo damageInfo = new DamageInfo(context.fromCharacter);
             damageInfo.damageValue = context.damage;
@@ -79,6 +79,26 @@ namespace YukkuriC.AlienGuns.Ext
             damageInfo.damageType = DamageTypes.normal;
             damageInfo.fromWeaponItemID = context.fromWeaponItemID;
             return damageInfo;
+        }
+        public static bool Attack(ref this DamageInfo dmgInfo, DamageReceiver target, Vector3? srcPos = null, bool noFriendlyFire = true, bool dashingEvades = true, bool simulate = false)
+        {
+            if (noFriendlyFire && !Team.IsEnemy(target.Team, dmgInfo.fromCharacter?.Team ?? Teams.all)) return false;
+            Debug.Log($"set={noFriendlyFire} myTeam={dmgInfo.fromCharacter?.Team} targetTeam={target.Team}");
+            if (dashingEvades)
+            {
+                var chara = target.health?.TryGetCharacter();
+                if (chara != null && chara.Dashing) return false;
+            }
+            if (!simulate)
+            {
+                dmgInfo.damagePoint = target.transform.position;
+                dmgInfo.damagePoint.y += 0.6f;
+                if (srcPos is Vector3 srcVec) dmgInfo.damageNormal = (srcVec - target.transform.position).normalized;
+                else dmgInfo.damageNormal = Vector3.up;
+                target.Hurt(dmgInfo);
+                target.AddBuff(GameplayDataSettings.Buffs.Pain, dmgInfo.fromCharacter);
+            }
+            return true;
         }
     }
 }

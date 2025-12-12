@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.XR;
 using YukkuriC.AlienGuns.Components.Containers;
 using YukkuriC.AlienGuns.Ext;
 
@@ -18,9 +19,11 @@ namespace YukkuriC.AlienGuns.Items.Guns
             gun.bulletPfb = gunRef.bullet;
 
             // stats
-            item.Stats["BulletSpeed"].BaseValue = 3f;
+            item.Constants.SetString(GunRegistry.HASH_CALIBER, "PWL");
+            item.Stats["BulletSpeed"].BaseValue = 7.5f;
             item.Stats["Damage"].BaseValue = 50;
             item.Stats["ArmorPiercing"].BaseValue = 65535;
+            gun.element = ElementTypes.space;
         }
     }
 }

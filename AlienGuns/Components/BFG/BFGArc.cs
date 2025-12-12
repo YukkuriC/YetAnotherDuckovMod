@@ -13,13 +13,13 @@ namespace YukkuriC.AlienGuns.Components.BFG
 
         Transform parentOrb;
         DamageInfo damage;
-        Health victim;
+        DamageReceiver victim;
 
         void Awake()
         {
             AddModule(ATTACK_INTERVAL, () =>
             {
-                victim.Hurt(damage);
+                damage.Attack(victim, srcMarker.position, noFriendlyFire: false, dashingEvades: false);
             });
         }
 
@@ -28,10 +28,11 @@ namespace YukkuriC.AlienGuns.Components.BFG
             parentOrb = parent.transform;
             damage = parent.Context.ToDamage();
             damage.damageValue *= DAMAGE_MULT;
+            damage.critRate = 0;
         }
         public void BindVictim(DamageReceiver target)
         {
-            victim = target.health;
+            victim = target;
             transform.SetParent(target.transform);
         }
 
