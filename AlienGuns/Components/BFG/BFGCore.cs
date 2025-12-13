@@ -84,6 +84,7 @@ namespace YukkuriC.AlienGuns.Components.BFG
         }
         void OnDisable()
         {
+            if (!LevelManager.LevelInited) return;
             var checkPos = transform.position;
             // special handle: shoot on wall
             if (proj.firstFrame) checkPos = Context.firstFrameCheckStartPoint;
