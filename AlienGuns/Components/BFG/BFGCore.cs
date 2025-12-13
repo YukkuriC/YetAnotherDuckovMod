@@ -13,6 +13,7 @@ namespace YukkuriC.AlienGuns.Components.BFG
         public float CheckRange = 6f;
         public float ExplodeRange = 9f;
         public BFGArc prefabArc;
+        public GameObject prefabExplodeFx;
 
         Projectile proj;
         Dictionary<DamageReceiver, BFGArc> charaMarked;
@@ -24,11 +25,7 @@ namespace YukkuriC.AlienGuns.Components.BFG
             proj = GetComponent<Projectile>();
             AddModule(CHECK_CHARA_INTERVAL, () =>
             {
-                if (!grabProjInfo)
-                {
-                    grabProjInfo = true;
-                    dmgToCheck = Context.ToDamage();
-                }
+                RefreshDamageInfo();
                 foreach (var collider in Physics.OverlapSphere(transform.position, CheckRange, GameplayDataSettings.Layers.damageReceiverLayerMask))
                 {
                     var receiver = collider.GetComponent<DamageReceiver>();
@@ -50,6 +47,15 @@ namespace YukkuriC.AlienGuns.Components.BFG
             get
             {
                 return ref proj.context;
+            }
+        }
+        void RefreshDamageInfo()
+        {
+            if (!grabProjInfo)
+            {
+                grabProjInfo = true;
+                dmgToCheck = Context.ToDamage();
+                dmgToCheck.critRate = 0;
             }
         }
 
@@ -77,13 +83,21 @@ namespace YukkuriC.AlienGuns.Components.BFG
         }
         void OnDisable()
         {
-            foreach (var collider in Physics.OverlapSphere(transform.position, ExplodeRange, GameplayDataSettings.Layers.damageReceiverLayerMask))
+            var checkPos = transform.position;
+            // special handle: shoot on wall
+            if (proj.firstFrame) checkPos = Context.firstFrameCheckStartPoint;
+
+            RefreshDamageInfo();
+            foreach (var collider in Physics.OverlapSphere(checkPos, ExplodeRange, GameplayDataSettings.Layers.damageReceiverLayerMask))
             {
                 var receiver = collider.GetComponent<DamageReceiver>();
                 if (receiver == null) continue;
                 var chara = receiver.health?.TryGetCharacter();
                 dmgToCheck.Attack(receiver, transform.position);
             }
+            var explode = Instantiate(prefabExplodeFx);
+            explode.transform.position = checkPos;
+            explode.gameObject.SetActive(true);
         }
     }
 }

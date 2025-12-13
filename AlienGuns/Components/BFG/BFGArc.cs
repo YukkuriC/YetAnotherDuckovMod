@@ -9,6 +9,7 @@ namespace YukkuriC.AlienGuns.Components.BFG
         const float DAMAGE_MULT = 0.1f;
 
         public float keepRange = 10f;
+        public float keepRangeStatic = 10f;
         public Transform srcMarker;
 
         Transform parentOrb;
@@ -45,7 +46,8 @@ namespace YukkuriC.AlienGuns.Components.BFG
                 return;
             }
             var parentPos = parentOrb.position;
-            if (Vector3.Distance(parentPos, transform.position) > keepRange)
+            var dist = Vector3.Distance(parentPos, transform.position);
+            if (dist > keepRange || (victim == null && dist > keepRangeStatic))
             {
                 Destroy(gameObject);
                 return;

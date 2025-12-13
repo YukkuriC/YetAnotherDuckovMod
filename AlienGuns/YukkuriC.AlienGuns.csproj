@@ -69,6 +69,7 @@
     <Publicize Include="TeamSoda.Duckov.Core:Movement.characterMovement" />
     <Publicize Include="TeamSoda.Duckov.Core:Projectile.Release" />
     <Publicize Include="TeamSoda.Duckov.Core:Projectile.direction" />
+    <Publicize Include="TeamSoda.Duckov.Core:Projectile.firstFrame" />
     <Publicize Include="TeamSoda.Duckov.Core:Projectile.hitLayers" />
     <Publicize Include="TeamSoda.Duckov.Core:Projectile.hitFx" />
     <Publicize Include="TeamSoda.Duckov.Core:Projectile.trail" />

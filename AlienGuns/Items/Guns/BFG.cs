@@ -23,6 +23,7 @@ namespace YukkuriC.AlienGuns.Items.Guns
             item.Stats["BulletSpeed"].BaseValue = 7.5f;
             item.Stats["Damage"].BaseValue = 50;
             item.Stats["ArmorPiercing"].BaseValue = 65535;
+            item.Stats["Penetrate"].BaseValue = 0;
             gun.element = ElementTypes.space;
         }
     }

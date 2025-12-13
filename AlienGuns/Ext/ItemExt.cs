@@ -83,7 +83,6 @@ namespace YukkuriC.AlienGuns.Ext
         public static bool Attack(ref this DamageInfo dmgInfo, DamageReceiver target, Vector3? srcPos = null, bool noFriendlyFire = true, bool dashingEvades = true, bool simulate = false)
         {
             if (noFriendlyFire && !Team.IsEnemy(target.Team, dmgInfo.fromCharacter?.Team ?? Teams.all)) return false;
-            Debug.Log($"set={noFriendlyFire} myTeam={dmgInfo.fromCharacter?.Team} targetTeam={target.Team}");
             if (dashingEvades)
             {
                 var chara = target.health?.TryGetCharacter();
