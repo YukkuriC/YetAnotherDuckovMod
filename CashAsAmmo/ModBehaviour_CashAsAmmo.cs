@@ -11,9 +11,7 @@ namespace CashAsAmmo
     {
         const int CASH_ID = 451;
         public const string LANG_KEY_POPUP = "YukkuriC.CashAsAmmo.Pop";
-        public static string[] ALL_BULLET_TYPES = new string[] {
-            "AR", "BR", "SHT", "SNP", "MAG", "PWL", "PWS", "SMG"
-        };
+        public const string LANG_KEY_TOOLTIP = "YukkuriC.CashAsAmmo.Tooltip";
         public static int HASH_CALIBER = "Caliber".GetHashCode();
 
         static readonly string[] TAGS_ADD = new string[] {
@@ -21,7 +19,7 @@ namespace CashAsAmmo
         };
         static readonly CustomData[] BULLET_CONSTANTS = new CustomData[]
         {
-            new CustomData("Caliber", ALL_BULLET_TYPES[0]) { Display=true },
+            new CustomData("Caliber", LANG_KEY_TOOLTIP) { Display=true },
             new CustomData("damageMultiplier", 1f) { Display=true },
             new CustomData("buffChanceMultiplier", 1f) { Display=true },
         };
@@ -52,6 +50,9 @@ namespace CashAsAmmo
                 go.AddComponent<SwapAmmoTypeAction>()
             };
 
+            // inject player switch item
+            LevelManager.OnAfterLevelInitialized += SwapAmmoTypeAction.OnAfterLevelInit;
+
             // lang
             LocalizationManager.OnSetLanguage += UpdateLang;
             UpdateLang(LocalizationManager.CurrentLanguage);
@@ -74,6 +75,10 @@ namespace CashAsAmmo
             cash.Constants.Remove(cash.Constants.GetEntry(HASH_CALIBER));
             Destroy(go.GetComponent<UsageUtilities>());
             Destroy(go.GetComponent<SwapAmmoTypeAction>());
+
+            // release events
+            LevelManager.OnAfterLevelInitialized -= SwapAmmoTypeAction.OnAfterLevelInit;
+            LocalizationManager.OnSetLanguage -= UpdateLang;
         }
         Tag CreateTagWithKey(string tagKey)
         {
@@ -89,11 +94,13 @@ namespace CashAsAmmo
                 default:
                 case SystemLanguage.English:
                     LocalizationManager.SetOverrideText(LANG_KEY_POPUP, "Switch bullet type to");
+                    LocalizationManager.SetOverrideText(LANG_KEY_TOOLTIP, "Switches bullet type to current holding weapon's caliber");
                     break;
                 case SystemLanguage.Chinese:
                 case SystemLanguage.ChineseSimplified:
                 case SystemLanguage.ChineseTraditional:
                     LocalizationManager.SetOverrideText(LANG_KEY_POPUP, "子弹类型切换至");
+                    LocalizationManager.SetOverrideText(LANG_KEY_TOOLTIP, "将子弹类型切换至手持武器口径");
                     break;
             }
         }
