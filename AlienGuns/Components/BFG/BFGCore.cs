@@ -1,4 +1,5 @@
-﻿using Duckov.Utilities;
+﻿using Duckov;
+using Duckov.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
 using YukkuriC.AlienGuns.Ext;
@@ -37,7 +38,7 @@ namespace YukkuriC.AlienGuns.Components.BFG
             var terrainMask = GameplayDataSettings.Layers.groundLayerMask | GameplayDataSettings.Layers.wallLayerMask;
             AddModule(RANDOM_ARC_INTERVAL, () =>
             {
-                var dir = Random.onUnitSphere + proj.direction;
+                var dir = Random.onUnitSphere + proj.direction * 0.5f;
                 if (!Physics.Raycast(transform.position, dir, out var res, CheckRange, terrainMask)) return;
                 SpawnArc(res.point);
             });
@@ -98,6 +99,7 @@ namespace YukkuriC.AlienGuns.Components.BFG
             var explode = Instantiate(prefabExplodeFx);
             explode.transform.position = checkPos;
             explode.gameObject.SetActive(true);
+            HardwareSyncingManager.SetEvent("Explosion");
         }
     }
 }

@@ -49,6 +49,7 @@
     </PackageReference>
     <Publicize Include="ItemStatsSystem:ItemStatsSystem.ItemAgentUtilities.agents" />
     <Publicize Include="ItemStatsSystem:ItemStatsSystem.Item.usageUtilities" />
+    <Publicize Include="ItemStatsSystem:ItemStatsSystem.Item.weight" />
     <Publicize Include="TeamSoda.Duckov.Core:CharacterInputControl.Bind" />
     <Publicize Include="TeamSoda.Duckov.Core:CharacterInputControl.Unbind" />
     <Publicize Include="TeamSoda.Duckov.Core:CharacterMainControl.runInput" />
