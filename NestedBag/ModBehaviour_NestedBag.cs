@@ -73,6 +73,10 @@ namespace NestedBag
                 stats.list = new List<Stat>();
             }
 
+            // accessories settings
+            var acc = go.GetComponent<ItemSetting_Accessory>();
+            if (acc == null) acc = go.AddComponent<ItemSetting_Accessory>();
+
             // modifier: use hacked one
             if (bag.modifiers) Destroy(bag.modifiers);
             bag.modifiers = go.AddComponent<HackedModifiers>();
@@ -110,6 +114,7 @@ namespace NestedBag
             bag.modifiers = null;
             foreach (var tagKey in TAGS_ADD) bag.Tags.Remove(CreateTagWithKey(tagKey));
             foreach (var tagKey in TAGS_ADD_HIDE) bag.Tags.Remove(CreateTagWithKey(tagKey));
+            Destroy(go.GetComponent<ItemSetting_Accessory>());
 
             // lang
             LocalizationManager.OnSetLanguage -= FillLang;
