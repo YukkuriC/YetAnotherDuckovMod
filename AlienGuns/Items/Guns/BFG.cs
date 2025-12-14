@@ -38,19 +38,18 @@ namespace YukkuriC.AlienGuns.Items.Guns
             gun.shootKey = "stormboss";
 
             // ammo stats
-            ammoPiece.ApplyAmmoStats(0.5f);
-            ItemAssetsCollection.GetPrefab(388).ApplyAmmoStats(5f);
+            ammoPiece.MaxStackCount = 100;
+            var theRealAmmoTag = ItemAssetsCollection.GetPrefab(594).Tags.list.Find(x => x.name == "Bullet"); // CraftView.CheckFilter用的array查找，憨吧
+            ammoPiece.ApplyAmmoStats(0.5f, theRealAmmoTag);
+            ItemAssetsCollection.GetPrefab(388).ApplyAmmoStats(5f, theRealAmmoTag);
         }
 
-        static void ApplyAmmoStats(this Item target, float damageMult)
+        static void ApplyAmmoStats(this Item target, float damageMult, Tag tagAmmo)
         {
             if (target.GetComponent<ItemSetting_Bullet>() == null) target.gameObject.AddComponent<ItemSetting_Bullet>();
             target.Constants.Add(new CustomData("damageMultiplier", damageMult) { Display = true });
             foreach (var entry in BULLET_CONSTANTS) target.Constants.Add(entry);
-            var tag = ScriptableObject.CreateInstance<Tag>();
-            tag.name = "Bullet";
-            tag.show = true;
-            target.Tags.Add(tag);
+            target.Tags.Add(tagAmmo);
         }
     }
 }
