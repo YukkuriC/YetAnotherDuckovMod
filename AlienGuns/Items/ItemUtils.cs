@@ -39,12 +39,12 @@ namespace YukkuriC.AlienGuns.Items
             return usage;
         }
 
-        public static void AddMaterialToGun(ItemAgent_Gun agent, string matName, int rendererIndex = 0) => AddMaterialToGun(agent, ResourceGrabber.Get<Material>(matName), rendererIndex);
-        public static void AddMaterialToGun(ItemAgent_Gun agent, Material mat, int rendererIndex = 0)
+        public static void AddMaterialToGun(ItemAgent_Gun agent, string matName, int rendererIndex = 0, bool clearOriginal = false) => AddMaterialToGun(agent, ResourceGrabber.Get<Material>(matName), rendererIndex, clearOriginal);
+        public static void AddMaterialToGun(ItemAgent_Gun agent, Material mat, int rendererIndex = 0, bool clearOriginal = false)
         {
             var renderer = agent.GetComponent<CharacterSubVisuals>().renderers[0];
             var tmpList = new List<Material>();
-            renderer.GetMaterials(tmpList);
+            if (!clearOriginal) renderer.GetMaterials(tmpList);
             tmpList.Add(mat);
             renderer.SetMaterials(tmpList);
         }

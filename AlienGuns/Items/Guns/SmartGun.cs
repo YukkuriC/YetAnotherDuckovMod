@@ -37,7 +37,7 @@ namespace YukkuriC.AlienGuns.Items.Guns
         }
 
         static Vector3[] dirSplitTmp = new Vector3[2];
-        public static void Init(Item item, ItemSetting_Gun gun)
+        public static void Init(Item item, ItemSetting_Gun gun, Material redMat)
         {
             item.DisplayQuality = DisplayQuality.Green;
             item.Variables.SetInt("TrackMode", 0);
@@ -93,7 +93,9 @@ namespace YukkuriC.AlienGuns.Items.Guns
             item.AddUseItem<SmartGunControl>();
 
             var agent = (ItemAgent_Gun)item.CopyAgent();
-            ItemUtils.AddMaterialToGun(agent, "Character_red");
+            var greenMat = new Material(redMat);
+            greenMat.SetColor("_EdgeLightColor", new Color(0.5f, 4.5f, 0.5f));
+            ItemUtils.AddMaterialToGun(agent, greenMat, clearOriginal: true);
         }
 
         // use item

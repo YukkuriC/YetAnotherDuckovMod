@@ -1,4 +1,4 @@
-﻿using ItemStatsSystem;
+using ItemStatsSystem;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -45,11 +45,10 @@ namespace YukkuriC.AlienGuns.Items.Guns
             });
 
             // model alter
-            var agent = rpg.CopyAgent();
+            var agent = (ItemAgent_Gun)rpg.CopyAgent();
             foreach (var target in new string[] { "Model", "Sockets" })
                 agent.transform.Find(target).localEulerAngles = new Vector3(45, 180);
-            var renderer = agent.transform.Find("Model").GetChild(0).GetComponent<Renderer>();
-            renderer.materials = new Material[] { redMat };
+            ItemUtils.AddMaterialToGun(agent, redMat, clearOriginal: true);
         }
     }
 }

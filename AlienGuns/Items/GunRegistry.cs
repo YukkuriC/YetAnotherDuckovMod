@@ -66,7 +66,7 @@ namespace YukkuriC.AlienGuns.Items
             // 4. smart gun
             {
                 var item = GetNew(788, out var gun);
-                SmartGun.Init(item, gun);
+                SmartGun.Init(item, gun, redMat);
             }
 
             // 5. chick spawner
