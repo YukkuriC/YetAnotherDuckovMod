@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using SodaCraft.Localizations;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +13,8 @@ namespace YukkuriC.AlienGuns.Events
         {
             LocalizationManager.OnSetLanguage += UpdateLang;
             UpdateLang(LocalizationManager.CurrentLanguage);
+            // general
+            foreach (var pair in $"lang.General.json".ToResourceJson<Dictionary<string, string>>()) LocalizationManager.SetOverrideText(pair.Key, pair.Value);
         }
         public static void OnDisable()
         {
