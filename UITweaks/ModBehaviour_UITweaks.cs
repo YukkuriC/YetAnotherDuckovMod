@@ -1,5 +1,7 @@
-﻿using HarmonyLib;
+﻿using Duckov;
+using HarmonyLib;
 using ItemStatsSystem;
+using System;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
@@ -20,13 +22,22 @@ namespace YukkuriC.UITweaks
             Debug.Log("[UITweaks] Harmony patched");
 
             // 暗改！
-            ItemAssetsCollection.GetPrefab(397).Inventory.SetCapacity(15);
-            ItemAssetsCollection.GetPrefab(388).MaxStackCount = 100;
+            if (MyCheatsActivated())
+            {
+                // super bitcoin miner
+                ItemAssetsCollection.GetPrefab(397).Inventory.SetCapacity(15);
+                ItemAssetsCollection.GetPrefab(388).MaxStackCount = 100;
+            }
         }
         void OnDisable()
         {
             patcher?.UnpatchAll(HARMONY_ID);
             Debug.Log("[UITweaks] Harmony released");
+        }
+
+        static bool MyCheatsActivated()
+        {
+            return File.Exists(Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "1145141919810"));
         }
     }
 }
