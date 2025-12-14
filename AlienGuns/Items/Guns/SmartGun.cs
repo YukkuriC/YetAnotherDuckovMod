@@ -1,4 +1,4 @@
-﻿using Duckov.Utilities;
+using Duckov.Utilities;
 using ItemStatsSystem;
 using NodeCanvas.Tasks.Actions;
 using SodaCraft.Localizations;
@@ -89,8 +89,11 @@ namespace YukkuriC.AlienGuns.Items.Guns
                 }
             });
 
-            // using switch ammo type
+            // using switch track type
             item.AddUseItem<SmartGunControl>();
+
+            var agent = (ItemAgent_Gun)item.CopyAgent();
+            ItemUtils.AddMaterialToGun(agent, "Character_red");
         }
 
         // use item

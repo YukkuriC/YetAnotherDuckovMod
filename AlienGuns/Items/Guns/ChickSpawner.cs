@@ -42,6 +42,9 @@ namespace YukkuriC.AlienGuns.Items.Guns
                 vel += Vector3.up * (5 + Random.value * 10);
                 SpawnChick(p.transform.position, vel, p.context).Forget();
             });
+
+            var agent = (ItemAgent_Gun)item.CopyAgent();
+            ItemUtils.AddMaterialToGun(agent, "Skin_StormCreature");
         }
 
         public static async UniTask SpawnChick(Vector3 muzzle, Vector3 velocity, ProjectileContext ctx, CharacterMainControl parentChick = null)

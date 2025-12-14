@@ -1,6 +1,7 @@
-﻿using ItemStatsSystem;
+using ItemStatsSystem;
 using System.Collections.Generic;
 using UnityEngine;
+using YukkuriC.AlienGuns.Ext;
 using YukkuriC.AlienGuns.Interfaces;
 using static YukkuriC.AlienGuns.Items.Guns.SmartGun;
 
@@ -36,6 +37,16 @@ namespace YukkuriC.AlienGuns.Items
             item.usageUtilities.behaviors.Add(usage);
             if (usage is ISetMasterItem binder) binder.SetMaster(item);
             return usage;
+        }
+
+        public static void AddMaterialToGun(ItemAgent_Gun agent, string matName, int rendererIndex = 0) => AddMaterialToGun(agent, ResourceGrabber.Get<Material>(matName), rendererIndex);
+        public static void AddMaterialToGun(ItemAgent_Gun agent, Material mat, int rendererIndex = 0)
+        {
+            var renderer = agent.GetComponent<CharacterSubVisuals>().renderers[0];
+            var tmpList = new List<Material>();
+            renderer.GetMaterials(tmpList);
+            tmpList.Add(mat);
+            renderer.SetMaterials(tmpList);
         }
     }
 }

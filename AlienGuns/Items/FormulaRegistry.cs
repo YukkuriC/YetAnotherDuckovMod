@@ -16,13 +16,14 @@ namespace YukkuriC.AlienGuns.Items
             static readonly string[] COMMON_WORKBENCH = { "WorkBenchAdvanced" };
             public int id;
             public string items;
+            public int count;
 
             public CraftingFormula ToCrafting() => new CraftingFormula
             {
                 unlockByDefault = true,
                 tags = COMMON_WORKBENCH,
                 id = $"YukkuriC.AlienGun.{id}",
-                result = new CraftingFormula.ItemEntry { amount = 1, id = id + ItemUtils.ITEM_START_ID },
+                result = new CraftingFormula.ItemEntry { amount = Math.Max(count, 1), id = id + ItemUtils.ITEM_START_ID },
                 cost = BuildCost(),
             };
             public DecomposeFormula ToDecomposing() => new DecomposeFormula
