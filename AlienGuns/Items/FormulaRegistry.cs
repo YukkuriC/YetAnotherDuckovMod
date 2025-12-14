@@ -1,4 +1,4 @@
-﻿using Duckov.Economy;
+using Duckov.Economy;
 using ItemStatsSystem;
 using Newtonsoft.Json;
 using System;
@@ -70,7 +70,7 @@ namespace YukkuriC.AlienGuns.Items
                 var gun = ItemAssetsCollection.GetPrefab(c.result.id);
                 float price = 0;
                 foreach (var i in c.cost.items) price += ItemAssetsCollection.GetPrefab(i.id).Value * i.amount;
-                gun.Value = (int)(price * 0.9f);
+                gun.Value = (int)(price * 0.9f / c.result.amount);
             }
         }
         public static void Load()
