@@ -1,11 +1,5 @@
 using Duckov.Utilities;
 using ItemStatsSystem;
-using NodeCanvas.Tasks.Actions;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using UnityEngine;
-using UnityEngine.XR;
 using YukkuriC.AlienGuns.Components.Containers;
 using YukkuriC.AlienGuns.Ext;
 

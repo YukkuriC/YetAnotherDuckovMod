@@ -1,7 +1,4 @@
-﻿using ItemStatsSystem;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using ItemStatsSystem;
 
 namespace YukkuriC.AlienGuns.Interfaces
 {

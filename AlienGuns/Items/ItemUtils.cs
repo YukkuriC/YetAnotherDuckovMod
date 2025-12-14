@@ -1,9 +1,7 @@
 using ItemStatsSystem;
 using System.Collections.Generic;
 using UnityEngine;
-using YukkuriC.AlienGuns.Ext;
 using YukkuriC.AlienGuns.Interfaces;
-using static YukkuriC.AlienGuns.Items.Guns.SmartGun;
 
 namespace YukkuriC.AlienGuns.Items
 {

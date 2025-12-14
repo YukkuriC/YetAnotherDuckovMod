@@ -1,11 +1,9 @@
-﻿
+
 using Cysharp.Threading.Tasks;
 using Duckov.Economy;
 using Duckov.Scenes;
 using Duckov.Utilities;
-using ItemStatsSystem;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using YukkuriC.AlienGuns.Items;
 

@@ -1,4 +1,3 @@
-﻿using Duckov.Utilities;
 using UnityEngine;
 
 namespace YukkuriC.AlienGuns.Components

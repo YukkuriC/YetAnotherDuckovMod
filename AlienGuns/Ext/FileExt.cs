@@ -1,13 +1,9 @@
-﻿using Duckov.Utilities;
-using ItemStatsSystem.Items;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
-using YukkuriC.AlienGuns.Events;
 
 namespace YukkuriC.AlienGuns.Ext
 {

@@ -1,7 +1,5 @@
-using Newtonsoft.Json;
 using SodaCraft.Localizations;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using YukkuriC.AlienGuns.Ext;
 
