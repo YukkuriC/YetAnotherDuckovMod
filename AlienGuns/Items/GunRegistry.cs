@@ -1,4 +1,4 @@
-﻿using ItemStatsSystem;
+using ItemStatsSystem;
 using System.Collections.Generic;
 using UnityEngine;
 using YukkuriC.AlienGuns.Ext;
@@ -18,7 +18,7 @@ namespace YukkuriC.AlienGuns.Items
             var res = ItemUtils.CopyItem(templateId, idOffset);
             Debug.Log($"[AlienGun] register item #{res.TypeID} from {res.DisplayName}#{templateId}");
             res.DisplayNameRaw = $"YukkuriC.AlienGun.{idOffset}";
-            res.Quality = 8;
+            res.Quality = 9;
             AddedGuns.Add(res);
             var icon = $"assets/textures/icon_{idOffset}.png".ToLooseTexture();
             if (icon != null) res.Icon = Sprite.Create(icon, new Rect(0, 0, icon.width, icon.height), Vector2.zero);
@@ -75,10 +75,11 @@ namespace YukkuriC.AlienGuns.Items
                 ChickSpawner.Init(item, gun);
             }
 
-            // 6. BFG
+            // 6-7. BFG & bullet
             {
                 var item = GetNew(407, out var gun);
-                BFG.Init(item, gun);
+                var ammo = GetNew(388, out var _);
+                BFG.Init(item, gun, ammo);
             }
         }
     }
