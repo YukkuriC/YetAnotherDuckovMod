@@ -30,6 +30,8 @@ if 'funcs':
     def prepare(lang):
         with open(f"../assets/lang/{lang}.json", encoding='utf-8') as f:
             raw = json.load(f)
+        with open(f"../assets/lang/General.json", encoding='utf-8') as f:
+            raw.update(json.load(f))
         res = []
         i = 0
         while 1:

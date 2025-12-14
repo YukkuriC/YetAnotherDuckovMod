@@ -38,4 +38,12 @@ A bunch of guns shooting anything istead of regular bullets; also the most usefu
     [list]
     [*]Grandpa, let us serve your back a CCB massage!
     [/list]
+[*]BFG-114514(#6)
+    [list]
+    [*]Big Friendly Gun shooting power of money.
+    [/list]
+[*]0.02 BTC(#7)
+    [list]
+    [*]Not only with physical form, also divisible.
+    [/list]
 [/list]

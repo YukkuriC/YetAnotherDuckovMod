@@ -28,3 +28,7 @@ _NOTE: all items IDs from this mod start from `"YukkuriC".GetHashCode() = 120652
     -   Additionally, every fifth bullets and the last five bullets are replaced with different colored tracer rounds to indicate the user's remaining ammo.
 -   CCB-ChickBombs(#5)
     -   Grandpa, let us serve your back a CCB massage!
+-   BFG-114514(#6)
+    -   Big Friendly Gun shooting power of money.
+-   0.02 BTC(#7)
+    -   Not only with physical form, also divisible.
