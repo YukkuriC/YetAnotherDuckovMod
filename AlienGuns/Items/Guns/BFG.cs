@@ -32,6 +32,7 @@ namespace YukkuriC.AlienGuns.Items.Guns
             item.Stats["Penetrate"].BaseValue = 0;
             //gun.element = ElementBFG; // throw new ArgumentOutOfRangeException()
             gun.shootKey = "stormboss";
+            gun.muzzleFxPfb = null;
 
             // ammo stats
             ammoPiece.MaxStackCount = 100;
