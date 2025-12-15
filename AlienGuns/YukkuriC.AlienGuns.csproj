@@ -60,10 +60,6 @@
     <Publicize Include="TeamSoda.Duckov.Core:CharacterRandomPreset.bulletQualityDistribution" />
     <Publicize Include="TeamSoda.Duckov.Core:CharacterRandomPreset.itemsToGenerate" />
     <Publicize Include="TeamSoda.Duckov.Core:CharacterRandomPreset.usePlayerPreset" />
-    <Publicize Include="TeamSoda.Duckov.Core:CraftingFormulaCollection.list" />
-    <Publicize Include="TeamSoda.Duckov.Core:CraftingFormulaCollection._entries_ReadOnly" />
-    <Publicize Include="TeamSoda.Duckov.Core:DecomposeDatabase.entries" />
-    <Publicize Include="TeamSoda.Duckov.Core:DecomposeDatabase._dic" />
     <Publicize Include="TeamSoda.Duckov.Core:Duckov.Economy.StockShop.merchantID" />
     <Publicize Include="TeamSoda.Duckov.Core:Duckov.Economy.StockShop.refreshAfterTimeSpan" />
     <Publicize Include="TeamSoda.Duckov.Core:Duckov.UI.HealthBarManager.GetActiveHealthBar" />

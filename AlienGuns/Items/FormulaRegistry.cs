@@ -72,24 +72,17 @@ namespace YukkuriC.AlienGuns.Items
         }
         public static void Load()
         {
-            ClearCache();
-            CraftingFormulaCollection.Instance.list.AddRange(CraftingList);
-            DecomposeDatabase.Instance.entries = DecomposeDatabase.Instance.entries.Concat(DecomposingList).ToArray();
+            foreach (var recipe in CraftingList)
+                CraftingFormulaCollection.RegisterDynamic(recipe);
+            foreach (var recipe in DecomposingList)
+                DecomposeDatabase.RegisterDynamic(recipe);
         }
         public static void Unload()
         {
-            ClearCache();
-            CraftingFormulaCollection.Instance.list.RemoveAll(x => CraftingList.Contains(x));
-            DecomposeDatabase.Instance.entries = (
-                from x in DecomposeDatabase.Instance.entries
-                where !DecomposingList.Contains(x)
-                select x
-            ).ToArray();
-        }
-        static void ClearCache()
-        {
-            CraftingFormulaCollection.Instance._entries_ReadOnly = null;
-            DecomposeDatabase.Instance._dic = null;
+            foreach (var recipe in CraftingList)
+                CraftingFormulaCollection.UnregisterDynamic(recipe.id);
+            foreach (var recipe in DecomposingList)
+                DecomposeDatabase.UnregisterDynamic(recipe.item);
         }
     }
 }
