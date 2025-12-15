@@ -1,6 +1,7 @@
 using Duckov.Utilities;
 using ItemStatsSystem;
 using UnityEngine;
+using YukkuriC.AlienGuns.Components;
 using YukkuriC.AlienGuns.Components.BFG;
 using YukkuriC.AlienGuns.Components.Containers;
 using YukkuriC.AlienGuns.Ext;
@@ -48,6 +49,9 @@ namespace YukkuriC.AlienGuns.Items.Guns
                 critSize = 1.6f,
                 color = new Color(0.3f, 1, 0.3f)
             });
+
+            // another setting
+            item.gameObject.AddComponent<ItemSetting_AmmoExtender>();
         }
 
         static void ApplyAmmoStats(this Item target, float damageMult, Tag tagAmmo)
