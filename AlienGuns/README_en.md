@@ -32,3 +32,6 @@ _NOTE: all items IDs from this mod start from `"YukkuriC".GetHashCode() = 120652
     -   Big Friendly Gun shooting power of money.
 -   0.02 BTC(#7)
     -   Not only with physical form, also divisible.
+
+## Credits
+-   "DOOM eternal bfg" (https://skfb.ly/oI8LO) by DJ_Nugget is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).

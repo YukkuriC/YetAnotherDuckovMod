@@ -47,3 +47,8 @@
     [*]不仅有实体，而且可分。
     [/list]
 [/list]
+
+[h2]借物表 & 致谢[/h2]
+[list]
+[*]"DOOM eternal bfg" (https://skfb.ly/oI8LO) by DJ_Nugget is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+[/list]

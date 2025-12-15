@@ -32,3 +32,6 @@ _注：本 mod 所有物品 id 号段从`"YukkuriC".GetHashCode() = 1206528349`�
     -   使用钞能力的大枪枪。
 -   0.02 BTC(#7)
     -   不仅有实体，而且可分。
+
+## 借物表 & 致谢
+-   "DOOM eternal bfg" (https://skfb.ly/oI8LO) by DJ_Nugget is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
