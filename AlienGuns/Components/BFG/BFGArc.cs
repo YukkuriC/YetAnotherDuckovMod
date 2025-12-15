@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using YukkuriC.AlienGuns.Ext;
 
 namespace YukkuriC.AlienGuns.Components.BFG
@@ -30,6 +30,7 @@ namespace YukkuriC.AlienGuns.Components.BFG
             damage = parent.Context.ToDamage();
             damage.damageValue *= DAMAGE_MULT;
             damage.critRate = 0;
+            BFGCore.SwitchElement(ref damage);
         }
         public void BindVictim(DamageReceiver target)
         {

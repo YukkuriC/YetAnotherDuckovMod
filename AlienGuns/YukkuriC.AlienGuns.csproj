@@ -68,6 +68,7 @@
     <Publicize Include="TeamSoda.Duckov.Core:Duckov.Economy.StockShop.refreshAfterTimeSpan" />
     <Publicize Include="TeamSoda.Duckov.Core:Duckov.UI.HealthBarManager.GetActiveHealthBar" />
     <Publicize Include="TeamSoda.Duckov.Core:Duckov.UI.HealthBar.Release" />
+    <Publicize Include="TeamSoda.Duckov.Core:Duckov.Utilities.GameplayDataSettings+UIStyleData.elementDamagePopTextLook" />
     <Publicize Include="TeamSoda.Duckov.Core:ItemAgent_MeleeWeapon.setting" />
     <Publicize Include="TeamSoda.Duckov.Core:Movement.characterMovement" />
     <Publicize Include="TeamSoda.Duckov.Core:Projectile.Release" />

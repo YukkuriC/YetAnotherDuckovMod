@@ -1,4 +1,4 @@
-﻿using Duckov;
+using Duckov;
 using Duckov.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +10,7 @@ namespace YukkuriC.AlienGuns.Components.BFG
     {
         const float CHECK_CHARA_INTERVAL = 0.1f;
         const float RANDOM_ARC_INTERVAL = 0.2f;
+        public static readonly ElementTypes ElementBFG = (ElementTypes)"BFG".GetHashCode();
 
         public float CheckRange = 6f;
         public float ExplodeRange = 9f;
@@ -57,6 +58,7 @@ namespace YukkuriC.AlienGuns.Components.BFG
                 grabProjInfo = true;
                 dmgToCheck = Context.ToDamage();
                 dmgToCheck.critRate = 0;
+                SwitchElement(ref dmgToCheck);
             }
         }
 
@@ -101,6 +103,12 @@ namespace YukkuriC.AlienGuns.Components.BFG
             explode.transform.position = checkPos;
             explode.gameObject.SetActive(true);
             HardwareSyncingManager.SetEvent("Explosion");
+        }
+
+        public static void SwitchElement(ref DamageInfo dmg)
+        {
+            dmg.elementFactors.Clear();
+            dmg.elementFactors.Add(new ElementFactor(ElementBFG, 1));
         }
     }
 }

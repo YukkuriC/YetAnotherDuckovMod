@@ -1,5 +1,7 @@
 using Duckov.Utilities;
 using ItemStatsSystem;
+using UnityEngine;
+using YukkuriC.AlienGuns.Components.BFG;
 using YukkuriC.AlienGuns.Components.Containers;
 using YukkuriC.AlienGuns.Ext;
 
@@ -28,7 +30,7 @@ namespace YukkuriC.AlienGuns.Items.Guns
             item.Stats["Damage"].BaseValue = 30;
             item.Stats["ArmorPiercing"].BaseValue = 65535;
             item.Stats["Penetrate"].BaseValue = 0;
-            gun.element = ElementTypes.space;
+            //gun.element = ElementBFG; // throw new ArgumentOutOfRangeException()
             gun.shootKey = "stormboss";
 
             // ammo stats
@@ -36,6 +38,15 @@ namespace YukkuriC.AlienGuns.Items.Guns
             var theRealAmmoTag = ItemAssetsCollection.GetPrefab(594).Tags.list.Find(x => x.name == "Bullet"); // CraftView.CheckFilter用的array查找，憨吧
             ammoPiece.ApplyAmmoStats(0.5f, theRealAmmoTag);
             ItemAssetsCollection.GetPrefab(388).ApplyAmmoStats(5f, theRealAmmoTag);
+
+            // BFG damage visuals
+            GameplayDataSettings.UIStyle.elementDamagePopTextLook.Add(new GameplayDataSettings.UIStyleData.DisplayElementDamagePopTextLook
+            {
+                elementType = BFGCore.ElementBFG,
+                normalSize = 1f,
+                critSize = 1.6f,
+                color = new Color(0.3f, 1, 0.3f)
+            });
         }
 
         static void ApplyAmmoStats(this Item target, float damageMult, Tag tagAmmo)
