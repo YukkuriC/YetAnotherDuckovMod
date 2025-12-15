@@ -37,7 +37,6 @@ namespace YukkuriC.AlienGuns.Items.Guns
         static Vector3[] dirSplitTmp = new Vector3[2];
         public static void Init(Item item, ItemSetting_Gun gun, Material redMat)
         {
-            item.DisplayQuality = DisplayQuality.Green;
             item.Variables.SetInt("TrackMode", 0);
 
             var originalBullet = gun.bulletPfb.MakeSmartBullet();
