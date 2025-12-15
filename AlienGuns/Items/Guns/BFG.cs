@@ -36,8 +36,8 @@ namespace YukkuriC.AlienGuns.Items.Guns
             // ammo stats
             ammoPiece.MaxStackCount = 100;
             var theRealAmmoTag = ItemAssetsCollection.GetPrefab(594).Tags.list.Find(x => x.name == "Bullet"); // CraftView.CheckFilter用的array查找，憨吧
-            ammoPiece.ApplyAmmoStats(0.5f, theRealAmmoTag);
-            ItemAssetsCollection.GetPrefab(388).ApplyAmmoStats(5f, theRealAmmoTag);
+            ammoPiece.ApplyAmmoStats(1f, theRealAmmoTag);
+            ItemAssetsCollection.GetPrefab(388).ApplyAmmoStats(10f, theRealAmmoTag);
 
             // BFG damage visuals
             GameplayDataSettings.UIStyle.elementDamagePopTextLook.Add(new GameplayDataSettings.UIStyleData.DisplayElementDamagePopTextLook
