@@ -50,5 +50,5 @@ A bunch of guns shooting anything istead of regular bullets; also the most usefu
 
 [h2]Credits[/h2]
 [list]
-[*]"DOOM eternal bfg" (https://skfb.ly/oI8LO) by DJ_Nugget is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+[*]"DOOM eternal bfg" ( https://skfb.ly/oI8LO ) by DJ_Nugget is licensed under Creative Commons Attribution ( http://creativecommons.org/licenses/by/4.0/ ).
 [/list]
