@@ -1,7 +1,7 @@
 # Alien Guns 怪枪
 
 [[中文](./README.md)] [English]  
-[Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3611676083)
+~~[Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3611676083)~~
 [Showcase Video 1](https://www.bilibili.com/video/BV1qsU1BCEDY)
 [Showcase Video 2](https://www.bilibili.com/video/BV197SnBKEtp)
 [Showcase Video 3](https://www.bilibili.com/video/BV1QC2WBPEcb)
